@@ -30,6 +30,11 @@ namespace SaveGame.ViewModels
 
         async partial void OnSearchQueryChanged(string value)
         {
+            if(value == "")
+            {
+                SearchResults = Enumerable.Empty<Game>();
+                return;
+            }
             var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields *, artworks.*, cover.*; search \"{value}\"; limit 4;");
             SearchResults = games;
         }
