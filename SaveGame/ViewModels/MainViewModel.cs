@@ -23,8 +23,8 @@ namespace SaveGame.ViewModels
         public MainViewModel()
         {
             igdb = new IGDBClient(
-                "x",
-                "x"
+                "0hl10nl85ycx2zmag82ov97o5lv9yw",
+                "ywef3u5ts1t0ebivlq80p8uqqbrjdh"
             );
         }
 

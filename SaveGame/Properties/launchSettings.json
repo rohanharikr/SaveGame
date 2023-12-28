@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "SaveGame": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "IGDB_CLIENT_ID": "0hl10nl85ycx2zmag82ov97o5lv9yw",
+        "IGDB_CLIENT_SECRET": "ywef3u5ts1t0ebivlq80p8uqqbrjdh"
+      }
+    }
+  }
+}
