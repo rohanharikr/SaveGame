@@ -99,55 +99,53 @@
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
             <Border Padding="0,0,0,0">
-                <StackPanel>
-                    <StackPanel>
-                        <Label
-                            Margin="0,0,0,-8"
-                            Content="Search results"
-                            FontSize="20"
-                            FontWeight="Bold"
-                            Foreground="White"
-                            Opacity="0.5" />
-                        <StackPanel Orientation="Horizontal" Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <Border
-                                Width="180"
-                                Height="220"
-                                Margin="6"
-                                Background="#101010" />
-                            <Border
-                                Width="180"
-                                Height="220"
-                                Margin="6"
-                                Background="#101010" />
-                            <Border
-                                Width="180"
-                                Height="220"
-                                Margin="6"
-                                Background="#101010" />
-                            <Border
-                                Width="180"
-                                Height="220"
-                                Margin="6"
-                                Background="#101010" />
-                        </StackPanel>
-                        <ItemsControl ItemsSource="{Binding SearchResults}" Visibility="{Binding IsSearching, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Image
-                                        Width="180"
-                                        Height="220"
-                                        Margin="6"
-                                        Source="{Binding Cover.Value.ImageId, Converter={StaticResource CovertArtConverter}}"
-                                        Stretch="UniformToFill" />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                <StackPanel Visibility="{Binding SearchQuery.Length, Converter={StaticResource BooleanToVisibilityHiddenConverter}}">
+                    <Label
+                        Margin="0,0,0,-4"
+                        Content="Search results"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Opacity="0.5" />
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Border
+                            Width="180"
+                            Height="220"
+                            Margin="6"
+                            Background="#101010" />
+                        <Border
+                            Width="180"
+                            Height="220"
+                            Margin="6"
+                            Background="#101010" />
+                        <Border
+                            Width="180"
+                            Height="220"
+                            Margin="6"
+                            Background="#101010" />
+                        <Border
+                            Width="180"
+                            Height="220"
+                            Margin="6"
+                            Background="#101010" />
                     </StackPanel>
+                    <ItemsControl ItemsSource="{Binding SearchResults}" Visibility="{Binding IsSearching, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Image
+                                    Width="180"
+                                    Height="220"
+                                    Margin="6"
+                                    Source="{Binding Cover.Value.ImageId, Converter={StaticResource CovertArtConverter}}"
+                                    Stretch="UniformToFill" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
             </Border>
         </ScrollViewer>
