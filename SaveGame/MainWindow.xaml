@@ -1,12 +1,143 @@
-﻿<Window x:Class="SaveGame.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SaveGame"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+﻿<Window
+    x:Class="SaveGame.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SaveGame"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:SaveGame.ViewModels"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    Background="Black"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            CaptionHeight="0"
+            CornerRadius="0"
+            GlassFrameThickness="0" />
+    </WindowChrome.WindowChrome>
 
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel
+            Height="100"
+            VerticalAlignment="Top"
+            Panel.ZIndex="10">
+            <StackPanel Orientation="Horizontal">
+                <Label
+                    FontSize="30"
+                    FontWeight="Bold"
+                    Foreground="White">
+                    Play
+                </Label>
+                <Label
+                    FontSize="30"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Opacity="0.5">
+                    Playing
+                </Label>
+                <Label
+                    FontSize="30"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Opacity="0.5">
+                    Played
+                </Label>
+            </StackPanel>
+            <TextBox
+                Margin="0,10,0,10"
+                Padding="3"
+                Background="Transparent"
+                BorderThickness="0"
+                FontSize="20"
+                Foreground="White"
+                Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+        <Border
+            Height="100"
+            VerticalAlignment="Top"
+            Panel.ZIndex="5"
+            Background="Black"
+            Opacity="1" />
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+            <Border Padding="0,100,0,0">
+                <StackPanel>
+                    <StackPanel>
+                        <Label
+                            Content="Search results"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Opacity="0.5" />
+                        <StackPanel Orientation="Horizontal">
+                            <ItemsControl ItemsSource="{Binding SearchResults}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Image
+                                            Width="160"
+                                            Height="220"
+                                            Margin="6"
+                                            Source="{Binding Image}"
+                                            Stretch="UniformToFill" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Opacity="0.5">
+                            Based on your interests
+                        </Label>
+                        <StackPanel Orientation="Horizontal">
+                            <Image
+                                Width="160"
+                                Height="220"
+                                Margin="6"
+                                Source="https://assets1.ignimgs.com/2018/01/11/dark-souls-remastered---button-1515700382346.jpg"
+                                Stretch="UniformToFill" />
+                            <Image
+                                Width="180"
+                                Height="220"
+                                Margin="6"
+                                Source="https://assets1.ignimgs.com/2018/01/11/dark-souls-remastered---button-1515700382346.jpg"
+                                Stretch="UniformToFill" />
+                            <Image
+                                Width="180"
+                                Height="220"
+                                Margin="6"
+                                Source="https://assets1.ignimgs.com/2018/01/11/dark-souls-remastered---button-1515700382346.jpg"
+                                Stretch="UniformToFill" />
+                            <Image
+                                Width="180"
+                                Height="220"
+                                Margin="6"
+                                Source="https://assets1.ignimgs.com/2018/01/11/dark-souls-remastered---button-1515700382346.jpg"
+                                Stretch="UniformToFill" />
+                            <Image
+                                Width="180"
+                                Height="220"
+                                Margin="6"
+                                Source="https://assets1.ignimgs.com/2018/01/11/dark-souls-remastered---button-1515700382346.jpg"
+                                Stretch="UniformToFill" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
     </Grid>
 </Window>
