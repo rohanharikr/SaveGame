@@ -143,11 +143,38 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Image
+                                    x:Name="Image"
                                     Width="180"
                                     Height="220"
                                     Margin="6"
+                                    RenderTransformOrigin="0.5,0"
                                     Source="{Binding Cover.Value.ImageId, Converter={StaticResource CovertArtConverter}}"
-                                    Stretch="UniformToFill" />
+                                    Stretch="UniformToFill">
+                                    <Image.RenderTransform>
+                                        <TransformGroup>
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </Image.RenderTransform>
+                                </Image>
+
+                                <DataTemplate.Resources>
+                                    <Storyboard x:Key="ItemAnimation" AutoReverse="False">
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Image" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="10" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </DataTemplate.Resources>
+
+                                <DataTemplate.Triggers>
+                                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                        <BeginStoryboard Storyboard="{StaticResource ItemAnimation}" />
+                                    </EventTrigger>
+                                </DataTemplate.Triggers>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
