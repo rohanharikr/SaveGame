@@ -8,8 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SaveGame.ViewModels"
     Title="MainWindow"
-    Width="800"
-    Height="450"
+    Width="810"
+    Height="680"
     AllowsTransparency="True"
     Background="Black"
     WindowStartupLocation="CenterScreen"
@@ -28,7 +28,7 @@
 
     <Window.Resources>
         <converters:CovertArtConverter x:Key="CovertArtConverter" />
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter" />
         <converters:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
     </Window.Resources>
@@ -36,7 +36,7 @@
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel
             Grid.Row="0"
@@ -104,40 +104,91 @@
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
             <Border Padding="0,0,0,0">
-                <StackPanel Visibility="{Binding SearchQuery.Length, Converter={StaticResource BooleanToVisibilityHiddenConverter}}">
-                    <Label
-                        Margin="0,0,0,-4"
-                        Content="Search results"
-                        FontSize="20"
-                        FontWeight="Bold"
-                        Foreground="White"
-                        Opacity="0.5" />
-                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <Border
-                            Width="180"
-                            Height="220"
-                            Margin="6"
-                            Background="#101010" />
-                        <Border
-                            Width="180"
-                            Height="220"
-                            Margin="6"
-                            Background="#101010" />
-                        <Border
-                            Width="180"
-                            Height="220"
-                            Margin="6"
-                            Background="#101010" />
-                        <Border
-                            Width="180"
-                            Height="220"
-                            Margin="6"
-                            Background="#101010" />
+                <StackPanel>
+                    <StackPanel
+                        Margin="5,0,5,10"
+                        Background="#101010"
+                        Visibility="{Binding SearchQuery.Length, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Label
+                            Margin="0,0,0,-4"
+                            Content="Search results"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Opacity="0.5" />
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Border
+                                Width="180"
+                                Height="220"
+                                Margin="6"
+                                Background="#101010" />
+                            <Border
+                                Width="180"
+                                Height="220"
+                                Margin="6"
+                                Background="#101010" />
+                            <Border
+                                Width="180"
+                                Height="220"
+                                Margin="6"
+                                Background="#101010" />
+                            <Border
+                                Width="180"
+                                Height="220"
+                                Margin="6"
+                                Background="#101010" />
+                        </StackPanel>
+
+                        <ItemsControl ItemsSource="{Binding SearchResults}" Visibility="{Binding IsSearching, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Image
+                                        x:Name="Image"
+                                        Width="180"
+                                        Height="220"
+                                        Margin="6"
+                                        RenderTransformOrigin="0.5,0"
+                                        Source="{Binding Cover.Value.ImageId, Converter={StaticResource CovertArtConverter}}"
+                                        Stretch="UniformToFill">
+                                        <Image.RenderTransform>
+                                            <TransformGroup>
+                                                <TranslateTransform />
+                                            </TransformGroup>
+                                        </Image.RenderTransform>
+                                    </Image>
+
+                                    <DataTemplate.Resources>
+                                        <Storyboard x:Key="ItemAnimation" AutoReverse="False">
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Image" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="10" />
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </DataTemplate.Resources>
+
+                                    <DataTemplate.Triggers>
+                                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                            <BeginStoryboard Storyboard="{StaticResource ItemAnimation}" />
+                                        </EventTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </StackPanel>
-                    <ItemsControl ItemsSource="{Binding SearchResults}" Visibility="{Binding IsSearching, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
+
+                    <ItemsControl ItemsSource="{Binding RandomGames}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" />
+                                <WrapPanel Orientation="Horizontal" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
@@ -147,34 +198,13 @@
                                     Width="180"
                                     Height="220"
                                     Margin="6"
+                                    RenderOptions.BitmapScalingMode="HighQuality"
                                     RenderTransformOrigin="0.5,0"
-                                    Source="{Binding Cover.Value.ImageId, Converter={StaticResource CovertArtConverter}}"
                                     Stretch="UniformToFill">
-                                    <Image.RenderTransform>
-                                        <TransformGroup>
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Image.RenderTransform>
+                                    <Image.Source>
+                                        <FormatConvertedBitmap DestinationFormat="Gray8" Source="{Binding Cover.Value.ImageId, Converter={StaticResource CovertArtConverter}}" />
+                                    </Image.Source>
                                 </Image>
-
-                                <DataTemplate.Resources>
-                                    <Storyboard x:Key="ItemAnimation" AutoReverse="False">
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Image" Storyboard.TargetProperty="(UIElement.Opacity)">
-                                            <EasingDoubleKeyFrame KeyTime="0" Value="0" />
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" />
-                                        </DoubleAnimationUsingKeyFrames>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
-                                            <EasingDoubleKeyFrame KeyTime="0" Value="10" />
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0" />
-                                        </DoubleAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </DataTemplate.Resources>
-
-                                <DataTemplate.Triggers>
-                                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                        <BeginStoryboard Storyboard="{StaticResource ItemAnimation}" />
-                                    </EventTrigger>
-                                </DataTemplate.Triggers>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

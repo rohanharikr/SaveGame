@@ -21,6 +21,9 @@ namespace SaveGame.ViewModels
         [ObservableProperty]
         IEnumerable<Game> searchResults;
 
+        [ObservableProperty]
+        IEnumerable<Game> randomGames;
+
         IGDBClient igdb;
 
         public MainViewModel()
@@ -29,6 +32,8 @@ namespace SaveGame.ViewModels
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_ID"),
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_SECRET")
             );
+
+            GetRandomGames();
         }
 
         async partial void OnSearchQueryChanged(string value)
@@ -43,6 +48,12 @@ namespace SaveGame.ViewModels
             var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields *, artworks.*, cover.*; search \"{value}\"; limit 4;");
             SearchResults = games;
             IsSearching = false;
+        }
+
+        async void GetRandomGames()
+        {
+            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: "fields *, artworks.*, cover.*; sort rating desc; limit: 15;");
+            RandomGames = games;
         }
     }
 }
