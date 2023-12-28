@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IGDB;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -12,7 +13,8 @@ namespace SaveGame.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return $"https://images.igdb.com/igdb/image/upload/t_cover_big_2x/{value}.jpg";
+            string url = IGDB.ImageHelper.GetImageUrl(imageId: (string)value, size: ImageSize.CoverBig, retina: true);
+            return "https:" + url;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
