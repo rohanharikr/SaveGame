@@ -10,8 +10,10 @@
     Title="MainWindow"
     Width="800"
     Height="450"
+    AllowsTransparency="True"
     Background="Black"
     WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
     mc:Ignorable="d">
     <WindowChrome.WindowChrome>
         <WindowChrome
@@ -36,7 +38,6 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
         <StackPanel
             Grid.Row="0"
             VerticalAlignment="Top"
@@ -45,7 +46,10 @@
                 <Label
                     FontSize="30"
                     FontWeight="Bold"
-                    Foreground="White">
+                    Foreground="YellowGreen">
+                    <Label.Effect>
+                        <DropShadowEffect BlurRadius="25" Color="YellowGreen" />
+                    </Label.Effect>
                     Play
                 </Label>
                 <Label
@@ -91,6 +95,7 @@
                         Height="5"
                         Background="Transparent"
                         BorderThickness="0"
+                        Foreground="YellowGreen"
                         IsIndeterminate="True"
                         Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityHiddenConverter}}" />
                 </Grid>
