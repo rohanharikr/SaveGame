@@ -13,7 +13,14 @@ namespace SaveGame.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (value is bool && (bool)value) ? Visibility.Collapsed : Visibility.Visible;
+            if (value is int)
+            {
+                return (int)value > 0 ? Visibility.Hidden : Visibility.Visible;
+            }
+            else
+            {
+                return (value is bool && (bool)value) ? Visibility.Hidden : Visibility.Visible;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
