@@ -9,17 +9,17 @@ using System.Windows.Data;
 
 namespace SaveGame.Converters
 {
-    class InvertBooleanToVisibilityConverter : IValueConverter
+    class InvertBooleanToVisibilityHiddenConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is int)
             {
-                return (int)value > 0 ? Visibility.Collapsed : Visibility.Visible;
+                return (int)value > 0 ? Visibility.Hidden : Visibility.Visible;
             }
             else
             {
-                return (value is bool && (bool)value) ? Visibility.Collapsed : Visibility.Visible;
+                return (value is bool && (bool)value) ? Visibility.Hidden : Visibility.Visible;
             }
         }
 

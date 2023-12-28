@@ -55,5 +55,11 @@ namespace SaveGame.ViewModels
             var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: "fields *, artworks.*, cover.*; sort rating desc; limit: 15;");
             RandomGames = games;
         }
+
+        [RelayCommand]
+        void CloseApp()
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
     }
 }

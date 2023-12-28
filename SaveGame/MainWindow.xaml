@@ -30,6 +30,7 @@
         <converters:CovertArtConverter x:Key="CovertArtConverter" />
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter" />
+        <converters:InvertBooleanToVisibilityHiddenConverter x:Key="InvertBooleanToVisibilityHiddenConverter" />
         <converters:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
     </Window.Resources>
 
@@ -50,7 +51,11 @@
                 VerticalAlignment="Center"
                 Content="❌"
                 FontSize="8"
-                Foreground="White" />
+                Foreground="White">
+                <Label.InputBindings>
+                    <MouseBinding Command="{Binding CloseAppCommand}" Gesture="LeftClick" />
+                </Label.InputBindings>
+            </Label>
         </StackPanel>
         <Grid Margin="20,10,20,20">
             <Grid.RowDefinitions>
@@ -217,6 +222,19 @@
                             </ItemsControl>
                         </StackPanel>
 
+                        <Border
+                            Height="490"
+                            Margin="7"
+                            HorizontalAlignment="Stretch"
+                            Visibility="{Binding RandomGames.Count, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
+                            <Label
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Content="Loading..."
+                                FontSize="24"
+                                Foreground="White"
+                                Opacity="0.35" />
+                        </Border>
                         <ItemsControl ItemsSource="{Binding RandomGames}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
