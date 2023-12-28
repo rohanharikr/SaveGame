@@ -16,6 +16,9 @@ namespace SaveGame.ViewModels
         string searchQuery = "";
 
         [ObservableProperty]
+        bool isSearching = false;
+
+        [ObservableProperty]
         IEnumerable<Game> searchResults;
 
         IGDBClient igdb;
@@ -35,8 +38,11 @@ namespace SaveGame.ViewModels
                 SearchResults = Enumerable.Empty<Game>();
                 return;
             }
+
+            IsSearching = true;
             var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields *, artworks.*, cover.*; search \"{value}\"; limit 4;");
             SearchResults = games;
+            IsSearching = false;
         }
     }
 }

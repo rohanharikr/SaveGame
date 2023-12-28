@@ -26,6 +26,8 @@
 
     <Window.Resources>
         <converters:CovertArtConverter x:Key="CovertArtConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter" />
     </Window.Resources>
 
     <Grid Margin="20">
@@ -78,6 +80,10 @@
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
             <Border Padding="0,100,0,0">
                 <StackPanel>
+                    <ProgressBar
+                        Margin="5"
+                        IsIndeterminate="True"
+                        Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityConverter}}" />
                     <StackPanel>
                         <Label
                             Content="Search results"
@@ -85,7 +91,29 @@
                             FontWeight="Bold"
                             Foreground="White"
                             Opacity="0.5" />
-                        <ItemsControl ItemsSource="{Binding SearchResults}">
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Border
+                                Width="180"
+                                Height="220"
+                                Margin="6"
+                                Background="#101010" />
+                            <Border
+                                Width="180"
+                                Height="220"
+                                Margin="6"
+                                Background="#101010" />
+                            <Border
+                                Width="180"
+                                Height="220"
+                                Margin="6"
+                                Background="#101010" />
+                            <Border
+                                Width="180"
+                                Height="220"
+                                Margin="6"
+                                Background="#101010" />
+                        </StackPanel>
+                        <ItemsControl ItemsSource="{Binding SearchResults}" Visibility="{Binding IsSearching, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal" />
