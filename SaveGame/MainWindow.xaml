@@ -260,6 +260,17 @@
                                         <Image.Source>
                                             <FormatConvertedBitmap Source="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}" />
                                         </Image.Source>
+                                        <Image.ContextMenu>
+                                            <ContextMenu StaysOpen="true">
+                                                <MenuItem Header="File" />
+                                                <MenuItem Header="Save" />
+                                                <MenuItem Header="SaveAs" />
+                                                <MenuItem Header="Recent Files">
+                                                    <MenuItem Header="ReadMe.txt" />
+                                                    <MenuItem Header="Schedule.xls" />
+                                                </MenuItem>
+                                            </ContextMenu>
+                                        </Image.ContextMenu>
                                         <Image.Style>
                                             <Style TargetType="Image">
                                                 <Setter Property="RenderTransform">
