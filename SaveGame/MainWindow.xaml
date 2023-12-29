@@ -2,6 +2,7 @@
     x:Class="SaveGame.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:SaveGame.Controls"
     xmlns:converters="clr-namespace:SaveGame.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SaveGame"
@@ -249,68 +250,7 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Image
-                                        x:Name="Image"
-                                        Width="180"
-                                        Height="220"
-                                        Margin="6"
-                                        RenderOptions.BitmapScalingMode="HighQuality"
-                                        RenderTransformOrigin="0.5,0.5"
-                                        Stretch="UniformToFill">
-                                        <Image.Source>
-                                            <FormatConvertedBitmap Source="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}" />
-                                        </Image.Source>
-                                        <Image.ContextMenu>
-                                            <ContextMenu StaysOpen="true">
-                                                <MenuItem Header="File" />
-                                                <MenuItem Header="Save" />
-                                                <MenuItem Header="SaveAs" />
-                                                <MenuItem Header="Recent Files">
-                                                    <MenuItem Header="ReadMe.txt" />
-                                                    <MenuItem Header="Schedule.xls" />
-                                                </MenuItem>
-                                            </ContextMenu>
-                                        </Image.ContextMenu>
-                                        <Image.Style>
-                                            <Style TargetType="Image">
-                                                <Setter Property="RenderTransform">
-                                                    <Setter.Value>
-                                                        <ScaleTransform ScaleX="1" ScaleY="1" />
-                                                    </Setter.Value>
-                                                </Setter>
-                                                <Style.Triggers>
-                                                    <EventTrigger RoutedEvent="UIElement.MouseEnter">
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation
-                                                                    Storyboard.TargetProperty="RenderTransform.ScaleX"
-                                                                    To="1.035"
-                                                                    Duration="0:0:0.15" />
-                                                                <DoubleAnimation
-                                                                    Storyboard.TargetProperty="RenderTransform.ScaleY"
-                                                                    To="1.035"
-                                                                    Duration="0:0:0.15" />
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </EventTrigger>
-                                                    <EventTrigger RoutedEvent="UIElement.MouseLeave">
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation
-                                                                    Storyboard.TargetProperty="RenderTransform.ScaleX"
-                                                                    To="1"
-                                                                    Duration="0:0:0.15" />
-                                                                <DoubleAnimation
-                                                                    Storyboard.TargetProperty="RenderTransform.ScaleY"
-                                                                    To="1"
-                                                                    Duration="0:0:0.15" />
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </EventTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Image.Style>
-                                    </Image>
+                                    <controls:GameCard CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>

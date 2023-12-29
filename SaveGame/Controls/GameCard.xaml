@@ -1,12 +1,161 @@
-﻿<UserControl x:Class="SaveGame.Controls.GameCard"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SaveGame.Controls"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+﻿<UserControl
+    x:Class="SaveGame.Controls.GameCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SaveGame.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="Root"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Grid
+        x:Name="Grid"
+        Width="180"
+        Height="220"
+        Margin="6"
+        MouseLeave="ExitPreview"
+        MouseMove="Preview"
+        RenderTransformOrigin="0.5,0.5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush
+                ImageSource="{Binding CoverArt, ElementName=Root}"
+                RenderOptions.BitmapScalingMode="HighQuality"
+                Stretch="UniformToFill" />
+        </Grid.Background>
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1" ScaleY="1" />
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                    To="1.035"
+                                    Duration="0:0:0.15" />
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                    To="1.035"
+                                    Duration="0:0:0.15" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                    To="1"
+                                    Duration="0:0:0.15" />
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                    To="1"
+                                    Duration="0:0:0.15" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
+        <StackPanel
+            x:Name="Bars"
+            Grid.Row="0"
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal"
+            Visibility="Collapsed">
+            <Border
+                Width="44"
+                Height="3.5"
+                Margin="3,0,3,0"
+                Background="White"
+                CornerRadius="2.5" />
+            <Border
+                Width="44"
+                Height="3.5"
+                Margin="3,0,3,0"
+                Background="White"
+                CornerRadius="2.5" />
+            <Border
+                Width="44"
+                Height="3.5"
+                Margin="3,0,3,0"
+                Background="White"
+                CornerRadius="2.5" />
+        </StackPanel>
     </Grid>
+
+    <!--
+        <Image
+            x:Name="Image"
+            Width="180"
+            Height="220"
+            Margin="6"
+            RenderOptions.BitmapScalingMode="HighQuality"
+            RenderTransformOrigin="0.5,0.5"
+            Stretch="UniformToFill">
+            <Image.Source>
+                <FormatConvertedBitmap Source="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}" />
+            </Image.Source>
+            <Image.ContextMenu>
+                <ContextMenu StaysOpen="true">
+                    <MenuItem Header="File" />
+                    <MenuItem Header="Save" />
+                    <MenuItem Header="SaveAs" />
+                    <MenuItem Header="Recent Files">
+                        <MenuItem Header="ReadMe.txt" />
+                        <MenuItem Header="Schedule.xls" />
+                    </MenuItem>
+                </ContextMenu>
+            </Image.ContextMenu>
+            <Image.Style>
+                <Style TargetType="Image">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                        To="1.035"
+                                        Duration="0:0:0.15" />
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                        To="1.035"
+                                        Duration="0:0:0.15" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                        To="1"
+                                        Duration="0:0:0.15" />
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                        To="1"
+                                        Duration="0:0:0.15" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+    -->
 </UserControl>
