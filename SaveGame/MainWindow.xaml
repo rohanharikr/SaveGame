@@ -27,7 +27,7 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <converters:CovertArtConverter x:Key="CovertArtConverter" />
+        <converters:CoverArtConverter x:Key="CoverArtConverter" />
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter" />
         <converters:InvertBooleanToVisibilityHiddenConverter x:Key="InvertBooleanToVisibilityHiddenConverter" />

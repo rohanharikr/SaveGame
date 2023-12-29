@@ -9,7 +9,7 @@ using System.Windows.Data;
 
 namespace SaveGame.Converters
 {
-    class CovertArtConverter : IValueConverter
+    class CoverArtConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
