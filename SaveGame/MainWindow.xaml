@@ -27,15 +27,21 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <converters:c x:Key="CoverArtConverter" />
+        <converters:CoverArtConverter x:Key="CoverArtConverter" />
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter" />
         <converters:InvertBooleanToVisibilityHiddenConverter x:Key="InvertBooleanToVisibilityHiddenConverter" />
         <converters:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
     </Window.Resources>
 
-    <StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
         <StackPanel
+            Grid.Row="0"
             HorizontalAlignment="Right"
             Background="#101010"
             Orientation="Horizontal">
@@ -57,7 +63,8 @@
                 </Label.InputBindings>
             </Label>
         </StackPanel>
-        <Grid Margin="20,10,20,20">
+
+        <Grid Grid.Row="1" Margin="20,10,20,20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -300,5 +307,5 @@
                 </Border>
             </ScrollViewer>
         </Grid>
-    </StackPanel>
+    </Grid>
 </Window>
