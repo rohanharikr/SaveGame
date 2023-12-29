@@ -223,7 +223,6 @@
                         </StackPanel>
 
                         <Border
-                            Height="490"
                             Margin="7"
                             HorizontalAlignment="Stretch"
                             Visibility="{Binding RandomGames.Count, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
@@ -249,11 +248,50 @@
                                         Height="220"
                                         Margin="6"
                                         RenderOptions.BitmapScalingMode="HighQuality"
-                                        RenderTransformOrigin="0.5,0"
+                                        RenderTransformOrigin="0.5,0.5"
                                         Stretch="UniformToFill">
                                         <Image.Source>
-                                            <FormatConvertedBitmap DestinationFormat="Gray8" Source="{Binding Cover.Value.ImageId, Converter={StaticResource CovertArtConverter}}" />
+                                            <FormatConvertedBitmap Source="{Binding Cover.Value.ImageId, Converter={StaticResource CovertArtConverter}}" />
                                         </Image.Source>
+                                        <Image.Style>
+                                            <Style TargetType="Image">
+                                                <Setter Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="1" ScaleY="1" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation
+                                                                    Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                                                    To="1.035"
+                                                                    Duration="0:0:0.15" />
+                                                                <DoubleAnimation
+                                                                    Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                                                    To="1.035"
+                                                                    Duration="0:0:0.15" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </EventTrigger>
+                                                    <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation
+                                                                    Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                                                    To="1"
+                                                                    Duration="0:0:0.15" />
+                                                                <DoubleAnimation
+                                                                    Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                                                    To="1"
+                                                                    Duration="0:0:0.15" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </EventTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
                                     </Image>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
