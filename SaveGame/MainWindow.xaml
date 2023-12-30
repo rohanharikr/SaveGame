@@ -9,7 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SaveGame.ViewModels"
     Title="MainWindow"
-    Width="810"
+    Width="800"
     Height="680"
     AllowsTransparency="True"
     Background="Black"
@@ -65,170 +65,144 @@
             </Label>
         </StackPanel>
 
-        <Grid Grid.Row="1" Margin="20,10,20,20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <Border Grid.Row="1" Padding="0,10,0,20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            <StackPanel
-                Grid.Row="0"
-                VerticalAlignment="Top"
-                Panel.ZIndex="10">
-                <DockPanel HorizontalAlignment="Stretch">
-                    <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                        <Label
-                            FontSize="30"
-                            FontWeight="Bold"
-                            Foreground="YellowGreen">
-                            <Label.Effect>
-                                <DropShadowEffect BlurRadius="25" Color="YellowGreen" />
-                            </Label.Effect>
-                            Play
-                        </Label>
-                        <Label
-                            FontSize="30"
-                            FontWeight="Bold"
-                            Foreground="White"
-                            Opacity="0.5">
-                            Playing
-                        </Label>
-                        <Label
-                            FontSize="30"
-                            FontWeight="Bold"
-                            Foreground="White"
-                            Opacity="0.5">
-                            Played
-                        </Label>
-                    </StackPanel>
-                    <Ellipse
-                        Width="38"
-                        Height="38"
-                        Margin="0,0,5,0"
-                        HorizontalAlignment="Right"
-                        DockPanel.Dock="Right">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="https://avatars.githubusercontent.com/u/12775813" RenderOptions.BitmapScalingMode="HighQuality" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                </DockPanel>
-                <Border Margin="5,15,5,10" Background="#101010">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Label
-                            Padding="8,6,8,6"
-                            Content="Search for a game"
-                            FontSize="20"
-                            Foreground="White"
-                            Opacity="0.5"
-                            Visibility="{Binding SearchQuery.Length, Converter={StaticResource InvertBooleanToVisibilityConverter}}" />
-                        <TextBox
-                            x:Name="SearchTextBox"
-                            Grid.Row="0"
-                            Padding="6"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            CaretBrush="White"
-                            FontSize="20"
-                            Foreground="White"
-                            Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" />
-                        <ProgressBar
-                            Grid.Row="1"
-                            Height="5"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            Foreground="YellowGreen"
-                            IsIndeterminate="True"
-                            Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityHiddenConverter}}" />
-                    </Grid>
-                </Border>
-            </StackPanel>
-
-            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-                <Border Padding="0,0,0,0">
+                <Border
+                    Grid.Row="0"
+                    Padding="15,0,15,0"
+                    VerticalAlignment="Top"
+                    Panel.ZIndex="10">
                     <StackPanel>
-                        <StackPanel
-                            Margin="5,0,5,10"
-                            Background="#101010"
-                            Visibility="{Binding SearchQuery.Length, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <Label
-                                Margin="0,0,0,-4"
-                                Content="Search results"
-                                FontSize="20"
-                                FontWeight="Bold"
-                                Foreground="White"
-                                Opacity="0.5" />
-                            <StackPanel Orientation="Horizontal" Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <Border
-                                    Width="180"
-                                    Height="220"
-                                    Margin="6"
-                                    Background="#101010" />
-                                <Border
-                                    Width="180"
-                                    Height="220"
-                                    Margin="6"
-                                    Background="#101010" />
-                                <Border
-                                    Width="180"
-                                    Height="220"
-                                    Margin="6"
-                                    Background="#101010" />
-                                <Border
-                                    Width="180"
-                                    Height="220"
-                                    Margin="6"
-                                    Background="#101010" />
+                        <DockPanel HorizontalAlignment="Stretch">
+                            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                                <Label
+                                    FontSize="30"
+                                    FontWeight="Bold"
+                                    Foreground="YellowGreen">
+                                    <Label.Effect>
+                                        <DropShadowEffect BlurRadius="25" Color="YellowGreen" />
+                                    </Label.Effect>
+                                    Play
+                                </Label>
+                                <Label
+                                    FontSize="30"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Opacity="0.5">
+                                    Playing
+                                </Label>
+                                <Label
+                                    FontSize="30"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Opacity="0.5">
+                                    Played
+                                </Label>
                             </StackPanel>
+                            <Ellipse
+                                Width="38"
+                                Height="38"
+                                Margin="0,0,5,0"
+                                HorizontalAlignment="Right"
+                                DockPanel.Dock="Right">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="https://avatars.githubusercontent.com/u/12775813" RenderOptions.BitmapScalingMode="HighQuality" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </DockPanel>
+                        <Border Margin="5,15,5,10" Background="#303030">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Padding="8,6,8,6"
+                                    Content="Search for a game"
+                                    FontSize="20"
+                                    Foreground="White"
+                                    Opacity="0.5"
+                                    Visibility="{Binding SearchQuery.Length, Converter={StaticResource InvertBooleanToVisibilityConverter}}" />
+                                <TextBox
+                                    x:Name="SearchTextBox"
+                                    Grid.Row="0"
+                                    Padding="6"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    CaretBrush="White"
+                                    FontSize="20"
+                                    Foreground="White"
+                                    Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" />
+                                <ProgressBar
+                                    Grid.Row="1"
+                                    Height="5"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Foreground="YellowGreen"
+                                    IsIndeterminate="True"
+                                    Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityHiddenConverter}}" />
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
 
-                            <ItemsControl ItemsSource="{Binding SearchResults}" Visibility="{Binding IsSearching, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Horizontal" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Image
-                                            x:Name="Image"
-                                            Width="180"
-                                            Height="220"
-                                            Margin="6"
-                                            RenderTransformOrigin="0.5,0"
-                                            Source="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
-                                            Stretch="UniformToFill">
-                                            <Image.RenderTransform>
-                                                <TransformGroup>
-                                                    <TranslateTransform />
-                                                </TransformGroup>
-                                            </Image.RenderTransform>
-                                        </Image>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                    <StackPanel>
+                        <Border
+                            Margin="0,0,0,10"
+                            Padding="15,0,15,0"
+                            Background="#303030"
+                            Visibility="{Binding SearchQuery.Length, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <StackPanel>
+                                <Label
+                                    Margin="0,0,0,-5"
+                                    Content="Search results"
+                                    FontSize="20"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Opacity="0.5" />
+                                <StackPanel Orientation="Horizontal" Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <Border
+                                        Width="180"
+                                        Height="220"
+                                        Margin="6"
+                                        Background="#101010" />
+                                    <Border
+                                        Width="180"
+                                        Height="220"
+                                        Margin="6"
+                                        Background="#101010" />
+                                    <Border
+                                        Width="180"
+                                        Height="220"
+                                        Margin="6"
+                                        Background="#101010" />
+                                    <Border
+                                        Width="180"
+                                        Height="220"
+                                        Margin="6"
+                                        Background="#101010" />
+                                </StackPanel>
 
-                                        <DataTemplate.Resources>
-                                            <Storyboard x:Key="ItemAnimation" AutoReverse="False">
-                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Image" Storyboard.TargetProperty="(UIElement.Opacity)">
-                                                    <EasingDoubleKeyFrame KeyTime="0" Value="0" />
-                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" />
-                                                </DoubleAnimationUsingKeyFrames>
-                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
-                                                    <EasingDoubleKeyFrame KeyTime="0" Value="10" />
-                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0" />
-                                                </DoubleAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </DataTemplate.Resources>
-
-                                        <DataTemplate.Triggers>
-                                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                                <BeginStoryboard Storyboard="{StaticResource ItemAnimation}" />
-                                            </EventTrigger>
-                                        </DataTemplate.Triggers>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
+                                <ItemsControl ItemsSource="{Binding SearchResults}" Visibility="{Binding IsSearching, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <controls:GameCard CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}" Screenshots="{Binding Screenshots.Values}" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
 
                         <Border
                             Margin="7"
@@ -242,7 +216,8 @@
                                 Foreground="White"
                                 Opacity="0.35" />
                         </Border>
-                        <ItemsControl ItemsSource="{Binding RandomGames}">
+
+                        <ItemsControl Padding="15,0,15,0" ItemsSource="{Binding RandomGames}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel Orientation="Horizontal" />
@@ -255,8 +230,8 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </StackPanel>
-                </Border>
-            </ScrollViewer>
-        </Grid>
+                </ScrollViewer>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

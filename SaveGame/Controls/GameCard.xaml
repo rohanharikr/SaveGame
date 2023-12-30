@@ -14,6 +14,7 @@
         Width="180"
         Height="220"
         Margin="6"
+        Cursor="Hand"
         MouseEnter="EnterPreview"
         MouseLeave="ExitPreview"
         MouseMove="Preview"
