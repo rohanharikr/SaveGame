@@ -250,7 +250,7 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <controls:GameCard CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}" />
+                                    <controls:GameCard CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}" Screenshots="{Binding Screenshots.Values}" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>

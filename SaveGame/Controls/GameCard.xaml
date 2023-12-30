@@ -14,6 +14,7 @@
         Width="180"
         Height="220"
         Margin="6"
+        MouseEnter="EnterPreview"
         MouseLeave="ExitPreview"
         MouseMove="Preview"
         RenderTransformOrigin="0.5,0.5">

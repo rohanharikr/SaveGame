@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,18 +13,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IGDB.Models;
 
 namespace SaveGame.Controls
 {
-    /// <summary>
-    /// Interaction logic for GameCard.xaml
-    /// </summary>
     public partial class GameCard : UserControl
     {
-        public GameCard()
+        List<BitmapImage> _screenshots = new();
+        double segmentWidth = 0;
+
+        public IList<Screenshot> Screenshots
         {
-            InitializeComponent();
+            get { return (IList<Screenshot>)GetValue(ScreenshotsProperty); }
+            set { SetValue(ScreenshotsProperty, value); }
         }
+
+        public static readonly DependencyProperty ScreenshotsProperty =
+             DependencyProperty.Register("Screenshots", typeof(IList<Screenshot>), typeof(GameCard), new PropertyMetadata(new List<Screenshot>()));
 
         public Uri CoverArt
         {
@@ -34,23 +40,60 @@ namespace SaveGame.Controls
         public static readonly DependencyProperty CoverArtProperty =
             DependencyProperty.Register("CoverArt", typeof(Uri), typeof(GameCard), new PropertyMetadata(null));
 
-        int? selectedBar = null;
+        public GameCard()
+        {
+            InitializeComponent();
+            Loaded += GameCard_Loaded;
+        }
+
+        private void GameCard_Loaded(object sender, RoutedEventArgs e)
+        {
+            foreach(var screenshot in Screenshots)
+            {
+                if (_screenshots.Count >= 3)
+                    break;
+
+                Uri imageUri = new Uri("https:" + screenshot.Url);
+                BitmapImage bitmapImage = new BitmapImage(imageUri);
+                _screenshots.Add(bitmapImage);
+
+            }
+            segmentWidth = Grid.Width / _screenshots.Count;
+        }
+
+        private void EnterPreview(object sender, MouseEventArgs e)
+        {
+            if (_screenshots.Count <= 1)
+                return;
+
+            Bars.Visibility = Visibility.Visible;
+        }
+
+        private void ExitPreview(object sender, MouseEventArgs e)
+        {
+            if (_screenshots.Count <= 1)
+                return;
+
+            Bars.Visibility = Visibility.Collapsed;
+            Grid.Background = new ImageBrush
+            {
+                ImageSource = new BitmapImage(CoverArt),
+                Stretch = Stretch.UniformToFill
+            };
+        }
+
+        int selectedBar = -1;
+
         private void Preview(object sender, MouseEventArgs e)
         {
-            string[] images =
-            {
-                "https://content.halocdn.com/media/Default/community/blogs/hi_campaign_sniper_4k-e327d439d8714ed481c5de4b1b7fcc81.png",
-                "https://www.nme.com/wp-content/uploads/2021/12/Stalker-2-screenshot-featured-2000x1270-1.jpg",
-                "https://gamingbolt.com/wp-content/uploads/2013/12/1.-Assassins-Creed-4.jpg",
-                "https://xxboxnews.blob.core.windows.net/prod/sites/2/2023/10/AFOP_Screenshot_ATTACKING_THE_RDA-551e7d6f75844a992285.jpg",
-                "https://cdn.mos.cms.futurecdn.net/ekWPT2WBsFikaoXdav9qNC-1200-80.jpg"
-            };
-            Bars.Visibility = Visibility.Visible;
+            if (_screenshots.Count <= 1)
+                return;
+
             Point mousePosition = e.GetPosition(Grid);
             double mouseX = mousePosition.X;
-            double segmentWidth = 180 / 3;
             int segmentIndex = (int)(mouseX / segmentWidth);
-            segmentIndex = Math.Max(0, Math.Min(segmentIndex, 3 - 1));
+            segmentIndex = Math.Max(0, Math.Min(segmentIndex, _screenshots.Count - 1));
+
             if(selectedBar != segmentIndex)
             {
                 for (int i=0; i<Bars.Children.Count; i++)
@@ -62,21 +105,11 @@ namespace SaveGame.Controls
                 };
                 Grid.Background = new ImageBrush
                 {
-                    ImageSource = new BitmapImage(new Uri(images[segmentIndex])),
+                    ImageSource = _screenshots[segmentIndex],
                     Stretch = Stretch.UniformToFill
                 };
                 selectedBar = segmentIndex;
             }
-        }
-
-        private void ExitPreview(object sender, MouseEventArgs e)
-        {
-            Bars.Visibility = Visibility.Collapsed;
-            Grid.Background = new ImageBrush
-            {
-                ImageSource = new BitmapImage(CoverArt),
-                Stretch = Stretch.UniformToFill
-            };
         }
     }
 }
