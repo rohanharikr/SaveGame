@@ -35,6 +35,7 @@
         <converters:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
     </Window.Resources>
 
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -71,6 +72,39 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+
+                <Border
+                    Grid.RowSpan="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Panel.ZIndex="100">
+                    <Border.Background>
+                        <SolidColorBrush Opacity="0.65" Color="Black" />
+                    </Border.Background>
+                    <Border
+                        Margin="60"
+                        Padding="20"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="#303030">
+                        <StackPanel>
+                            <Label
+                                Padding="0"
+                                FontSize="24"
+                                FontWeight="Bold"
+                                Foreground="White">
+                                Elden Ring
+                            </Label>
+                            <TextBlock
+                                Margin="0,10,0,0"
+                                FontSize="16"
+                                Foreground="White"
+                                Opacity="0.65"
+                                Text="Elden Ring is a fantasy, action and open world game with RPG elements such as stats, weapons and spells. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between."
+                                TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+                </Border>
 
                 <Border
                     Grid.Row="0"
