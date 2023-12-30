@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IGDB;
 using IGDB.Models;
 
 namespace SaveGame.Controls
@@ -53,7 +54,7 @@ namespace SaveGame.Controls
                 if (_screenshots.Count >= 3)
                     break;
 
-                Uri imageUri = new Uri("https:" + screenshot.Url);
+                Uri imageUri = new Uri("https:" + IGDB.ImageHelper.GetImageUrl(imageId: screenshot.ImageId, size: ImageSize.ScreenshotMed, retina: true));
                 BitmapImage bitmapImage = new BitmapImage(imageUri);
                 _screenshots.Add(bitmapImage);
 
