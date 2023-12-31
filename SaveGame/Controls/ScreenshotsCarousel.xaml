@@ -26,7 +26,14 @@
             Background="Black"
             BorderThickness="0"
             Click="PrevScreenshot"
-            Visibility="Collapsed" />
+            Visibility="Collapsed">
+            <Path
+                Width="25"
+                Data="M15.75 19.5 L8.25 12 15.75 4.5"
+                Stroke="White"
+                StrokeLineJoin="Round"
+                StrokeThickness="2" />
+        </Button>
         <Button
             x:Name="NextScreenshotButton"
             Width="30"
@@ -36,7 +43,14 @@
             Background="Black"
             BorderThickness="0"
             Click="NextScreenshot"
-            Visibility="Collapsed" />
+            Visibility="Collapsed">
+            <Path
+                Width="25"
+                Data="M8.25 4.5 L15.75 12 8.25 19.5"
+                Stroke="White"
+                StrokeLineJoin="Round"
+                StrokeThickness="2" />
+        </Button>
         <ScrollViewer
             x:Name="CarouselScrollViewer"
             Grid.Row="0"

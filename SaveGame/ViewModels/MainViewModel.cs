@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using IGDB;
 using IGDB.Models;
+using SaveGame.Views;
 
 namespace SaveGame.ViewModels
 {
@@ -30,6 +31,9 @@ namespace SaveGame.ViewModels
         [ObservableProperty]
         Game? gameDetail = null;
 
+        [ObservableProperty]
+        object? currentView = null;
+
         IGDBClient igdb;
 
         public MainViewModel()
@@ -39,27 +43,21 @@ namespace SaveGame.ViewModels
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_SECRET")
             );
 
-            GetRandomGames();
+            CurrentView = new PlayView();
         }
 
         async partial void OnSearchQueryChanged(string value)
         {
-            if(value == "")
+            if (value == "")
             {
                 SearchResults = Enumerable.Empty<Game>();
                 return;
             }
 
             IsSearching = true;
-            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields *, screenshots.*, genres.*, videos.*, release_dates.*, involved_companies.company.*, cover.*; search \"{value}\"; limit 8;");
+            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields *, screenshots.*, genres.*, videos.*, release_dates.*, involved_companies.company.*, cover.*; search \"{value}\"; limit 4;");
             SearchResults = games;
             IsSearching = false;
-        }
-
-        async void GetRandomGames()
-        {
-            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: "fields *, screenshots.*, genres.*, videos.*, release_dates.*, involved_companies.company.*, cover.*; sort rating desc; limit: 16;");
-            RandomGames = games;
         }
 
         [RelayCommand]

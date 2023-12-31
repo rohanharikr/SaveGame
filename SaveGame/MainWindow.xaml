@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SaveGame"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:SaveGame.Views"
     xmlns:vm="clr-namespace:SaveGame.ViewModels"
     Title="MainWindow"
     Width="800"
@@ -81,48 +82,49 @@
 
                 <Border
                     Grid.Row="0"
-                    Padding="15,0,15,0"
                     VerticalAlignment="Top"
                     Panel.ZIndex="10">
                     <StackPanel>
-                        <DockPanel HorizontalAlignment="Stretch">
-                            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                                <Label
-                                    FontSize="30"
-                                    FontWeight="Bold"
-                                    Foreground="YellowGreen">
-                                    <Label.Effect>
-                                        <DropShadowEffect BlurRadius="25" Color="YellowGreen" />
-                                    </Label.Effect>
-                                    Play
-                                </Label>
-                                <Label
-                                    FontSize="30"
-                                    FontWeight="Bold"
-                                    Foreground="White"
-                                    Opacity="0.5">
-                                    Playing
-                                </Label>
-                                <Label
-                                    FontSize="30"
-                                    FontWeight="Bold"
-                                    Foreground="White"
-                                    Opacity="0.5">
-                                    Played
-                                </Label>
-                            </StackPanel>
-                            <Ellipse
-                                Width="38"
-                                Height="38"
-                                Margin="0,0,5,0"
-                                HorizontalAlignment="Right"
-                                DockPanel.Dock="Right">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="https://avatars.githubusercontent.com/u/12775813" RenderOptions.BitmapScalingMode="HighQuality" />
-                                </Ellipse.Fill>
-                            </Ellipse>
-                        </DockPanel>
-                        <Border Margin="5,15,5,10" Background="#303030">
+                        <Border Padding="15,0,15,0">
+                            <DockPanel HorizontalAlignment="Stretch">
+                                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                                    <Label
+                                        FontSize="30"
+                                        FontWeight="Bold"
+                                        Foreground="YellowGreen">
+                                        <Label.Effect>
+                                            <DropShadowEffect BlurRadius="25" Color="YellowGreen" />
+                                        </Label.Effect>
+                                        Play
+                                    </Label>
+                                    <Label
+                                        FontSize="30"
+                                        FontWeight="Bold"
+                                        Foreground="White"
+                                        Opacity="0.5">
+                                        Playing
+                                    </Label>
+                                    <Label
+                                        FontSize="30"
+                                        FontWeight="Bold"
+                                        Foreground="White"
+                                        Opacity="0.5">
+                                        Played
+                                    </Label>
+                                </StackPanel>
+                                <Ellipse
+                                    Width="38"
+                                    Height="38"
+                                    Margin="0,0,5,0"
+                                    HorizontalAlignment="Right"
+                                    DockPanel.Dock="Right">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="https://avatars.githubusercontent.com/u/12775813" RenderOptions.BitmapScalingMode="HighQuality" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </DockPanel>
+                        </Border>
+                        <Border Margin="20,15,20,10" Background="#303030">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
@@ -155,11 +157,6 @@
                                     Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityHiddenConverter}}" />
                             </Grid>
                         </Border>
-                    </StackPanel>
-                </Border>
-
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-                    <StackPanel>
                         <Border
                             Margin="0,0,0,10"
                             Padding="15,0,15,0"
@@ -199,48 +196,26 @@
                                 <ItemsControl ItemsSource="{Binding SearchResults}" Visibility="{Binding IsSearching, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <WrapPanel/>
+                                            <WrapPanel />
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <controls:GameCard CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}" Screenshots="{Binding Screenshots.Values}" />
+                                            <controls:GameCard
+                                                Command="{Binding DataContext.OpenGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                CommandParameter="{Binding .}"
+                                                CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
+                                                Screenshots="{Binding Screenshots.Values}" />
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
                             </StackPanel>
                         </Border>
-
-                        <Border
-                            Margin="7"
-                            HorizontalAlignment="Stretch"
-                            Visibility="{Binding RandomGames.Count, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
-                            <Label
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Content="Loading..."
-                                FontSize="24"
-                                Foreground="White"
-                                Opacity="0.35" />
-                        </Border>
-
-                        <ItemsControl Padding="15,0,15,0" ItemsSource="{Binding RandomGames}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel Orientation="Horizontal" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <controls:GameCard
-                                        Command="{Binding DataContext.OpenGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                        CommandParameter="{Binding .}"
-                                        CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
-                                        Screenshots="{Binding Screenshots.Values}" />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
                     </StackPanel>
+                </Border>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                    <Frame Content="{Binding CurrentView}" NavigationUIVisibility="Hidden" />
                 </ScrollViewer>
             </Grid>
         </Border>

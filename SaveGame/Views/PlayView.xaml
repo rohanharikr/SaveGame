@@ -1,0 +1,57 @@
+﻿<Page
+    x:Class="SaveGame.Views.PlayView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:SaveGame.Controls"
+    xmlns:converters="clr-namespace:SaveGame.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SaveGame.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:SaveGame.ViewModels"
+    Title="PlayView"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:PlayViewModel />
+    </Page.DataContext>
+
+    <Page.Resources>
+        <converters:CoverArtConverter x:Key="CoverArtConverter" />
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter" />
+        <converters:InvertBooleanToVisibilityHiddenConverter x:Key="InvertBooleanToVisibilityHiddenConverter" />
+        <converters:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
+    </Page.Resources>
+
+    <StackPanel>
+        <Border
+            Margin="7"
+            HorizontalAlignment="Stretch"
+            Visibility="{Binding RandomGames.Count, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
+            <Label
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="Loading..."
+                FontSize="24"
+                Foreground="White"
+                Opacity="0.35" />
+        </Border>
+
+        <ItemsControl Padding="15,0,15,0" ItemsSource="{Binding RandomGames}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <controls:GameCard
+                        Command="{Binding DataContext.OpenGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                        CommandParameter="{Binding .}"
+                        CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
+                        Screenshots="{Binding Screenshots.Values}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+</Page>
