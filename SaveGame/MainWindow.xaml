@@ -199,7 +199,7 @@
                                 <ItemsControl ItemsSource="{Binding SearchResults}" Visibility="{Binding IsSearching, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Horizontal" />
+                                            <WrapPanel/>
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
