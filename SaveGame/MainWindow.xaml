@@ -87,22 +87,72 @@
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         Background="#303030">
-                        <StackPanel>
-                            <Label
-                                Padding="0"
-                                FontSize="24"
-                                FontWeight="Bold"
-                                Foreground="White">
-                                Elden Ring
-                            </Label>
-                            <TextBlock
-                                Margin="0,10,0,0"
-                                FontSize="16"
-                                Foreground="White"
-                                Opacity="0.65"
-                                Text="Elden Ring is a fantasy, action and open world game with RPG elements such as stats, weapons and spells. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between."
-                                TextWrapping="Wrap" />
-                        </StackPanel>
+                        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                            <StackPanel>
+                                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                    <Border
+                                        Width="40"
+                                        Height="46"
+                                        Margin="0,3,10,0"
+                                        HorizontalAlignment="Left"
+                                        Background="Green"
+                                        CornerRadius="4">
+                                        <Label
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="22"
+                                            FontWeight="Bold"
+                                            Foreground="White">
+                                            97
+                                        </Label>
+                                    </Border>
+                                    <StackPanel>
+                                        <Label
+                                            Padding="0"
+                                            FontSize="24"
+                                            FontWeight="Bold"
+                                            Foreground="White">
+                                            Elden Ring (2019)
+                                        </Label>
+                                        <Label
+                                            Padding="0"
+                                            FontSize="16"
+                                            Foreground="White">
+                                            FromSoftware
+                                        </Label>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                                    <Image
+                                        Height="220"
+                                        Margin="0,0,15,0"
+                                        Source="https://images.igdb.com/igdb/image/upload/t_cover_big/co4jni.png"
+                                        Stretch="UniformToFill" />
+                                    <Image
+                                        Width="300"
+                                        Height="220"
+                                        Margin="0,0,15,0"
+                                        Source="https://images.igdb.com/igdb/image/upload/t_original/scagdn.jpg"
+                                        Stretch="UniformToFill" />
+                                    <Image
+                                        Width="300"
+                                        Height="220"
+                                        Margin="0,0,15,0"
+                                        Source="https://images.igdb.com/igdb/image/upload/t_original/scagdo.jpg"
+                                        Stretch="UniformToFill" />
+                                </StackPanel>
+                                <TextBlock
+                                    Margin="0,10,0,10"
+                                    FontSize="16"
+                                    Foreground="White"
+                                    Text="Elden Ring is a fantasy, action and open world game with RPG elements such as stats, weapons and spells. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between."
+                                    TextWrapping="Wrap" />
+                                <TextBlock
+                                    FontSize="16"
+                                    Foreground="White"
+                                    Text="Action • Adventure • Role Playing Game" />
+                            </StackPanel>
+                        </ScrollViewer>
                     </Border>
                 </Border>
 
