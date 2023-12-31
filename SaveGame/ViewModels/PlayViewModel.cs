@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using IGDB;
 using IGDB.Models;
+using SaveGame.Services;
 using System;
 using System.Collections.Generic;
 using System.DirectoryServices;
@@ -32,6 +33,9 @@ namespace SaveGame.ViewModels
             );
 
             GetRandomGames();
+
+            using var context = new SQLiteService();
+            Console.WriteLine(context.Play);
         }
 
         async void GetRandomGames()
