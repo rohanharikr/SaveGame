@@ -88,29 +88,104 @@
                         <Border Padding="15,0,15,0">
                             <DockPanel HorizontalAlignment="Stretch">
                                 <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                                    <Label
+                                    <RadioButton
+                                        Command="{Binding GotoPlayViewCommand}"
+                                        IsChecked="True"
+                                        Style="{StaticResource BtnStyle}">
+                                        Play
+                                    </RadioButton>
+                                    <RadioButton
+                                        Command="{Binding GotoPlayingViewCommand}"
+                                        IsChecked="True"
+                                        Style="{StaticResource BtnStyle}">
+                                        Playing
+                                    </RadioButton>
+                                    <RadioButton
+                                        Command="{Binding GotoPlayedViewCommand}"
+                                        IsChecked="True"
+                                        Style="{StaticResource BtnStyle}">
+                                        Played
+                                    </RadioButton>
+                                    <!--<Label
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Cursor="Hand"
                                         FontSize="30"
                                         FontWeight="Bold"
-                                        Foreground="YellowGreen">
-                                        <Label.Effect>
-                                            <DropShadowEffect BlurRadius="25" Color="YellowGreen" />
-                                        </Label.Effect>
+                                        Foreground="White"
+                                        Opacity="0.5">
+                                        <Label.Style>
+                                            <Style TargetType="{x:Type Label}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="True">
+                                                        <Setter Property="Effect">
+                                                            <Setter.Value>
+                                                                <DropShadowEffect BlurRadius="25" Color="YellowGreen" />
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                        <Setter Property="Foreground" Value="YellowGreen" />
+                                                        <Setter Property="Opacity" Value="1" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                        <Label.InputBindings>
+                                            <MouseBinding Command="{Binding GotoPlayViewCommand}" Gesture="LeftClick" />
+                                        </Label.InputBindings>
                                         Play
                                     </Label>
                                     <Label
+                                        Cursor="Hand"
                                         FontSize="30"
                                         FontWeight="Bold"
                                         Foreground="White"
                                         Opacity="0.5">
+                                        <Label.Style>
+                                            <Style TargetType="{x:Type Label}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="True">
+                                                        <Setter Property="Effect">
+                                                            <Setter.Value>
+                                                                <DropShadowEffect BlurRadius="25" Color="YellowGreen" />
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                        <Setter Property="Foreground" Value="YellowGreen" />
+                                                        <Setter Property="Opacity" Value="1" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                        <Label.InputBindings>
+                                            <MouseBinding Command="{Binding GotoPlayingViewCommand}" Gesture="LeftClick" />
+                                        </Label.InputBindings>
                                         Playing
                                     </Label>
                                     <Label
+                                        Cursor="Hand"
                                         FontSize="30"
                                         FontWeight="Bold"
                                         Foreground="White"
                                         Opacity="0.5">
+                                        <Label.Style>
+                                            <Style TargetType="{x:Type Label}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CurrentView}" Value="True">
+                                                        <Setter Property="Effect">
+                                                            <Setter.Value>
+                                                                <DropShadowEffect BlurRadius="25" Color="YellowGreen" />
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                        <Setter Property="Foreground" Value="YellowGreen" />
+                                                        <Setter Property="Opacity" Value="1" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                        <Label.InputBindings>
+                                            <MouseBinding Command="{Binding GotoPlayedViewCommand}" Gesture="LeftClick" />
+                                        </Label.InputBindings>
                                         Played
-                                    </Label>
+                                    </Label>-->
                                 </StackPanel>
                                 <Ellipse
                                     Width="38"

@@ -43,7 +43,7 @@ namespace SaveGame.ViewModels
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_SECRET")
             );
 
-            CurrentView = new PlayView();
+            GotoPlayView();
         }
 
         async partial void OnSearchQueryChanged(string value)
@@ -79,6 +79,24 @@ namespace SaveGame.ViewModels
             ShowGameDetailModal = false;
             GameDetail = null;
             return;
+        }
+
+        [RelayCommand]
+        void GotoPlayView()
+        {
+            CurrentView = new PlayView();
+        }
+
+        [RelayCommand]
+        void GotoPlayingView()
+        {
+            CurrentView = new PlayingView();
+        }
+
+        [RelayCommand]
+        void GotoPlayedView()
+        {
+            CurrentView = new PlayedView();
         }
     }
 }
