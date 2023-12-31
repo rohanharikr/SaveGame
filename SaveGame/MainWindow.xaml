@@ -59,11 +59,11 @@
                         FontWeight="Bold"
                         Foreground="White"
                         Opacity="0.5">
-                        savegame
+                        [savegame]
                     </Label>
                 </StackPanel>
             </Border>
-            <StackPane
+            <StackPanel
                 Grid.Column="1"
                 VerticalAlignment="Stretch"
                 Background="#101010"
@@ -98,7 +98,7 @@
                         <MouseBinding Command="{Binding CloseAppCommand}" Gesture="LeftClick" />
                     </Label.InputBindings>
                 </Label>
-            </StackPane>
+            </StackPanel>
         </Grid>
 
         <Border Grid.Row="1" Padding="0,10,0,20">
@@ -187,7 +187,7 @@
                         </Border>
                         <Border
                             Margin="0,0,0,10"
-                            Padding="15,0,15,0"
+                            Padding="15,0,15,6"
                             Background="#303030"
                             Visibility="{Binding SearchQuery.Length, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <StackPanel>

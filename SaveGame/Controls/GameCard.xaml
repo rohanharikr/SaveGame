@@ -17,6 +17,14 @@
         MouseLeave="ExitPreview"
         MouseMove="Preview"
         RenderTransformOrigin="0.5,0.5">
+        <Grid.ContextMenu>
+            <ContextMenu Style="{StaticResource CoolContextMenu}">
+                <MenuItem Header="Play" Style="{StaticResource CoolContextMenuItem}" />
+                <MenuItem Header="Playing" Style="{StaticResource CoolContextMenuItem}" />
+                <MenuItem Header="Played" Style="{StaticResource CoolContextMenuItem}" />
+                <MenuItem Header="Remove" Style="{StaticResource CoolContextMenuItem}" />
+            </ContextMenu>
+        </Grid.ContextMenu>
         <Grid.InputBindings>
             <MouseBinding
                 Command="{Binding Command, ElementName=Root}"
