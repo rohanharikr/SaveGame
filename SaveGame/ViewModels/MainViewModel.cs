@@ -24,6 +24,12 @@ namespace SaveGame.ViewModels
         [ObservableProperty]
         IEnumerable<Game> randomGames;
 
+        [ObservableProperty]
+        bool showGameDetailModal = false;
+
+        [ObservableProperty]
+        Game? gameDetail = null;
+
         IGDBClient igdb;
 
         public MainViewModel()
@@ -60,6 +66,12 @@ namespace SaveGame.ViewModels
         void CloseApp()
         {
             System.Windows.Application.Current.Shutdown();
+        }
+
+        [RelayCommand]
+        void GameDetailModalHandler()
+        {
+            ShowGameDetailModal = true;
         }
     }
 }
