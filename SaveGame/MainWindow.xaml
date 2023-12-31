@@ -35,7 +35,6 @@
         <converters:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
     </Window.Resources>
 
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -76,6 +75,8 @@
                 <controls:GameDetailModal
                     Grid.RowSpan="2"
                     Panel.ZIndex="100"
+                    CloseModal="{Binding CloseGameDetailModalCommand}"
+                    Detail="{Binding GameDetail}"
                     Visibility="{Binding ShowGameDetailModal, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                 <Border
@@ -232,7 +233,8 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <controls:GameCard
-                                        Command="{Binding GameDetailModalHandler}"
+                                        Command="{Binding DataContext.OpenGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                        CommandParameter="{Binding .}"
                                         CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
                                         Screenshots="{Binding Screenshots.Values}" />
                                 </DataTemplate>

@@ -2,89 +2,103 @@
     x:Class="SaveGame.Controls.GameDetailModal"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:SaveGame.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SaveGame.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="Root"
     mc:Ignorable="d">
 
+    <UserControl.Resources>
+        <converters:CoverArtConverter x:Key="CoverArtConverter" />
+        <converters:GenresToStringConverter x:Key="GenresToStringConverter" />
+    </UserControl.Resources>
+
     <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Border.Background>
-            <SolidColorBrush Opacity="0.65" Color="Black" />
-        </Border.Background>
-        <Border
-            Margin="60"
-            Padding="20"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Background="#303030">
-            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                <StackPanel>
-                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                        <Border
-                            Width="40"
-                            Height="46"
-                            Margin="0,3,10,0"
-                            HorizontalAlignment="Left"
-                            Background="Green"
-                            CornerRadius="4">
-                            <Label
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                FontSize="22"
-                                FontWeight="Bold"
-                                Foreground="White">
-                                97
-                            </Label>
-                        </Border>
-                        <StackPanel>
-                            <Label
-                                Padding="0"
-                                FontSize="24"
-                                FontWeight="Bold"
-                                Foreground="White">
-                                Elden Ring (2019)
-                            </Label>
-                            <Label
-                                Padding="0"
-                                FontSize="16"
-                                Foreground="White">
-                                FromSoftware
-                            </Label>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border
+                Grid.Row="0"
+                Margin="60"
+                Padding="20"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Panel.ZIndex="100"
+                Background="#303030">
+                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <StackPanel>
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                            <Border
+                                Width="46"
+                                Height="46"
+                                Margin="0,3,10,0"
+                                HorizontalAlignment="Left"
+                                Background="Green"
+                                CornerRadius="4">
+                                <Label
+                                    Padding="0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Content="{Binding Detail.TotalRating, ElementName=Root}"
+                                    FontSize="22"
+                                    FontWeight="Bold"
+                                    Foreground="White" />
+
+                            </Border>
+                            <StackPanel>
+                                <Label
+                                    Padding="0"
+                                    Content="{Binding Detail.Name, ElementName=Root}"
+                                    FontSize="24"
+                                    FontWeight="Bold"
+                                    Foreground="White" />
+                                <Label
+                                    Padding="0"
+                                    Content="{Binding Path=Detail.InvolvedCompanies.Values[0].Company.Value.Name, ElementName=Root}"
+                                    FontSize="16"
+                                    Foreground="White" />
+                            </StackPanel>
                         </StackPanel>
+                        <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                            <Image
+                                Height="220"
+                                Margin="0,0,15,0"
+                                Source="{Binding Detail.Cover.Value.ImageId, ElementName=Root, Converter={StaticResource CoverArtConverter}}"
+                                Stretch="UniformToFill" />
+                            <Image
+                                Width="300"
+                                Height="220"
+                                Margin="0,0,15,0"
+                                Source="https://images.igdb.com/igdb/image/upload/t_original/scagdn.jpg"
+                                Stretch="UniformToFill" />
+                            <Image
+                                Width="300"
+                                Height="220"
+                                Margin="0,0,15,0"
+                                Source="https://images.igdb.com/igdb/image/upload/t_original/scagdo.jpg"
+                                Stretch="UniformToFill" />
+                        </StackPanel>
+                        <TextBlock
+                            Margin="0,10,0,10"
+                            FontSize="16"
+                            Foreground="White"
+                            Text="{Binding Detail.Summary, ElementName=Root}"
+                            TextWrapping="Wrap" />
+                        <TextBlock
+                            FontSize="16"
+                            Foreground="White"
+                            Text="{Binding Detail.Genres.Values, ElementName=Root, Converter={StaticResource GenresToStringConverter}}" />
                     </StackPanel>
-                    <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                        <Image
-                            Height="220"
-                            Margin="0,0,15,0"
-                            Source="https://images.igdb.com/igdb/image/upload/t_cover_big/co4jni.png"
-                            Stretch="UniformToFill" />
-                        <Image
-                            Width="300"
-                            Height="220"
-                            Margin="0,0,15,0"
-                            Source="https://images.igdb.com/igdb/image/upload/t_original/scagdn.jpg"
-                            Stretch="UniformToFill" />
-                        <Image
-                            Width="300"
-                            Height="220"
-                            Margin="0,0,15,0"
-                            Source="https://images.igdb.com/igdb/image/upload/t_original/scagdo.jpg"
-                            Stretch="UniformToFill" />
-                    </StackPanel>
-                    <TextBlock
-                        Margin="0,10,0,10"
-                        FontSize="16"
-                        Foreground="White"
-                        Text="Elden Ring is a fantasy, action and open world game with RPG elements such as stats, weapons and spells. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between."
-                        TextWrapping="Wrap" />
-                    <TextBlock
-                        FontSize="16"
-                        Foreground="White"
-                        Text="Action • Adventure • Role Playing Game" />
-                </StackPanel>
-            </ScrollViewer>
-        </Border>
+                </ScrollViewer>
+            </Border>
+            <StackPanel Background="Black" Opacity="0.65">
+                <StackPanel.InputBindings>
+                    <MouseBinding Command="{Binding CloseModal, ElementName=Root}" Gesture="LeftClick" />
+                </StackPanel.InputBindings>
+            </StackPanel>
+        </Grid>
     </Border>
 
 

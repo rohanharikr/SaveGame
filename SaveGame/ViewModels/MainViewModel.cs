@@ -51,14 +51,14 @@ namespace SaveGame.ViewModels
             }
 
             IsSearching = true;
-            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields *, screenshots.*, genres.*, cover.*; search \"{value}\"; limit 4;");
+            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields *, screenshots.*, genres.*, involved_companies.company.*, cover.*; search \"{value}\"; limit 4;");
             SearchResults = games;
             IsSearching = false;
         }
 
         async void GetRandomGames()
         {
-            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: "fields *, screenshots.*, genres.*, cover.*; sort rating desc; limit: 15;");
+            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: "fields *, screenshots.*, genres.*, involved_companies.company.*, cover.*; sort rating desc; limit: 15;");
             RandomGames = games;
         }
 
@@ -69,9 +69,18 @@ namespace SaveGame.ViewModels
         }
 
         [RelayCommand]
-        void GameDetailModalHandler()
+        void OpenGameDetailModal(Game? game)
         {
+            GameDetail = game;
             ShowGameDetailModal = true;
+        }
+
+        [RelayCommand]
+        void CloseGameDetailModal()
+        {
+            ShowGameDetailModal = false;
+            GameDetail = null;
+            return;
         }
     }
 }

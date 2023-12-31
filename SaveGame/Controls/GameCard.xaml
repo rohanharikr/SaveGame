@@ -6,8 +6,6 @@
     xmlns:local="clr-namespace:SaveGame.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="Root"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
     mc:Ignorable="d">
     <Grid
         x:Name="Grid"
@@ -19,15 +17,21 @@
         MouseLeave="ExitPreview"
         MouseMove="Preview"
         RenderTransformOrigin="0.5,0.5">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+        <Grid.InputBindings>
+            <MouseBinding
+                Command="{Binding Command, ElementName=Root}"
+                CommandParameter="{Binding CommandParameter, ElementName=Root}"
+                Gesture="LeftClick" />
+        </Grid.InputBindings>
         <Grid.Background>
             <ImageBrush
                 ImageSource="{Binding CoverArt, ElementName=Root}"
                 RenderOptions.BitmapScalingMode="HighQuality"
                 Stretch="UniformToFill" />
         </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         <Grid.Style>
             <Style TargetType="Grid">
                 <Setter Property="RenderTransform">
