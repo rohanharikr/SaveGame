@@ -33,9 +33,6 @@ namespace SaveGame.ViewModels
             );
 
             GetRandomGames();
-
-            using var context = new SQLiteService();
-            Console.WriteLine(context.Play);
         }
 
         async void GetRandomGames()
