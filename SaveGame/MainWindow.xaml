@@ -24,10 +24,6 @@
             GlassFrameThickness="0" />
     </WindowChrome.WindowChrome>
 
-    <Window.DataContext>
-        <vm:MainViewModel />
-    </Window.DataContext>
-
     <Window.Resources>
         <converters:CoverArtConverter x:Key="CoverArtConverter" />
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -167,6 +163,12 @@
                                         Content="Played"
                                         GroupName="MainNav"
                                         Style="{StaticResource BtnStyle}" />
+                                    <RadioButton
+                                        Command="{Binding GotoPlayedViewCommand}"
+                                        Content="Bruv"
+                                        GroupName="MainNav"
+                                        Style="{StaticResource BtnStyle}"
+                                        Visibility="{Binding IsModalOpen, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </StackPanel>
                                 <Ellipse
                                     Width="38"
