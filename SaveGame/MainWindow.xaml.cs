@@ -21,5 +21,20 @@ namespace SaveGame
         {
             InitializeComponent();
         }
+
+        private void CloseApp(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void DragApp(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void MinimizeApp(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
     }
 }

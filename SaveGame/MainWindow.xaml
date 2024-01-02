@@ -45,7 +45,8 @@
         <Grid
             Grid.Row="0"
             Height="30"
-            Background="#202020">
+            Background="#202020"
+            MouseLeftButtonDown="DragApp">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -68,36 +69,63 @@
                 VerticalAlignment="Stretch"
                 Background="#101010"
                 Orientation="Horizontal">
-                <Label
-                    Padding="16,0,16,0"
+                <Button
                     VerticalAlignment="Stretch"
                     VerticalContentAlignment="Center"
+                    Click="MinimizeApp"
                     Content="—"
+                    Cursor="Hand"
                     FontSize="8"
                     FontWeight="Black"
-                    Foreground="White" />
-                <Label
-                    Padding="16,0,16,0"
+                    Foreground="White">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="#101010" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Padding="16,0,16,0" Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#303030" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button
                     VerticalAlignment="Stretch"
                     VerticalContentAlignment="Center"
+                    Click="CloseApp"
                     Content="❌"
                     Cursor="Hand"
                     FontSize="8"
                     Foreground="White">
-                    <Label.Style>
-                        <Style TargetType="Label">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="#101010" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Padding="16,0,16,0" Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Background" Value="Red" />
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
-                    </Label.Style>
-                    <Label.InputBindings>
-                        <MouseBinding Command="{Binding CloseAppCommand}" Gesture="LeftClick" />
-                    </Label.InputBindings>
-                </Label>
+                    </Button.Style>
+                </Button>
             </StackPanel>
         </Grid>
 

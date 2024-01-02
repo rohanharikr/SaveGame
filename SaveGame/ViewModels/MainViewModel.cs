@@ -61,12 +61,6 @@ namespace SaveGame.ViewModels
         }
 
         [RelayCommand]
-        void CloseApp()
-        {
-            System.Windows.Application.Current.Shutdown();
-        }
-
-        [RelayCommand]
         void OpenGameDetailModal(Game? game)
         {
             GameDetail = game;

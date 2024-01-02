@@ -13,8 +13,8 @@ namespace SaveGame
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            DatabaseFacade facade = new(new SQLiteService());
-            facade.EnsureCreated();
+            //DatabaseFacade facade = new(new SQLiteService());
+            //facade.EnsureCreated();
         }
     }
 
