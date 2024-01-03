@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using IGDB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,28 +10,24 @@ namespace SaveGame.Stores
 {
     public partial class ModalNavigationStore : ObservableObject
     {
-        private bool _currentViewModel;
-        public bool CurrentViewModel
+        private Game? _detail;
+        public Game? Detail
         {
-            get
-            {
-                return _currentViewModel;
-            }
+            get { return _detail; }
             set
             {
-                _currentViewModel = value;
-                CurrentViewModelChanged?.Invoke();
+                _detail = value;
+                DetailChanged?.Invoke();
             }
         }
 
-        public bool IsOpen => CurrentViewModel != false;
+        public bool IsOpen => _detail != null;
 
-
-        public event Action CurrentViewModelChanged;
+        public event Action? DetailChanged;
 
         public void Close()
         {
-            CurrentViewModel = false;
+            _detail = null;
         }
     }
 }

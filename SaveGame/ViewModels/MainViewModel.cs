@@ -25,21 +25,15 @@ namespace SaveGame.ViewModels
 
         [ObservableProperty]
         IEnumerable<Game> randomGames;
-
-        [ObservableProperty]
-        bool showGameDetailModal = false;
-
-        [ObservableProperty]
-        Game? gameDetail = null;
-
+        
         [ObservableProperty]
         object? currentView = null;
 
-        private readonly ModalNavigationStore _modalNavigationStore;
-        public bool CurrentModalViewModel => _modalNavigationStore.CurrentViewModel;
-        public bool IsModalOpen => _modalNavigationStore.IsOpen;
-
         IGDBClient igdb;
+
+        private readonly ModalNavigationStore _modalNavigationStore;
+        public Game? GameDetail => _modalNavigationStore.Detail;
+        public bool IsGameDetailModalOpen => _modalNavigationStore.IsOpen;
 
         public MainViewModel(ModalNavigationStore modalNavigationStore)
         {
@@ -49,15 +43,27 @@ namespace SaveGame.ViewModels
             );
 
             _modalNavigationStore = modalNavigationStore;
-            _modalNavigationStore.CurrentViewModelChanged += ModalNavigationStore_CurrentViewModelChanged;
+            _modalNavigationStore.DetailChanged += ModalNavigationStore_GameDetailChanged;
 
             GotoPlayView();
         }
 
-        private void ModalNavigationStore_CurrentViewModelChanged()
+        private void ModalNavigationStore_GameDetailChanged()
         {
-            OnPropertyChanged(nameof(CurrentModalViewModel));
-            OnPropertyChanged(nameof(IsModalOpen));
+            OnPropertyChanged(nameof(GameDetail));
+            OnPropertyChanged(nameof(IsGameDetailModalOpen));
+        }
+
+        [RelayCommand]
+        void ShowGameDetailModal(Game game)
+        {
+            _modalNavigationStore.Detail = game;
+        }
+
+        [RelayCommand]
+        void CloseGameDetailModal()
+        {
+            _modalNavigationStore.Detail = null;
         }
 
         async partial void OnSearchQueryChanged(string value)
@@ -75,21 +81,6 @@ namespace SaveGame.ViewModels
         }
 
         [RelayCommand]
-        void OpenGameDetailModal(Game? game)
-        {
-            GameDetail = game;
-            ShowGameDetailModal = true;
-        }
-
-        [RelayCommand]
-        void CloseGameDetailModal()
-        {
-            ShowGameDetailModal = false;
-            GameDetail = null;
-            return;
-        }
-
-        [RelayCommand]
         void GotoPlayView()
         {
             CurrentView = new PlayView();
@@ -99,14 +90,12 @@ namespace SaveGame.ViewModels
         void GotoPlayingView()
         {
             CurrentView = new PlayingView();
-            _modalNavigationStore.CurrentViewModel = true;
         }
 
         [RelayCommand]
         void GotoPlayedView()
         {
             CurrentView = new PlayedView();
-            _modalNavigationStore.Close();
         }
     }
 }
