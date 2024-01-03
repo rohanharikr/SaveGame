@@ -5,6 +5,7 @@ using IGDB.Models;
 using SaveGame.Services;
 using SaveGame.Stores;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.DirectoryServices;
@@ -26,6 +27,9 @@ namespace SaveGame.ViewModels
 
         public ObservableCollection<Game> PlayGames => _gameStore.PlayGames;
 
+        [ObservableProperty]
+        IEnumerable<Game> upcomingReleases;
+
         public PlayViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore)
         {
             igdb = new IGDBClient(
@@ -33,11 +37,28 @@ namespace SaveGame.ViewModels
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_SECRET")
             );
 
+            GetUpcomingReleases();
+
             _modalNavigationStore = modalNavigationStore;
             _gameStore = gameStore;
 
             _modalNavigationStore.DetailChanged += ModalNavigationStore_GameDetailChanged;
             _gameStore.GamesChanged += GameStore_GamesChanged;
+        }
+
+        long GetDateTimeInMs()
+        {
+            DateTime currentDate = DateTime.Now;
+            long ticks = currentDate.Ticks;
+            long milliseconds = ticks / TimeSpan.TicksPerMillisecond;
+            return milliseconds;
+        }
+
+        async void GetUpcomingReleases()
+        {
+            var dateTimeInMs = GetDateTimeInMs();
+            IEnumerable<Game> games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields *, screenshots.*, genres.*, videos.*, release_dates.*, involved_companies.company.*, cover.*; where cover.url != null; limit 4;");
+            UpcomingReleases = games;
         }
 
         private void ModalNavigationStore_GameDetailChanged()
@@ -66,12 +87,14 @@ namespace SaveGame.ViewModels
         [RelayCommand]
         void AddToPlaying(Game game)
         {
+            _gameStore.PlayGames.Remove(game);
             _gameStore.PlayingGames.Add(game);
         }
 
         [RelayCommand]
         void AddToPlayed(Game game)
         {
+            _gameStore.PlayGames.Remove(game);
             _gameStore.PlayedGames.Add(game);
         }
 

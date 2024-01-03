@@ -152,17 +152,17 @@
                                         Content="Play"
                                         GroupName="MainNav"
                                         IsChecked="True"
-                                        Style="{StaticResource BtnStyle}" />
+                                        Style="{StaticResource NavButton}" />
                                     <RadioButton
                                         Command="{Binding GotoPlayingViewCommand}"
                                         Content="Playing"
                                         GroupName="MainNav"
-                                        Style="{StaticResource BtnStyle}" />
+                                        Style="{StaticResource NavButton}" />
                                     <RadioButton
                                         Command="{Binding GotoPlayedViewCommand}"
                                         Content="Played"
                                         GroupName="MainNav"
-                                        Style="{StaticResource BtnStyle}" />
+                                        Style="{StaticResource NavButton}" />
                                 </StackPanel>
                                 <Ellipse
                                     Width="38"
