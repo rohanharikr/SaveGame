@@ -6,6 +6,7 @@ using SaveGame.Services;
 using SaveGame.Stores;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.DirectoryServices;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace SaveGame.ViewModels
         public Game? GameDetail => _modalNavigationStore.Detail;
         public bool IsGameDetailModalOpen => _modalNavigationStore.IsOpen;
 
-        List<Game> PlayGames => _gameStore.PlayGames;
+        public ObservableCollection<Game> PlayGames => _gameStore.PlayGames;
 
         public PlayViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +10,8 @@ namespace SaveGame.Stores
 {
     public class GameStore
     {
-        private List<Game> _playGames = new();
-        public List<Game> PlayGames
+        private ObservableCollection<Game> _playGames = new();
+        public ObservableCollection<Game> PlayGames
         {
             get { return _playGames; }
             set
@@ -20,8 +21,8 @@ namespace SaveGame.Stores
             }
         }
 
-        private List<Game> _playingGames = new();
-        public List<Game> PlayingGames
+        private ObservableCollection<Game> _playingGames = new();
+        public ObservableCollection<Game> PlayingGames
         {
             get { return _playingGames; }
             set
@@ -31,8 +32,8 @@ namespace SaveGame.Stores
             }
         }
 
-        private List<Game> _playedGames = new();
-        public List<Game> PlayedGames
+        private ObservableCollection<Game> _playedGames = new();
+        public ObservableCollection<Game> PlayedGames
         {
             get { return _playedGames; }
             set

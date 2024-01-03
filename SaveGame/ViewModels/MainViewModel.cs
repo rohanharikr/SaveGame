@@ -113,7 +113,7 @@ namespace SaveGame.ViewModels
         [RelayCommand]
         void AddToPlay(Game game)
         {
-            _gameStore.PlayGames = new List<Game>() { game };
+            _gameStore.PlayGames.Add(game);
         }
     }
 }
