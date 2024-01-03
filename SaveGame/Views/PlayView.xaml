@@ -11,10 +11,6 @@
     Title="PlayView"
     mc:Ignorable="d">
 
-    <Page.DataContext>
-        <vm:PlayViewModel />
-    </Page.DataContext>
-
     <Page.Resources>
         <converters:CoverArtConverter x:Key="CoverArtConverter" />
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -46,7 +42,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <controls:GameCard
-                        Command="{Binding DataContext.OpenGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                        Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                         CommandParameter="{Binding .}"
                         CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
                         Screenshots="{Binding Screenshots.Values}" />

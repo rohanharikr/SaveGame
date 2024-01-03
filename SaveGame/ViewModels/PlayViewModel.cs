@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using IGDB;
 using IGDB.Models;
 using SaveGame.Services;
+using SaveGame.Stores;
 using System;
 using System.Collections.Generic;
 using System.DirectoryServices;
@@ -17,22 +18,29 @@ namespace SaveGame.ViewModels
         [ObservableProperty]
         IEnumerable<Game> randomGames;
 
-        [ObservableProperty]
-        bool showGameDetailModal = false;
-
-        [ObservableProperty]
-        Game? gameDetail = null;
-
         IGDBClient igdb;
 
-        public PlayViewModel()
+        private readonly ModalNavigationStore _modalNavigationStore;
+        public Game? GameDetail => _modalNavigationStore.Detail;
+        public bool IsGameDetailModalOpen => _modalNavigationStore.IsOpen;
+
+        public PlayViewModel(ModalNavigationStore modalNavigationStore)
         {
             igdb = new IGDBClient(
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_ID"),
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_SECRET")
             );
 
+            _modalNavigationStore = modalNavigationStore;
+            _modalNavigationStore.DetailChanged += ModalNavigationStore_GameDetailChanged;
+
             GetRandomGames();
+        }
+
+        private void ModalNavigationStore_GameDetailChanged()
+        {
+            OnPropertyChanged(nameof(GameDetail));
+            OnPropertyChanged(nameof(IsGameDetailModalOpen));
         }
 
         async void GetRandomGames()
@@ -42,18 +50,15 @@ namespace SaveGame.ViewModels
         }
 
         [RelayCommand]
-        void OpenGameDetailModal(Game? game)
+        void ShowGameDetailModal(Game game)
         {
-            GameDetail = game;
-            ShowGameDetailModal = true;
+            _modalNavigationStore.Detail = game;
         }
 
         [RelayCommand]
         void CloseGameDetailModal()
         {
-            ShowGameDetailModal = false;
-            GameDetail = null;
-            return;
+            _modalNavigationStore.Detail = null;
         }
     }
 }

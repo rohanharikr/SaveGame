@@ -1,4 +1,7 @@
-﻿using System;
+﻿using IGDB.Models;
+using SaveGame.Stores;
+using SaveGame.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +23,10 @@ namespace SaveGame.Views
     /// </summary>
     public partial class PlayView : Page
     {
-        public PlayView()
+        public PlayView(ModalNavigationStore modalNavigationStore)
         {
             InitializeComponent();
+            DataContext = new PlayViewModel(modalNavigationStore);
         }
     }
 }

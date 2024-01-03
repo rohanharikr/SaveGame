@@ -35,12 +35,20 @@ namespace SaveGame.ViewModels
         public Game? GameDetail => _modalNavigationStore.Detail;
         public bool IsGameDetailModalOpen => _modalNavigationStore.IsOpen;
 
+        PlayView PlayView;
+        PlayingView PlayingView;
+        PlayedView PlayedView;
+
         public MainViewModel(ModalNavigationStore modalNavigationStore)
         {
             igdb = new IGDBClient(
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_ID"),
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_SECRET")
             );
+
+            PlayView = new PlayView(modalNavigationStore);
+            PlayingView = new PlayingView();
+            PlayedView = new PlayedView();
 
             _modalNavigationStore = modalNavigationStore;
             _modalNavigationStore.DetailChanged += ModalNavigationStore_GameDetailChanged;
@@ -83,19 +91,19 @@ namespace SaveGame.ViewModels
         [RelayCommand]
         void GotoPlayView()
         {
-            CurrentView = new PlayView();
+            CurrentView = PlayView;
         }
 
         [RelayCommand]
         void GotoPlayingView()
         {
-            CurrentView = new PlayingView();
+            CurrentView = PlayingView;
         }
 
         [RelayCommand]
         void GotoPlayedView()
         {
-            CurrentView = new PlayedView();
+            CurrentView = PlayedView;
         }
     }
 }
