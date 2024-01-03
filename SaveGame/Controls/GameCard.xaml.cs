@@ -78,6 +78,15 @@ namespace SaveGame.Controls
         public static readonly DependencyProperty AddToPlayedProperty =
             DependencyProperty.Register("AddToPlayed", typeof(ICommand), typeof(GameCard));
 
+        public ICommand Remove
+        {
+            get { return (ICommand)GetValue(RemoveProperty); }
+            set { SetValue(RemoveProperty, value); }
+        }
+
+        public static readonly DependencyProperty RemoveProperty =
+            DependencyProperty.Register("Remove", typeof(ICommand), typeof(GameCard));
+
         public object CommandParameter
         {
             get { return GetValue(CommandParameterProperty); }

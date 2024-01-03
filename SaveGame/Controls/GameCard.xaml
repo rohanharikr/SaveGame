@@ -91,6 +91,7 @@
                 <Button Command="{Binding AddToPlay, ElementName=Root}" CommandParameter="{Binding CommandParameter, ElementName=Root}">Play</Button>
                 <Button Command="{Binding AddToPlaying, ElementName=Root}" CommandParameter="{Binding CommandParameter, ElementName=Root}">Playing</Button>
                 <Button Command="{Binding AddToPlayed, ElementName=Root}" CommandParameter="{Binding CommandParameter, ElementName=Root}">Played</Button>
+                <Button Command="{Binding Remove, ElementName=Root}" CommandParameter="{Binding CommandParameter, ElementName=Root}">Remove</Button>
             </StackPanel>
             <Border
                 Width="44"

@@ -16,8 +16,6 @@ namespace SaveGame.ViewModels
 {
     partial class PlayingViewModel : ObservableObject
     {
-        IGDBClient igdb;
-
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly GameStore _gameStore;
 
@@ -28,11 +26,6 @@ namespace SaveGame.ViewModels
 
         public PlayingViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore)
         {
-            igdb = new IGDBClient(
-                Environment.GetEnvironmentVariable("IGDB_CLIENT_ID"),
-                Environment.GetEnvironmentVariable("IGDB_CLIENT_SECRET")
-            );
-
             _modalNavigationStore = modalNavigationStore;
             _gameStore = gameStore;
 
@@ -61,6 +54,18 @@ namespace SaveGame.ViewModels
         void CloseGameDetailModal()
         {
             _modalNavigationStore.Detail = null;
+        }
+
+        [RelayCommand]
+        void AddToPlaying(Game game)
+        {
+            _gameStore.PlayingGames.Add(game);
+        }
+
+        [RelayCommand]
+        void AddToPlayed(Game game)
+        {
+            _gameStore.PlayedGames.Add(game);
         }
     }
 }

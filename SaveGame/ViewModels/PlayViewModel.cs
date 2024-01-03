@@ -74,5 +74,11 @@ namespace SaveGame.ViewModels
         {
             _gameStore.PlayedGames.Add(game);
         }
+
+        [RelayCommand]
+        void Remove(Game game)
+        {
+            _gameStore.PlayGames.Remove(game);
+        }
     }
 }

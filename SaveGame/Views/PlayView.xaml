@@ -20,19 +20,6 @@
     </Page.Resources>
 
     <StackPanel>
-        <Border
-            Margin="7"
-            HorizontalAlignment="Stretch"
-            Visibility="{Binding RandomGames.Count, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
-            <Label
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Content="Loading..."
-                FontSize="24"
-                Foreground="White"
-                Opacity="0.35" />
-        </Border>
-
         <ItemsControl Padding="15,0,15,0" ItemsSource="{Binding PlayGames}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -47,6 +34,7 @@
                         Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                         CommandParameter="{Binding .}"
                         CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
+                        Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                         Screenshots="{Binding Screenshots.Values}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
