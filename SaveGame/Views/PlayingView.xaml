@@ -1,14 +1,39 @@
-﻿<Page x:Class="SaveGame.Views.PlayingView"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SaveGame.Views"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="PlayingView">
+﻿<Page
+    x:Class="SaveGame.Views.PlayingView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:SaveGame.Controls"
+    xmlns:converters="clr-namespace:SaveGame.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SaveGame.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="PlayingView"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
 
-    <Grid>
-        
-    </Grid>
+    <Page.Resources>
+        <converters:CoverArtConverter x:Key="CoverArtConverter" />
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter" />
+        <converters:InvertBooleanToVisibilityHiddenConverter x:Key="InvertBooleanToVisibilityHiddenConverter" />
+        <converters:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
+    </Page.Resources>
+
+    <ItemsControl Padding="15,0,15,0" ItemsSource="{Binding PlayingGames}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <controls:GameCard
+                    Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                    CommandParameter="{Binding .}"
+                    CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
+                    Screenshots="{Binding Screenshots.Values}" />
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 </Page>

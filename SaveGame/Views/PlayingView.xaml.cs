@@ -1,4 +1,5 @@
 ﻿using SaveGame.Stores;
+using SaveGame.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,10 @@ namespace SaveGame.Views
     /// </summary>
     public partial class PlayingView : Page
     {
-        public PlayingView()
+        public PlayingView(ModalNavigationStore modalNavigationStore, GameStore gameStore)
         {
             InitializeComponent();
+            DataContext = new PlayingViewModel(modalNavigationStore, gameStore);
         }
     }
 }

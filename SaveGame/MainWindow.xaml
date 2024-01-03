@@ -155,7 +155,7 @@
                                         Style="{StaticResource BtnStyle}" />
                                     <RadioButton
                                         Command="{Binding GotoPlayingViewCommand}"
-                                        Content="Played"
+                                        Content="Playing"
                                         GroupName="MainNav"
                                         Style="{StaticResource BtnStyle}" />
                                     <RadioButton

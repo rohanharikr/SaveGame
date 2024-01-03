@@ -49,9 +49,8 @@ namespace SaveGame.ViewModels
             );
 
             PlayView = new PlayView(modalNavigationStore, gameStore);
-
-            PlayingView = new PlayingView();
-            PlayedView = new PlayedView();
+            PlayingView = new PlayingView(modalNavigationStore, gameStore);
+            PlayedView = new PlayedView(modalNavigationStore, gameStore);
 
             _modalNavigationStore = modalNavigationStore;
             _modalNavigationStore.DetailChanged += ModalNavigationStore_GameDetailChanged;

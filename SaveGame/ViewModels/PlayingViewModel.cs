@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace SaveGame.ViewModels
 {
-    partial class PlayViewModel : ObservableObject
+    partial class PlayingViewModel : ObservableObject
     {
         IGDBClient igdb;
 
@@ -24,9 +24,9 @@ namespace SaveGame.ViewModels
         public Game? GameDetail => _modalNavigationStore.Detail;
         public bool IsGameDetailModalOpen => _modalNavigationStore.IsOpen;
 
-        public ObservableCollection<Game> PlayGames => _gameStore.PlayGames;
+        public ObservableCollection<Game> PlayingGames => _gameStore.PlayingGames;
 
-        public PlayViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore)
+        public PlayingViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore)
         {
             igdb = new IGDBClient(
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_ID"),
@@ -48,7 +48,7 @@ namespace SaveGame.ViewModels
 
         private void GameStore_GamesChanged()
         {
-            OnPropertyChanged(nameof(PlayGames));
+            OnPropertyChanged(nameof(PlayingGames));
         }
 
         [RelayCommand]
@@ -61,18 +61,6 @@ namespace SaveGame.ViewModels
         void CloseGameDetailModal()
         {
             _modalNavigationStore.Detail = null;
-        }
-
-        [RelayCommand]
-        void AddToPlaying(Game game)
-        {
-            _gameStore.PlayingGames.Add(game);
-        }
-
-        [RelayCommand]
-        void AddToPlayed(Game game)
-        {
-            _gameStore.PlayedGames.Add(game);
         }
     }
 }

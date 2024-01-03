@@ -42,6 +42,8 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <controls:GameCard
+                        AddToPlayed="{Binding DataContext.AddToPlayedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                        AddToPlaying="{Binding DataContext.AddToPlayingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                         Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                         CommandParameter="{Binding .}"
                         CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"

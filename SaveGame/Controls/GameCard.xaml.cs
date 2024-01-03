@@ -60,6 +60,24 @@ namespace SaveGame.Controls
         public static readonly DependencyProperty AddToPlayProperty =
             DependencyProperty.Register("AddToPlay", typeof(ICommand), typeof(GameCard));
 
+        public ICommand AddToPlaying
+        {
+            get { return (ICommand)GetValue(AddToPlayingProperty); }
+            set { SetValue(AddToPlayingProperty, value); }
+        }
+
+        public static readonly DependencyProperty AddToPlayingProperty =
+            DependencyProperty.Register("AddToPlaying", typeof(ICommand), typeof(GameCard));
+
+        public ICommand AddToPlayed
+        {
+            get { return (ICommand)GetValue(AddToPlayedProperty); }
+            set { SetValue(AddToPlayedProperty, value); }
+        }
+
+        public static readonly DependencyProperty AddToPlayedProperty =
+            DependencyProperty.Register("AddToPlayed", typeof(ICommand), typeof(GameCard));
+
         public object CommandParameter
         {
             get { return GetValue(CommandParameterProperty); }
