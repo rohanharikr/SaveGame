@@ -14,17 +14,19 @@ namespace SaveGame
     public partial class App : Application
     {
         private readonly ModalNavigationStore _modalNavigationStore;
+        private readonly GameStore _gameStore;
 
         public App()
         {
             _modalNavigationStore = new ModalNavigationStore();
+            _gameStore = new GameStore();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(_modalNavigationStore)
+                DataContext = new MainViewModel(_modalNavigationStore, _gameStore)
             };
             MainWindow.Show();
             base.OnStartup(e);

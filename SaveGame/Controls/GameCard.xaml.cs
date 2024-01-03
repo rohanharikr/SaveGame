@@ -50,6 +50,16 @@ namespace SaveGame.Controls
         public static readonly DependencyProperty CommandProperty =
             DependencyProperty.Register("Command", typeof(ICommand), typeof(GameCard));
 
+
+        public ICommand AddToPlay
+        {
+            get { return (ICommand)GetValue(AddToPlayProperty); }
+            set { SetValue(AddToPlayProperty, value); }
+        }
+
+        public static readonly DependencyProperty AddToPlayProperty =
+            DependencyProperty.Register("AddToPlay", typeof(ICommand), typeof(GameCard));
+
         public object CommandParameter
         {
             get { return GetValue(CommandParameterProperty); }
@@ -62,6 +72,7 @@ namespace SaveGame.Controls
         public GameCard()
         {
             InitializeComponent();
+            NameScope.SetNameScope(ContextMenu, NameScope.GetNameScope(this));
             Loaded += GameCard_Loaded;
         }
 

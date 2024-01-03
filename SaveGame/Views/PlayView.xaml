@@ -33,7 +33,7 @@
                 Opacity="0.35" />
         </Border>
 
-        <ItemsControl Padding="15,0,15,0" ItemsSource="{Binding RandomGames}">
+        <ItemsControl Padding="15,0,15,0" ItemsSource="{Binding PlayGames}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" />

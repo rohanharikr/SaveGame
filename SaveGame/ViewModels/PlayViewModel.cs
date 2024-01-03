@@ -15,16 +15,17 @@ namespace SaveGame.ViewModels
 {
     partial class PlayViewModel : ObservableObject
     {
-        [ObservableProperty]
-        IEnumerable<Game> randomGames;
-
         IGDBClient igdb;
 
         private readonly ModalNavigationStore _modalNavigationStore;
+        private readonly GameStore _gameStore;
+
         public Game? GameDetail => _modalNavigationStore.Detail;
         public bool IsGameDetailModalOpen => _modalNavigationStore.IsOpen;
 
-        public PlayViewModel(ModalNavigationStore modalNavigationStore)
+        List<Game> PlayGames => _gameStore.PlayGames;
+
+        public PlayViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore)
         {
             igdb = new IGDBClient(
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_ID"),
@@ -32,9 +33,10 @@ namespace SaveGame.ViewModels
             );
 
             _modalNavigationStore = modalNavigationStore;
-            _modalNavigationStore.DetailChanged += ModalNavigationStore_GameDetailChanged;
+            _gameStore = gameStore;
 
-            GetRandomGames();
+            _modalNavigationStore.DetailChanged += ModalNavigationStore_GameDetailChanged;
+            _gameStore.GamesChanged += GameStore_GamesChanged;
         }
 
         private void ModalNavigationStore_GameDetailChanged()
@@ -43,10 +45,9 @@ namespace SaveGame.ViewModels
             OnPropertyChanged(nameof(IsGameDetailModalOpen));
         }
 
-        async void GetRandomGames()
+        private void GameStore_GamesChanged()
         {
-            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: "fields *, screenshots.*, genres.*, videos.*, release_dates.*, involved_companies.company.*, cover.*; sort rating desc; limit: 16;");
-            RandomGames = games;
+            OnPropertyChanged(nameof(PlayGames));
         }
 
         [RelayCommand]

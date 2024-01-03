@@ -23,10 +23,10 @@ namespace SaveGame.Views
     /// </summary>
     public partial class PlayView : Page
     {
-        public PlayView(ModalNavigationStore modalNavigationStore)
+        public PlayView(ModalNavigationStore modalNavigationStore, GameStore gameStore)
         {
             InitializeComponent();
-            DataContext = new PlayViewModel(modalNavigationStore);
+            DataContext = new PlayViewModel(modalNavigationStore, gameStore);
         }
     }
 }

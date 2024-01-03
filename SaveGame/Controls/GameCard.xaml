@@ -18,7 +18,7 @@
         MouseMove="Preview"
         RenderTransformOrigin="0.5,0.5">
         <Grid.ContextMenu>
-            <ContextMenu Style="{StaticResource CoolContextMenu}">
+            <ContextMenu x:Name="ContextMenu" Style="{StaticResource CoolContextMenu}">
                 <MenuItem Header="Play" Style="{StaticResource CoolContextMenuItem}" />
                 <MenuItem Header="Playing" Style="{StaticResource CoolContextMenuItem}" />
                 <MenuItem Header="Played" Style="{StaticResource CoolContextMenuItem}" />
@@ -87,6 +87,7 @@
             VerticalAlignment="Bottom"
             Orientation="Horizontal"
             Visibility="Collapsed">
+            <Button Command="{Binding AddToPlay, ElementName=Root}" CommandParameter="{Binding CommandParameter, ElementName=Root}">Play</Button>
             <Border
                 Width="44"
                 Height="3.5"

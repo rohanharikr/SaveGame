@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SaveGame.Stores
 {
-    public partial class ModalNavigationStore : ObservableObject
+    public class ModalNavigationStore
     {
         private Game? _detail;
         public Game? Detail
