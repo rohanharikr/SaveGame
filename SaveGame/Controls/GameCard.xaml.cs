@@ -115,7 +115,7 @@ namespace SaveGame.Controls
                 _screenshots.Add(bitmapImage);
 
             }
-            segmentWidth = Grid.Width / _screenshots.Count;
+            segmentWidth = Border.Width / _screenshots.Count;
         }
 
         private void EnterPreview(object sender, MouseEventArgs e)
@@ -146,7 +146,7 @@ namespace SaveGame.Controls
             if (_screenshots.Count <= 1)
                 return;
 
-            Point mousePosition = e.GetPosition(Grid);
+            Point mousePosition = e.GetPosition(Border);
             double mouseX = mousePosition.X;
             int segmentIndex = (int)(mouseX / segmentWidth);
             segmentIndex = Math.Max(0, Math.Min(segmentIndex, _screenshots.Count - 1));

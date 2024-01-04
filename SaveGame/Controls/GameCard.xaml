@@ -7,41 +7,81 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="Root"
     mc:Ignorable="d">
-    <Grid
-        x:Name="Grid"
+
+    <Border
+        x:Name="Border"
         Width="180"
         Height="220"
         Margin="6"
+        CornerRadius="5"
         Cursor="Hand"
         MouseEnter="EnterPreview"
         MouseLeave="ExitPreview"
         MouseMove="Preview"
         RenderTransformOrigin="0.5,0.5">
-        <Grid.ContextMenu>
-            <ContextMenu x:Name="ContextMenu" Style="{StaticResource CoolContextMenu}">
-                <MenuItem Header="Play" Style="{StaticResource CoolContextMenuItem}" />
-                <MenuItem Header="Playing" Style="{StaticResource CoolContextMenuItem}" />
-                <MenuItem Header="Played" Style="{StaticResource CoolContextMenuItem}" />
-                <MenuItem Header="Remove" Style="{StaticResource CoolContextMenuItem}" />
-            </ContextMenu>
-        </Grid.ContextMenu>
-        <Grid.InputBindings>
-            <MouseBinding
-                Command="{Binding Command, ElementName=Root}"
-                CommandParameter="{Binding CommandParameter, ElementName=Root}"
-                Gesture="LeftClick" />
-        </Grid.InputBindings>
-        <Grid.Background>
-            <ImageBrush
-                ImageSource="{Binding CoverArt, ElementName=Root}"
-                RenderOptions.BitmapScalingMode="HighQuality"
-                Stretch="UniformToFill" />
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.Style>
-            <Style TargetType="Grid">
+        <Grid>
+            <Grid.OpacityMask>
+                <VisualBrush Stretch="None" Visual="{Binding ElementName=Mask}" />
+            </Grid.OpacityMask>
+            <Border
+                x:Name="Mask"
+                Background="White"
+                CornerRadius="5" />
+            <Grid x:Name="Grid">
+                <Grid.ContextMenu>
+                    <ContextMenu x:Name="ContextMenu" Style="{StaticResource CoolContextMenu}">
+                        <MenuItem Header="Play" Style="{StaticResource CoolContextMenuItem}" />
+                        <MenuItem Header="Playing" Style="{StaticResource CoolContextMenuItem}" />
+                        <MenuItem Header="Played" Style="{StaticResource CoolContextMenuItem}" />
+                        <MenuItem Header="Remove" Style="{StaticResource CoolContextMenuItem}" />
+                    </ContextMenu>
+                </Grid.ContextMenu>
+                <Grid.InputBindings>
+                    <MouseBinding
+                        Command="{Binding Command, ElementName=Root}"
+                        CommandParameter="{Binding CommandParameter, ElementName=Root}"
+                        Gesture="LeftClick" />
+                </Grid.InputBindings>
+                <Grid.Background>
+                    <ImageBrush
+                        ImageSource="{Binding CoverArt, ElementName=Root}"
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                        Stretch="UniformToFill" />
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel
+                    x:Name="Bars"
+                    Grid.Row="0"
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal"
+                    Visibility="Collapsed">
+                    <Border
+                        Width="44"
+                        Height="3.5"
+                        Margin="3,0,3,0"
+                        Background="White"
+                        CornerRadius="2.5" />
+                    <Border
+                        Width="44"
+                        Height="3.5"
+                        Margin="3,0,3,0"
+                        Background="White"
+                        CornerRadius="2.5" />
+                    <Border
+                        Width="44"
+                        Height="3.5"
+                        Margin="3,0,3,0"
+                        Background="White"
+                        CornerRadius="2.5" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Border.Style>
+            <Style TargetType="Border">
                 <Setter Property="RenderTransform">
                     <Setter.Value>
                         <ScaleTransform ScaleX="1" ScaleY="1" />
@@ -78,35 +118,8 @@
                     </EventTrigger>
                 </Style.Triggers>
             </Style>
-        </Grid.Style>
-        <StackPanel
-            x:Name="Bars"
-            Grid.Row="0"
-            Margin="0,0,0,10"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
-            Orientation="Horizontal"
-            Visibility="Collapsed">
-            <Border
-                Width="44"
-                Height="3.5"
-                Margin="3,0,3,0"
-                Background="White"
-                CornerRadius="2.5" />
-            <Border
-                Width="44"
-                Height="3.5"
-                Margin="3,0,3,0"
-                Background="White"
-                CornerRadius="2.5" />
-            <Border
-                Width="44"
-                Height="3.5"
-                Margin="3,0,3,0"
-                Background="White"
-                CornerRadius="2.5" />
-        </StackPanel>
-    </Grid>
+        </Border.Style>
+    </Border>
 
     <!--
         <Image
