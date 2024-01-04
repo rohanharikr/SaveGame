@@ -60,7 +60,7 @@ namespace SaveGame.ViewModels
             _modalNavigationStore = modalNavigationStore;
             _modalNavigationStore.DetailChanged += ModalNavigationStore_GameDetailChanged;
 
-            GotoPlayView();
+            GotoHomeView();
             _gameStore = gameStore;
         }
 
