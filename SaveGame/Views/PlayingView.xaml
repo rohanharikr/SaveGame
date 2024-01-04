@@ -6,10 +6,9 @@
     xmlns:converters="clr-namespace:SaveGame.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SaveGame.Views"
+    xmlns:lottie="clr-namespace:LottieSharp.WPF;assembly=LottieSharp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="PlayingView"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -20,20 +19,31 @@
         <converters:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
     </Page.Resources>
 
-    <ItemsControl Padding="15,0,15,0" ItemsSource="{Binding PlayingGames}">
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <WrapPanel Orientation="Horizontal" />
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <controls:GameCard
-                    Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                    CommandParameter="{Binding .}"
-                    CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
-                    Screenshots="{Binding Screenshots.Values}" />
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-    </ItemsControl>
+    <StackPanel>
+        <lottie:LottieAnimationView
+            Width="200"
+            Height="300"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            AutoPlay="True"
+            FileName="Animations/Empty.json"
+            RepeatCount="-1" />
+
+        <ItemsControl Padding="15,0,15,0" ItemsSource="{Binding PlayingGames}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <controls:GameCard
+                        Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                        CommandParameter="{Binding .}"
+                        CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
+                        Screenshots="{Binding Screenshots.Values}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
 </Page>

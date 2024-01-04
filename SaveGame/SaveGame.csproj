@@ -9,8 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="C:\Users\agro\.nuget\packages\lottiesharp\2.3.0\contentFiles\any\net6.0-windows7.0\lottie_sharp.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="IGDB" Version="3.0.0" />
+    <PackageReference Include="LottieSharp" Version="2.3.0" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="8.0.0" />
   </ItemGroup>
@@ -24,6 +29,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Animations\Empty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Animations\Loading.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
