@@ -6,6 +6,7 @@
     xmlns:converters="clr-namespace:SaveGame.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SaveGame.Views"
+    xmlns:lottie="clr-namespace:LottieSharp.WPF;assembly=LottieSharp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SaveGame.ViewModels"
     Title="PlayView"
@@ -39,5 +40,14 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+
+        <lottie:LottieAnimationView
+            Width="500"
+            Height="500"
+            HorizontalAlignment="Left"
+            AutoPlay="True"
+            FileName="Animations/Empty2.json"
+            Opacity="0.25"
+            RepeatCount="-1" />
     </StackPanel>
 </Page>

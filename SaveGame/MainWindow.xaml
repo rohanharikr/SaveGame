@@ -8,6 +8,7 @@
     xmlns:local="clr-namespace:SaveGame"
     xmlns:lottie="clr-namespace:LottieSharp.WPF;assembly=LottieSharp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:transforms="clr-namespace:LottieSharp.WPF.Transforms;assembly=LottieSharp"
     xmlns:views="clr-namespace:SaveGame.Views"
     xmlns:vm="clr-namespace:SaveGame.ViewModels"
     Title="MainWindow"
@@ -173,16 +174,32 @@
                                         GroupName="MainNav"
                                         Style="{StaticResource NavButton}" />
                                 </StackPanel>
-                                <Ellipse
-                                    Width="38"
-                                    Height="38"
-                                    Margin="0,0,5,0"
+
+                                <StackPanel
                                     HorizontalAlignment="Right"
-                                    DockPanel.Dock="Right">
-                                    <Ellipse.Fill>
-                                        <ImageBrush ImageSource="https://avatars.githubusercontent.com/u/12775813" RenderOptions.BitmapScalingMode="HighQuality" />
-                                    </Ellipse.Fill>
-                                </Ellipse>
+                                    DockPanel.Dock="Right"
+                                    Orientation="Horizontal">
+                                    <Border RenderTransformOrigin="0.5,0.5" Margin="0,0,-6,-12">
+                                        <Border.RenderTransform>
+                                            <ScaleTransform ScaleX="-1" />
+                                        </Border.RenderTransform>
+                                        <lottie:LottieAnimationView
+                                            Width="100"
+                                            Height="50"
+                                            HorizontalAlignment="Left"
+                                            AutoPlay="True"
+                                            FileName="Animations/Empty2.json"
+                                            RepeatCount="-1" />
+                                    </Border>
+                                    <Ellipse
+                                        Width="38"
+                                        Height="38"
+                                        Margin="0,0,5,0">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="https://avatars.githubusercontent.com/u/12775813" RenderOptions.BitmapScalingMode="HighQuality" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                </StackPanel>
                             </DockPanel>
                         </Border>
                         <Border
