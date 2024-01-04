@@ -23,11 +23,10 @@
                     <Storyboard RepeatBehavior="Forever">
                         <DoubleAnimation
                             AutoReverse="True"
-                            RepeatBehavior="Forever"
                             Storyboard.TargetProperty="Opacity"
-                            From="0.25"
+                            From="0.5"
                             To="1.0"
-                            Duration="0:0:1.5" />
+                            Duration="0:0:0.5" />
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>

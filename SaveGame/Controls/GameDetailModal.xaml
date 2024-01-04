@@ -16,6 +16,19 @@
     </UserControl.Resources>
 
     <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="Border.Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+                            Storyboard.TargetProperty="Opacity"
+                            From="0"
+                            To="1.0"
+                            Duration="0:0:1" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Border.Triggers>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
