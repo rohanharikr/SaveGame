@@ -87,33 +87,24 @@
             VerticalAlignment="Bottom"
             Orientation="Horizontal"
             Visibility="Collapsed">
-            <StackPanel HorizontalAlignment="Center">
-                <Button Command="{Binding AddToPlay, ElementName=Root}" CommandParameter="{Binding CommandParameter, ElementName=Root}">Play</Button>
-                <Button Command="{Binding AddToPlaying, ElementName=Root}" CommandParameter="{Binding CommandParameter, ElementName=Root}">Playing</Button>
-                <Button Command="{Binding AddToPlayed, ElementName=Root}" CommandParameter="{Binding CommandParameter, ElementName=Root}">Played</Button>
-                <Button Command="{Binding Remove, ElementName=Root}" CommandParameter="{Binding CommandParameter, ElementName=Root}">Remove</Button>
-            </StackPanel>
             <Border
                 Width="44"
                 Height="3.5"
                 Margin="3,0,3,0"
                 Background="White"
-                CornerRadius="2.5"
-                Visibility="Hidden" />
+                CornerRadius="2.5" />
             <Border
                 Width="44"
                 Height="3.5"
                 Margin="3,0,3,0"
                 Background="White"
-                CornerRadius="2.5"
-                Visibility="Hidden" />
+                CornerRadius="2.5" />
             <Border
                 Width="44"
                 Height="3.5"
                 Margin="3,0,3,0"
                 Background="White"
-                CornerRadius="2.5"
-                Visibility="Hidden" />
+                CornerRadius="2.5" />
         </StackPanel>
     </Grid>
 
