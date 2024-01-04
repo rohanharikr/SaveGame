@@ -77,18 +77,25 @@ namespace SaveGame.ViewModels
             _modalNavigationStore.Detail = null;
         }
 
-        async partial void OnSearchQueryChanged(string value)
+        private static Timer timer;
+        partial void OnSearchQueryChanged(string value)
         {
             if (value == "")
             {
                 SearchResults = Enumerable.Empty<Game>();
                 return;
             }
-
+            
             IsSearching = true;
-            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields *, screenshots.*, genres.*, videos.*, release_dates.*, involved_companies.company.*, cover.*; search \"{value}\"; limit 4;");
-            SearchResults = games;
-            IsSearching = false;
+
+            timer?.Change(Timeout.Infinite, Timeout.Infinite);
+            timer = new Timer(async state =>
+            {
+                var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields *, screenshots.*, genres.*, videos.*, release_dates.*, involved_companies.company.*, cover.*; search \"{value}\"; limit 4;");
+                SearchResults = games;
+                IsSearching = false;
+            }, null, 250, Timeout.Infinite);
+
         }
 
         [RelayCommand]
