@@ -20,32 +20,52 @@
     </Page.Resources>
 
     <StackPanel>
-        <ItemsControl Padding="15,0,15,0" ItemsSource="{Binding PlayGames}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <controls:GameCard
-                        AddToPlayed="{Binding DataContext.AddToPlayedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                        AddToPlaying="{Binding DataContext.AddToPlayingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                        Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                        CommandParameter="{Binding .}"
-                        CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
-                        Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                        Screenshots="{Binding Screenshots.Values}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-
-        <StackPanel Visibility="Collapsed">
+        <Border Padding="15,10,15,0">
+            <Label
+                FontSize="30"
+                FontWeight="Bold"
+                Foreground="White">
+                Good evening, Rohan
+            </Label>
+        </Border>
+        <StackPanel>
             <Border Padding="15,10,15,0">
                 <Label
                     FontSize="20"
                     FontWeight="Bold"
-                    Foreground="White">
+                    Foreground="White"
+                    Opacity="0.65">
+                    Popular right now
+                </Label>
+            </Border>
+            <ItemsControl Padding="15,0,15,0" ItemsSource="{Binding UpcomingReleases}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <controls:GameCard
+                            AddToPlayed="{Binding DataContext.AddToPlayedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                            AddToPlaying="{Binding DataContext.AddToPlayingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                            Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                            CommandParameter="{Binding .}"
+                            CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
+                            Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                            Screenshots="{Binding Screenshots.Values}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+        <StackPanel>
+            <Border Padding="15,10,15,0">
+                <Label
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Opacity="0.65">
                     Upcoming releases
                 </Label>
             </Border>
@@ -70,12 +90,13 @@
             </ItemsControl>
         </StackPanel>
 
-        <StackPanel Visibility="Collapsed">
-            <Border Padding="15,20,15,0">
+        <StackPanel>
+            <Border Padding="15,10,15,0">
                 <Label
                     FontSize="20"
                     FontWeight="Bold"
-                    Foreground="White">
+                    Foreground="White"
+                    Opacity="0.65">
                     Based on your interests
                 </Label>
             </Border>

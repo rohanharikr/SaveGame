@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SaveGame.Stores;
+using SaveGame.ViewModels;
 
 namespace SaveGame.Views
 {
@@ -20,9 +22,10 @@ namespace SaveGame.Views
     /// </summary>
     public partial class HomeView : Page
     {
-        public HomeView()
+        public HomeView(ModalNavigationStore modalNavigationStore, GameStore gameStore)
         {
             InitializeComponent();
+            DataContext = new HomeViewModel(modalNavigationStore, gameStore);
         }
     }
 }

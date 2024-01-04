@@ -29,6 +29,9 @@ namespace SaveGame.ViewModels
         [ObservableProperty]
         object? currentView = null;
 
+        [ObservableProperty]
+        bool isSearchBarVisible = false;
+
         IGDBClient igdb;
 
         private readonly ModalNavigationStore _modalNavigationStore;
@@ -37,7 +40,7 @@ namespace SaveGame.ViewModels
         public Game? GameDetail => _modalNavigationStore.Detail;
         public bool IsGameDetailModalOpen => _modalNavigationStore.IsOpen;
 
-        PlayView HomeView;
+        HomeView HomeView;
         PlayView PlayView;
         PlayingView PlayingView;
         PlayedView PlayedView;
@@ -49,7 +52,7 @@ namespace SaveGame.ViewModels
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_SECRET")
             );
 
-            HomeView = new HomeView();
+            HomeView = new HomeView(modalNavigationStore, gameStore);
             PlayView = new PlayView(modalNavigationStore, gameStore);
             PlayingView = new PlayingView(modalNavigationStore, gameStore);
             PlayedView = new PlayedView(modalNavigationStore, gameStore);
@@ -104,24 +107,28 @@ namespace SaveGame.ViewModels
         void GotoHomeView()
         {
             CurrentView = HomeView;
+            IsSearchBarVisible = false;
         }
 
         [RelayCommand]
         void GotoPlayView()
         {
             CurrentView = PlayView;
+            IsSearchBarVisible = true;
         }
 
         [RelayCommand]
         void GotoPlayingView()
         {
             CurrentView = PlayingView;
+            IsSearchBarVisible = true;
         }
 
         [RelayCommand]
         void GotoPlayedView()
         {
             CurrentView = PlayedView;
+            IsSearchBarVisible = true;
         }
 
         [RelayCommand]
