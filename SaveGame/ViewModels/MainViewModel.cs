@@ -94,7 +94,7 @@ namespace SaveGame.ViewModels
                 var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields *, screenshots.*, genres.*, videos.*, release_dates.*, involved_companies.company.*, cover.*; search \"{value}\"; limit 4;");
                 SearchResults = games;
                 IsSearching = false;
-            }, null, 250, Timeout.Infinite);
+            }, null, 500, Timeout.Infinite);
 
         }
 
