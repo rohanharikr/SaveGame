@@ -53,7 +53,7 @@
                             Style="{StaticResource labelBase}">
                             <Label.Effect>
                                 <DropShadowEffect
-                                    BlurRadius="10"
+                                    BlurRadius="15"
                                     ShadowDepth="0"
                                     Color="White" />
                             </Label.Effect>
