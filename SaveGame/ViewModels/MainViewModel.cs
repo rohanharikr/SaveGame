@@ -37,6 +37,7 @@ namespace SaveGame.ViewModels
         public Game? GameDetail => _modalNavigationStore.Detail;
         public bool IsGameDetailModalOpen => _modalNavigationStore.IsOpen;
 
+        PlayView HomeView;
         PlayView PlayView;
         PlayingView PlayingView;
         PlayedView PlayedView;
@@ -48,6 +49,7 @@ namespace SaveGame.ViewModels
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_SECRET")
             );
 
+            HomeView = new HomeView();
             PlayView = new PlayView(modalNavigationStore, gameStore);
             PlayingView = new PlayingView(modalNavigationStore, gameStore);
             PlayedView = new PlayedView(modalNavigationStore, gameStore);
@@ -96,6 +98,12 @@ namespace SaveGame.ViewModels
                 IsSearching = false;
             }, null, 500, Timeout.Infinite);
 
+        }
+
+        [RelayCommand]
+        void GotoHomeView()
+        {
+            CurrentView = HomeView;
         }
 
         [RelayCommand]
