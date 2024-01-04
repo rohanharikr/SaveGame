@@ -22,21 +22,24 @@
             </Grid.RowDefinitions>
             <Border
                 Grid.Row="0"
-                Margin="60"
+                Margin="120,60,120,60"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Panel.ZIndex="100"
-                Background="#303030">
+                Background="#262626"
+                CornerRadius="10">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Border
                         Padding="20"
                         VerticalAlignment="Top"
-                        Panel.ZIndex="100">
+                        Panel.ZIndex="100"
+                        CornerRadius="10">
                         <Border.Background>
-                            <SolidColorBrush Opacity="0.95" Color="#303030" />
+                            <SolidColorBrush Opacity="0.95" Color="#262626" />
                         </Border.Background>
                         <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                             <Border
@@ -80,7 +83,7 @@
                         </StackPanel>
                     </Border>
                     <ScrollViewer Grid.Row="0" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                        <Border Margin="0,10,0,0" Padding="20,80,20,40">
+                        <Border Margin="0,10,0,0" Padding="20,85,20,40">
                             <StackPanel>
                                 <local:ScreenshotsCarousel CoverArt="{Binding Detail.Cover.Value.ImageId, ElementName=Root, Converter={StaticResource CoverArtConverter}}" Screenshots="{Binding Detail.Screenshots.Values, ElementName=Root}" />
                                 <TextBlock
@@ -96,9 +99,139 @@
                             </StackPanel>
                         </Border>
                     </ScrollViewer>
+                    <Border
+                        Grid.Row="1"
+                        Height="55"
+                        Margin="10"
+                        Padding="0,10,0,10"
+                        Background="#1D1D1D"
+                        CornerRadius="10">
+                        <DockPanel>
+                            <Button
+                                Margin="10,0,10,0"
+                                VerticalAlignment="Stretch"
+                                VerticalContentAlignment="Center"
+                                Content="Add to Play"
+                                FontSize="16"
+                                Foreground="White">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#282828" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border
+                                                        Padding="16,0,16,0"
+                                                        Background="{TemplateBinding Background}"
+                                                        CornerRadius="5">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#2C2C2C" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button
+                                Margin="10,0,10,0"
+                                VerticalAlignment="Stretch"
+                                VerticalContentAlignment="Center"
+                                Content="Add to Playing"
+                                FontSize="16"
+                                Foreground="White">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#282828" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border
+                                                        Padding="16,0,16,0"
+                                                        Background="{TemplateBinding Background}"
+                                                        CornerRadius="5">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#2C2C2C" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button
+                                Margin="10,0,10,0"
+                                VerticalAlignment="Stretch"
+                                VerticalContentAlignment="Center"
+                                Content="Add to Played"
+                                FontSize="16"
+                                Foreground="White">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#282828" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border
+                                                        Padding="16,0,16,0"
+                                                        Background="{TemplateBinding Background}"
+                                                        CornerRadius="5">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#2C2C2C" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button
+                                Margin="10,0,10,0"
+                                VerticalAlignment="Stretch"
+                                VerticalContentAlignment="Center"
+                                Content="Remove from Playing"
+                                FontSize="16"
+                                Foreground="White">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#282828" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border
+                                                        Padding="16,0,16,0"
+                                                        Background="{TemplateBinding Background}"
+                                                        CornerRadius="5">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#2C2C2C" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </DockPanel>
+                    </Border>
                 </Grid>
             </Border>
-            <StackPanel Background="Black" Opacity="0.75">
+            <StackPanel Background="Black" Opacity="0.5">
                 <StackPanel.InputBindings>
                     <MouseBinding Command="{Binding CloseModal, ElementName=Root}" Gesture="LeftClick" />
                 </StackPanel.InputBindings>
