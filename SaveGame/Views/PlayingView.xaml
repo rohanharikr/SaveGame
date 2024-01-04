@@ -21,12 +21,13 @@
 
     <StackPanel>
         <lottie:LottieAnimationView
-            Width="200"
-            Height="300"
+            Width="1000"
+            Height="500"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             AutoPlay="True"
-            FileName="Animations/Empty.json"
+            FileName="Animations/Loading2.json"
+            Opacity="0.5"
             RepeatCount="-1" />
 
         <ItemsControl Padding="15,0,15,0" ItemsSource="{Binding PlayingGames}">
