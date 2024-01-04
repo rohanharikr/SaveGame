@@ -210,7 +210,7 @@
                                     Height="5"
                                     Background="Transparent"
                                     BorderThickness="0"
-                                    Foreground="YellowGreen"
+                                    Foreground="MediumPurple"
                                     IsIndeterminate="True"
                                     Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityHiddenConverter}}" />
                             </Grid>

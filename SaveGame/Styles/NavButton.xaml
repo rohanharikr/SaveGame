@@ -27,10 +27,10 @@
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="label" Property="Effect">
                                 <Setter.Value>
-                                    <DropShadowEffect BlurRadius="25" Color="YellowGreen" />
+                                    <DropShadowEffect BlurRadius="20" Color="MediumPurple" />
                                 </Setter.Value>
                             </Setter>
-                            <Setter TargetName="label" Property="Foreground" Value="YellowGreen" />
+                            <Setter TargetName="label" Property="Foreground" Value="White" />
                             <Setter TargetName="label" Property="Opacity" Value="1" />
                             <Setter TargetName="label" Property="Margin" Value="0,1,0,0" />
                         </Trigger>
