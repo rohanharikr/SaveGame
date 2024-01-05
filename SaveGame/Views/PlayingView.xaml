@@ -19,6 +19,20 @@
         <converters:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
     </Page.Resources>
 
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation
+                        Storyboard.TargetProperty="Opacity"
+                        From="0"
+                        To="1"
+                        Duration="0:0:0.15" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>
+
     <StackPanel>
         <lottie:LottieAnimationView
             Width="1000"

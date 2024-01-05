@@ -19,8 +19,22 @@
         <converters:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
     </Page.Resources>
 
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation
+                        Storyboard.TargetProperty="Opacity"
+                        From="0"
+                        To="1"
+                        Duration="0:0:0.15" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>
+
     <StackPanel>
-        <Border Padding="15,10,15,0">
+        <Border Padding="15,10,15,0" Opacity="0">
             <Label
                 FontSize="30"
                 FontWeight="Bold"
@@ -28,7 +42,7 @@
                 Good evening, Rohan
             </Label>
         </Border>
-        <StackPanel>
+        <StackPanel Opacity="0">
             <Border Padding="15,10,15,0">
                 <Label
                     FontSize="20"
@@ -69,7 +83,7 @@
                 </StackPanel>
             </Border>
         </StackPanel>
-        <StackPanel>
+        <StackPanel Opacity="0">
             <Border Padding="15,10,15,0">
                 <Label
                     FontSize="20"
