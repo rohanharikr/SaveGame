@@ -34,24 +34,6 @@
         <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter" />
         <converters:InvertBooleanToVisibilityHiddenConverter x:Key="InvertBooleanToVisibilityHiddenConverter" />
         <converters:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
-
-        <Style x:Key="VisibleAnimation" TargetType="FrameworkElement">
-            <Style.Triggers>
-                <Trigger Property="Visibility" Value="Visible">
-                    <Trigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation
-                                    Storyboard.TargetProperty="Opacity"
-                                    From="0.0"
-                                    To="1.0"
-                                    Duration="0:0:0.25" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.EnterActions>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
     </Window.Resources>
 
     <Grid>
@@ -157,7 +139,6 @@
                     Panel.ZIndex="100"
                     CloseModal="{Binding CloseGameDetailModalCommand}"
                     Detail="{Binding GameDetail}"
-                    Style="{StaticResource VisibleAnimation}"
                     Visibility="{Binding IsGameDetailModalOpen, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                 <Border

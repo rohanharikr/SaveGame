@@ -1,6 +1,7 @@
 ﻿using IGDB.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -39,9 +41,25 @@ namespace SaveGame.Controls
         public static readonly DependencyProperty CloseModalProperty =
             DependencyProperty.Register("CloseModal", typeof(ICommand), typeof(GameDetailModal));
 
+        Storyboard showModalSb;
+
         public GameDetailModal()
         {
             InitializeComponent();
+            
+            showModalSb = (FindResource("ShowModalAnimation") as Storyboard);
+
+            DependencyPropertyDescriptor.FromProperty(UserControl.VisibilityProperty, typeof(UserControl))
+                .AddValueChanged(this, VisibilityPropertyChanged);
+        }
+
+        private void VisibilityPropertyChanged(object sender, EventArgs e)
+        {
+            if (Visibility == Visibility.Collapsed)
+                showModalSb.Remove();
+
+            if (Visibility == Visibility.Visible)
+                showModalSb.Begin();
         }
     }
 }

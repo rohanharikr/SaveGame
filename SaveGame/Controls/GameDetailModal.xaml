@@ -13,34 +13,47 @@
     <UserControl.Resources>
         <converters:CoverArtConverter x:Key="CoverArtConverter" />
         <converters:GenresToStringConverter x:Key="GenresToStringConverter" />
+
+        <Storyboard x:Key="ShowModalAnimation">
+            <DoubleAnimation
+                Storyboard.TargetName="bg"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="0.5"
+                Duration="0:0:0.10" />
+            <DoubleAnimation
+                Storyboard.TargetName="modalY"
+                Storyboard.TargetProperty="Y"
+                From="10"
+                To="0"
+                Duration="0:0:0.75">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
     </UserControl.Resources>
 
     <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Border.Triggers>
-            <EventTrigger RoutedEvent="Border.Loaded">
-                <BeginStoryboard>
-                    <Storyboard>
-                        <DoubleAnimation
-                            Storyboard.TargetProperty="Opacity"
-                            From="0"
-                            To="1.0"
-                            Duration="0:0:1" />
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger>
-        </Border.Triggers>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Border
+                x:Name="modal"
                 Grid.Row="0"
                 Margin="120,60,120,60"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Panel.ZIndex="100"
                 Background="#262626"
-                CornerRadius="10">
+                CornerRadius="10"
+                RenderTransformOrigin="0.5,1">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform x:Name="modalY" Y="0" />
+                    </TransformGroup>
+                </Border.RenderTransform>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
@@ -244,7 +257,7 @@
                     </Border>
                 </Grid>
             </Border>
-            <StackPanel Background="Black" Opacity="0.5">
+            <StackPanel x:Name="bg" Background="Black">
                 <StackPanel.InputBindings>
                     <MouseBinding Command="{Binding CloseModal, ElementName=Root}" Gesture="LeftClick" />
                 </StackPanel.InputBindings>
