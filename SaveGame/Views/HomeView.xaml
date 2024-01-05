@@ -76,19 +76,19 @@
                     FontWeight="Bold"
                     Foreground="White"
                     Opacity="0.65">
-                    Upcoming releases
+                    Highly rated
                 </Label>
             </Border>
             <Border Padding="15,0,15,0">
                 <StackPanel>
-                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsFetchingUpcomingReleases, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsFetchingHighRatedGames, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <controls:GameCardSkeleton />
                         <controls:GameCardSkeleton />
                         <controls:GameCardSkeleton />
                         <controls:GameCardSkeleton />
                         <controls:GameCardSkeleton />
                     </StackPanel>
-                    <ItemsControl ItemsSource="{Binding UpcomingReleases}">
+                    <ItemsControl ItemsSource="{Binding HighRatedGames}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel Orientation="Horizontal" />

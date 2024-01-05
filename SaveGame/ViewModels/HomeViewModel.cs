@@ -34,6 +34,12 @@ namespace SaveGame.ViewModels
         [ObservableProperty]
         bool isFetchingUpcomingReleases = true;
 
+        [ObservableProperty]
+        IEnumerable<Game> highRatedGames;
+
+        [ObservableProperty]
+        bool isFetchingHighRatedGames = true;
+
         public HomeViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore)
         {
             igdb = new IGDBClient(
@@ -42,6 +48,7 @@ namespace SaveGame.ViewModels
             );
 
             GetUpcomingReleases();
+            GetHighRatedGames();
 
             _modalNavigationStore = modalNavigationStore;
             _gameStore = gameStore;
@@ -70,6 +77,36 @@ namespace SaveGame.ViewModels
             UpcomingReleases = games;
 
             IsFetchingUpcomingReleases = false;
+        }
+
+        static int GetOffset()
+        {
+            Random random = new Random();
+            return random.Next(0, 21) * 5;
+        }
+
+        async void GetHighRatedGames()
+        {
+            IsFetchingHighRatedGames = true;
+            int offset = GetOffset();
+            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
+                    $"fields name, involved_companies.developer, involved_companies.company.name," +
+                        $"screenshots.image_id, screenshots.url, aggregated_rating, cover.url, cover.image_id," +
+                        $"summary, genres.name, genres.slug, release_dates.y;" +
+
+                    $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & parent_game = null &" +
+                        $"(follows != null | hypes != null) & aggregated_rating_count > 0 & version_parent = null &" +
+                        $"involved_companies.developer = true & release_dates > 0;" +
+
+                    $"sort aggregated_rating desc;" +
+
+                    $"offset: {offset};" +
+
+                    $"limit 5;");
+
+            HighRatedGames = games;
+
+            IsFetchingHighRatedGames = false;
         }
 
         private void ModalNavigationStore_GameDetailChanged()

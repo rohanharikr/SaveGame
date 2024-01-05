@@ -66,7 +66,7 @@
                                     Padding="0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Content="{Binding Detail.TotalRating, ElementName=Root}"
+                                    Content="{Binding Detail.AggregatedRating, ElementName=Root}"
                                     FontSize="22"
                                     FontWeight="Bold"
                                     Foreground="White" />

@@ -106,6 +106,7 @@ namespace SaveGame.ViewModels
                     $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & parent_game = null &" +
                         $"(follows != null | hypes != null) & aggregated_rating_count > 0 & version_parent = null &" +
                         $"involved_companies.developer = true & release_dates > 0;" +
+
                     $"limit 5;");
 
                 SearchResults = games;
