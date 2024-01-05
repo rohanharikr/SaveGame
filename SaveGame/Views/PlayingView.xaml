@@ -34,16 +34,6 @@
     </Page.Triggers>
 
     <StackPanel>
-        <lottie:LottieAnimationView
-            Width="1000"
-            Height="500"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            AutoPlay="True"
-            FileName="Animations/Loading2.json"
-            Opacity="0.25"
-            RepeatCount="-1" />
-
         <ItemsControl Padding="15,0,15,0" ItemsSource="{Binding PlayingGames}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

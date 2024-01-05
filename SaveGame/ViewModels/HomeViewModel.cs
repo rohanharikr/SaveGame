@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.DirectoryServices;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,9 @@ namespace SaveGame.ViewModels
         [ObservableProperty]
         bool isFetchingHighRatedGames = true;
 
+        [ObservableProperty]
+        string greeting = "Good ";
+
         public HomeViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore)
         {
             igdb = new IGDBClient(
@@ -49,6 +53,14 @@ namespace SaveGame.ViewModels
 
             GetUpcomingReleases();
             GetHighRatedGames();
+
+            int hour = DateTime.Now.Hour;
+            if (hour >= 18)
+                greeting += "Evening";
+            else if (hour >= 12)
+                greeting += "Afternoon";
+            else
+                greeting += "Morning";
 
             _modalNavigationStore = modalNavigationStore;
             _gameStore = gameStore;

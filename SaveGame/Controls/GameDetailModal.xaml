@@ -3,6 +3,7 @@
     x:Class="SaveGame.Controls.GameDetailModal"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:SaveGame.Controls"
     xmlns:converters="clr-namespace:SaveGame.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SaveGame.Controls"
@@ -68,22 +69,7 @@
                             <SolidColorBrush Opacity="0.95" Color="#262626" />
                         </Border.Background>
                         <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                            <Border
-                                Width="46"
-                                Height="46"
-                                Margin="0,3,10,0"
-                                HorizontalAlignment="Left"
-                                Background="Green"
-                                CornerRadius="4">
-                                <Label
-                                    Padding="0"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Content="{Binding Detail.AggregatedRating, ElementName=Root}"
-                                    FontSize="22"
-                                    FontWeight="Bold"
-                                    Foreground="White" />
-                            </Border>
+                            <controls:RatingCard Rating="{Binding Detail.AggregatedRating, ElementName=Root}" />
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Label

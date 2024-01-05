@@ -54,14 +54,5 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-
-        <lottie:LottieAnimationView
-            Width="500"
-            Height="500"
-            HorizontalAlignment="Left"
-            AutoPlay="True"
-            FileName="Animations/Empty2.json"
-            Opacity="0.25"
-            RepeatCount="-1" />
     </StackPanel>
 </Page>

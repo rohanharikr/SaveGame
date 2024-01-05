@@ -189,6 +189,7 @@
                                             HorizontalAlignment="Left"
                                             AutoPlay="True"
                                             FileName="Animations/Empty2.json"
+                                            Opacity="1"
                                             RepeatCount="-1" />
                                     </Border>
                                     <Ellipse

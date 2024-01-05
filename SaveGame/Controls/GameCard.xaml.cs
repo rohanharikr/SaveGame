@@ -99,7 +99,6 @@ namespace SaveGame.Controls
         public GameCard()
         {
             InitializeComponent();
-            NameScope.SetNameScope(ContextMenu, NameScope.GetNameScope(this));
             Loaded += GameCard_Loaded;
         }
 

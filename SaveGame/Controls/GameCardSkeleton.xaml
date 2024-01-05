@@ -10,7 +10,7 @@
     <Border
         Width="180"
         Height="220"
-        Margin="5"
+        Margin="6"
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Background="#323232"

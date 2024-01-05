@@ -34,15 +34,15 @@
     </Page.Triggers>
 
     <StackPanel>
-        <Border Padding="15,10,15,0" Opacity="0">
+        <Border Padding="15,10,15,0">
             <Label
+                Content="{Binding Greeting}"
+                ContentStringFormat="{}{0}, Rohan"
                 FontSize="30"
                 FontWeight="Bold"
-                Foreground="White">
-                Good evening, Rohan
-            </Label>
+                Foreground="White" />
         </Border>
-        <StackPanel Opacity="0">
+        <StackPanel>
             <Border Padding="15,10,15,0">
                 <Label
                     FontSize="20"
@@ -83,7 +83,7 @@
                 </StackPanel>
             </Border>
         </StackPanel>
-        <StackPanel Opacity="0">
+        <StackPanel>
             <Border Padding="15,10,15,0">
                 <Label
                     FontSize="20"
