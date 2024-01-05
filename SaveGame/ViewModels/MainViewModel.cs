@@ -96,7 +96,18 @@ namespace SaveGame.ViewModels
             timer?.Change(Timeout.Infinite, Timeout.Infinite);
             timer = new Timer(async state =>
             {
-                var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields *, screenshots.*, genres.*, videos.*, release_dates.*, involved_companies.company.*, cover.*; search \"{value}\"; limit 5;");
+                var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
+                    $"fields name, involved_companies.developer, involved_companies.company.name," +
+                        $"screenshots.image_id, screenshots.url, aggregated_rating, cover.url, cover.image_id," +
+                        $"summary, genres.name, genres.slug, release_dates.y;" +
+                    
+                    $"search \"{value}\";" +
+
+                    $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & parent_game = null &" +
+                        $"(follows != null | hypes != null) & aggregated_rating_count > 0 & version_parent = null &" +
+                        $"involved_companies.developer = true & release_dates > 0;" +
+                    $"limit 5;");
+
                 SearchResults = games;
                 IsSearching = false;
             }, null, 500, Timeout.Infinite);

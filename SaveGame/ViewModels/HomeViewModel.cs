@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using IGDB;
 using IGDB.Models;
+using Newtonsoft.Json.Linq;
 using SaveGame.Services;
 using SaveGame.Stores;
 using System;
@@ -56,8 +57,19 @@ namespace SaveGame.ViewModels
 
         async void GetUpcomingReleases()
         {
-            var dateTimeInMs = GetDateTimeInMs();
-            IEnumerable<Game> games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields *, screenshots.*, genres.*, videos.*, release_dates.*, involved_companies.company.*, cover.*; where cover.url != null; limit 5;");
+            long dateTimeMs = GetDateTimeInMs();
+            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
+                    $"fields name, involved_companies.developer, involved_companies.company.name," +
+                        $"screenshots.image_id, screenshots.url, cover.url, cover.image_id," +
+                        $"summary, genres.name, genres.slug, release_dates.y;" +
+
+                    $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & version_parent = null & parent_game = null &" +
+                        $"(follows > 25 | hypes > 25) & first_release_date > 1704456297 & involved_companies.developer = true;" +
+
+                    $"sort first_release_date asc;" +
+
+                    $"limit 5;");
+
             UpcomingReleases = games;
         }
 
