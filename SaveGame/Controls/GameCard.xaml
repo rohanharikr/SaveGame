@@ -12,7 +12,7 @@
         x:Name="Border"
         Width="180"
         Height="220"
-        Margin="5"
+        Margin="6"
         BorderBrush="Black"
         BorderThickness="0.25"
         CornerRadius="5"

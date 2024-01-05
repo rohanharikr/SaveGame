@@ -35,30 +35,40 @@
                     FontWeight="Bold"
                     Foreground="White"
                     Opacity="0.65">
-                    Popular right now
+                    Upcoming releases
                 </Label>
             </Border>
-            <ItemsControl Padding="15,0,15,0" ItemsSource="{Binding UpcomingReleases}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <controls:GameCard
-                            AddToPlayed="{Binding DataContext.AddToPlayedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            AddToPlaying="{Binding DataContext.AddToPlayingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            CommandParameter="{Binding .}"
-                            CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
-                            Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            Screenshots="{Binding Screenshots.Values}" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <Border Padding="15,0,15,0">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsFetchingUpcomingReleases, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <controls:GameCardSkeleton />
+                        <controls:GameCardSkeleton />
+                        <controls:GameCardSkeleton />
+                        <controls:GameCardSkeleton />
+                        <controls:GameCardSkeleton />
+                    </StackPanel>
+                    <ItemsControl ItemsSource="{Binding UpcomingReleases}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <controls:GameCard
+                                    AddToPlayed="{Binding DataContext.AddToPlayedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    AddToPlaying="{Binding DataContext.AddToPlayingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    CommandParameter="{Binding .}"
+                                    CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
+                                    Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    Screenshots="{Binding Screenshots.Values}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
         </StackPanel>
-
         <StackPanel>
             <Border Padding="15,10,15,0">
                 <Label
@@ -69,56 +79,36 @@
                     Upcoming releases
                 </Label>
             </Border>
-            <ItemsControl Padding="15,0,15,0" ItemsSource="{Binding UpcomingReleases}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <controls:GameCard
-                            AddToPlayed="{Binding DataContext.AddToPlayedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            AddToPlaying="{Binding DataContext.AddToPlayingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            CommandParameter="{Binding .}"
-                            CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
-                            Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            Screenshots="{Binding Screenshots.Values}" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
-
-        <StackPanel>
-            <Border Padding="15,10,15,0">
-                <Label
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Foreground="White"
-                    Opacity="0.65">
-                    Based on your interests
-                </Label>
+            <Border Padding="15,0,15,0">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsFetchingUpcomingReleases, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <controls:GameCardSkeleton />
+                        <controls:GameCardSkeleton />
+                        <controls:GameCardSkeleton />
+                        <controls:GameCardSkeleton />
+                        <controls:GameCardSkeleton />
+                    </StackPanel>
+                    <ItemsControl ItemsSource="{Binding UpcomingReleases}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <controls:GameCard
+                                    AddToPlayed="{Binding DataContext.AddToPlayedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    AddToPlaying="{Binding DataContext.AddToPlayingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    CommandParameter="{Binding .}"
+                                    CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
+                                    Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    Screenshots="{Binding Screenshots.Values}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
             </Border>
-            <ItemsControl Padding="15,0,15,0" ItemsSource="{Binding UpcomingReleases}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <controls:GameCard
-                            AddToPlayed="{Binding DataContext.AddToPlayedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            AddToPlaying="{Binding DataContext.AddToPlayingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            CommandParameter="{Binding .}"
-                            CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
-                            Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                            Screenshots="{Binding Screenshots.Values}" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
         </StackPanel>
     </StackPanel>
 </Page>

@@ -31,6 +31,9 @@ namespace SaveGame.ViewModels
         [ObservableProperty]
         IEnumerable<Game> upcomingReleases;
 
+        [ObservableProperty]
+        bool isFetchingUpcomingReleases = true;
+
         public HomeViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore)
         {
             igdb = new IGDBClient(
@@ -47,30 +50,26 @@ namespace SaveGame.ViewModels
             _gameStore.GamesChanged += GameStore_GamesChanged;
         }
 
-        long GetDateTimeInMs()
-        {
-            DateTime currentDate = DateTime.Now;
-            long ticks = currentDate.Ticks;
-            long milliseconds = ticks / TimeSpan.TicksPerMillisecond;
-            return milliseconds;
-        }
-
         async void GetUpcomingReleases()
         {
-            long dateTimeMs = GetDateTimeInMs();
+            IsFetchingUpcomingReleases = true;
+
+            Int32 unixTime = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
             var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
                     $"fields name, involved_companies.developer, involved_companies.company.name," +
                         $"screenshots.image_id, screenshots.url, cover.url, cover.image_id," +
                         $"summary, genres.name, genres.slug, release_dates.y;" +
 
                     $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & version_parent = null & parent_game = null &" +
-                        $"(follows > 25 | hypes > 25) & first_release_date > 1704456297 & involved_companies.developer = true;" +
+                        $"(follows > 25 | hypes > 25) & first_release_date > {unixTime} & involved_companies.developer = true;" +
 
                     $"sort first_release_date asc;" +
 
                     $"limit 5;");
 
             UpcomingReleases = games;
+
+            IsFetchingUpcomingReleases = false;
         }
 
         private void ModalNavigationStore_GameDetailChanged()
