@@ -27,7 +27,7 @@
                 Storyboard.TargetProperty="Y"
                 From="10"
                 To="0"
-                Duration="0:0:0.75">
+                Duration="0:0:0.25">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
