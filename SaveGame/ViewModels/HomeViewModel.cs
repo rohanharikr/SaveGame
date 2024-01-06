@@ -83,7 +83,7 @@ namespace SaveGame.ViewModels
             Int32 unixTime = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
             var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
                     $"fields name, involved_companies.developer, involved_companies.company.name," +
-                        $"screenshots.image_id, screenshots.url, cover.url, cover.image_id," +
+                        $"screenshots.image_id, screenshots.url, aggregated_rating, cover.url, cover.image_id," +
                         $"summary, genres.name, genres.slug, release_dates.y;" +
 
                     $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & version_parent = null & parent_game = null &" +
@@ -106,7 +106,7 @@ namespace SaveGame.ViewModels
             int yearInUnixTime = 31536000;
             var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
                     $"fields name, involved_companies.developer, involved_companies.company.name," +
-                        $"screenshots.image_id, screenshots.url, cover.url, cover.image_id," +
+                        $"screenshots.image_id, screenshots.url, aggregated_rating, cover.url, cover.image_id," +
                         $"summary, genres.name, genres.slug, release_dates.y;" +
 
                     $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & version_parent = null & parent_game = null &" +
