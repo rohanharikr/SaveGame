@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CommunityToolkit.Mvvm.Input;
 using IGDB;
 using IGDB.Models;
 
@@ -115,6 +116,16 @@ namespace SaveGame.Controls
 
             }
             segmentWidth = Border.Width / _screenshots.Count;
+
+            //trying to bind the command in XAML was a major PITA
+            AddToPlayMenuItem.Command = AddToPlayed;
+            AddToPlayMenuItem.CommandParameter = CommandParameter;
+            AddToPlayingMenuItem.Command = AddToPlaying;
+            AddToPlayingMenuItem.CommandParameter = CommandParameter;
+            AddToPlayedMenuItem.Command = AddToPlayed;
+            AddToPlayedMenuItem.CommandParameter = CommandParameter;
+            RemoveMenuItem.Command = Remove;
+            RemoveMenuItem.CommandParameter = CommandParameter;
         }
 
         private void EnterPreview(object sender, MouseEventArgs e)

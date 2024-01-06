@@ -31,11 +31,12 @@
                 CornerRadius="5" />
             <Grid x:Name="Grid">
                 <Grid.ContextMenu>
-                    <ContextMenu x:Name="ContextMenu" Style="{StaticResource CoolContextMenu}">
-                        <MenuItem Header="Play" Style="{StaticResource CoolContextMenuItem}" />
-                        <MenuItem Header="Playing" Style="{StaticResource CoolContextMenuItem}" />
-                        <MenuItem Header="Played" Style="{StaticResource CoolContextMenuItem}" />
-                        <MenuItem Header="Remove" Style="{StaticResource CoolContextMenuItem}" />
+                    <ContextMenu PlacementTarget="{Binding ElementName=Root}">
+                        <!--  binding was for these can be found in code-behind  -->
+                        <MenuItem x:Name="AddToPlayMenuItem" Header="Play" />
+                        <MenuItem x:Name="AddToPlayingMenuItem" Header="Playing" />
+                        <MenuItem x:Name="AddToPlayedMenuItem" Header="Played" />
+                        <MenuItem x:Name="RemoveMenuItem" Header="Remove" />
                     </ContextMenu>
                 </Grid.ContextMenu>
                 <Grid.InputBindings>
