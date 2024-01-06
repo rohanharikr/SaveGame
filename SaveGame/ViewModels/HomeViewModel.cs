@@ -30,16 +30,22 @@ namespace SaveGame.ViewModels
         public ObservableCollection<Game> PlayGames => _gameStore.PlayGames;
 
         [ObservableProperty]
-        IEnumerable<Game> upcomingReleases;
-
-        [ObservableProperty]
         bool isFetchingUpcomingReleases = true;
 
         [ObservableProperty]
-        IEnumerable<Game> highRatedGames;
+        IEnumerable<Game> upcomingReleases;
+
+        [ObservableProperty]
+        bool isFetchingRecentReleases = true;
+        
+        [ObservableProperty]
+        IEnumerable<Game> recentReleases;
 
         [ObservableProperty]
         bool isFetchingHighRatedGames = true;
+
+        [ObservableProperty]
+        IEnumerable<Game> highRatedGames;
 
         [ObservableProperty]
         string greeting = "Good ";
@@ -51,6 +57,7 @@ namespace SaveGame.ViewModels
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_SECRET")
             );
 
+            GetRecentReleases();
             GetUpcomingReleases();
             GetHighRatedGames();
 
@@ -89,6 +96,29 @@ namespace SaveGame.ViewModels
             UpcomingReleases = games;
 
             IsFetchingUpcomingReleases = false;
+        }
+
+        async void GetRecentReleases()
+        {
+            IsFetchingRecentReleases = true;
+
+            int unixTime = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+            int yearInUnixTime = 31536000;
+            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
+                    $"fields name, involved_companies.developer, involved_companies.company.name," +
+                        $"screenshots.image_id, screenshots.url, cover.url, cover.image_id," +
+                        $"summary, genres.name, genres.slug, release_dates.y;" +
+
+                    $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & version_parent = null & parent_game = null &" +
+                        $"(follows > 25 | hypes > 25) & first_release_date > {unixTime - yearInUnixTime} & first_release_date < {unixTime} & involved_companies.developer = true;" +
+
+                    $"sort first_release_date asc;" +
+
+                    $"limit 5;");
+
+            RecentReleases = games;
+
+            IsFetchingRecentReleases = false;
         }
 
         static int GetOffset()
