@@ -14,6 +14,7 @@
     <UserControl.Resources>
         <converters:CoverArtConverter x:Key="CoverArtConverter" />
         <converters:GenresToStringConverter x:Key="GenresToStringConverter" />
+        <converters:DeveloperFromCompaniesConverter x:Key="DeveloperFromCompaniesConverter" />
 
         <Storyboard x:Key="ShowModalAnimation">
             <DoubleAnimation
@@ -88,7 +89,7 @@
                                 </StackPanel>
                                 <Label
                                     Padding="0"
-                                    Content="{Binding Path=Detail.InvolvedCompanies.Values[0].Company.Value.Name, ElementName=Root}"
+                                    Content="{Binding Path=Detail.InvolvedCompanies.Values, ElementName=Root, Converter={StaticResource DeveloperFromCompaniesConverter}}"
                                     FontSize="16"
                                     Foreground="White" />
                             </StackPanel>
@@ -107,7 +108,8 @@
                                 <TextBlock
                                     FontSize="16"
                                     Foreground="White"
-                                    Text="{Binding Detail.Genres.Values, ElementName=Root, Converter={StaticResource GenresToStringConverter}}" />
+                                    Text="{Binding Detail.Genres.Values, ElementName=Root, Converter={StaticResource GenresToStringConverter}}"
+                                    Visibility="Collapsed" />
                             </StackPanel>
                         </Border>
                     </ScrollViewer>
