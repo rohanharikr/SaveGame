@@ -19,31 +19,33 @@ namespace SaveGame.Controls
 {
     public partial class RatingCard : UserControl
     {
-        public int Rating
+        private static readonly DependencyProperty RatingProperty = DependencyProperty.Register(
+           "Rating", typeof(double), typeof(RatingCard), new PropertyMetadata(0.0, new PropertyChangedCallback(RatingChanged)));
+
+        public double Rating
         {
-            get { return (int)GetValue(RatingProperty); }
+            get { return (double)GetValue(RatingProperty); }
             set { SetValue(RatingProperty, value); }
         }
 
-        public static readonly DependencyProperty RatingProperty =
-            DependencyProperty.Register("Rating", typeof(int), typeof(RatingCard), new PropertyMetadata(0));
+        private static void RatingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            RatingCard ratingCard = (RatingCard)d;
+            double newRating = (double)e.NewValue;
 
+            if (newRating >= 66)
+                ratingCard.border.Background = Brushes.Green;
+            else if (newRating >= 33)
+                ratingCard.border.Background = Brushes.Yellow;
+            else if (newRating > 0)
+                ratingCard.border.Background = Brushes.Red;
+            else
+                ratingCard.border.Background = Brushes.Gray;
+        }
 
         public RatingCard()
         {
             InitializeComponent();
-        }
-
-        private void RatingChanged()
-        {
-            if (Rating == 100)
-                border.Background = Brushes.Green;
-            else if (Rating >= 66)
-                border.Background = Brushes.Yellow;
-            else if (Rating >= 33)
-                border.Background = Brushes.Red;
-            else if (Rating == 0)
-                border.Background = Brushes.Gray;
         }
     }
 }
