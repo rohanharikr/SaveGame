@@ -28,6 +28,12 @@ namespace SaveGame.Controls
             set { SetValue(RatingProperty, value); }
         }
 
+        public RatingCard()
+        {
+            InitializeComponent();
+            border.Background = Brushes.Gray; //this is hack - RatingChanged does not get fired 
+        }
+
         private static void RatingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             RatingCard ratingCard = (RatingCard)d;
@@ -41,11 +47,6 @@ namespace SaveGame.Controls
                 ratingCard.border.Background = Brushes.Red;
             else
                 ratingCard.border.Background = Brushes.Gray;
-        }
-
-        public RatingCard()
-        {
-            InitializeComponent();
         }
     }
 }
