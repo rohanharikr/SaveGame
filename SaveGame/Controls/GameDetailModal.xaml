@@ -69,31 +69,44 @@
                         <Border.Background>
                             <SolidColorBrush Opacity="0.95" Color="#262626" />
                         </Border.Background>
-                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                            <controls:RatingCard Rating="{Binding Detail.AggregatedRating, ElementName=Root}" />
-                            <StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <Label
-                                        Padding="0"
-                                        Content="{Binding Detail.Name, ElementName=Root}"
-                                        FontSize="24"
-                                        FontWeight="Bold"
-                                        Foreground="White" />
-                                    <Label
-                                        Padding="0"
-                                        Content="{Binding Detail.ReleaseDates.Values[0].Year, ElementName=Root}"
-                                        ContentStringFormat=" ({0})"
-                                        FontSize="24"
-                                        FontWeight="Bold"
-                                        Foreground="White" />
-                                </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <controls:RatingCard Grid.Column="0" Rating="{Binding Detail.AggregatedRating, ElementName=Root}" />
+                            <StackPanel Grid.Column="1">
+                                <DockPanel>
+                                    <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                                        <Label
+                                            Padding="0"
+                                            Content="{Binding Detail.Name, ElementName=Root}"
+                                            FontSize="24"
+                                            FontWeight="Bold"
+                                            Foreground="White" />
+                                        <Label
+                                            Padding="0"
+                                            Content="{Binding Detail.ReleaseDates.Values[0].Year, ElementName=Root}"
+                                            ContentStringFormat=" ({0})"
+                                            FontSize="24"
+                                            FontWeight="Bold"
+                                            Foreground="White" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        HorizontalAlignment="Right"
+                                        DockPanel.Dock="Right"
+                                        Opacity="0.5"
+                                        Orientation="Horizontal">
+                                        <controls:PlatformLogos Platforms="{Binding Detail.Platforms.Values, ElementName=Root}" />
+                                    </StackPanel>
+                                </DockPanel>
                                 <Label
                                     Padding="0"
                                     Content="{Binding Path=Detail.InvolvedCompanies.Values, ElementName=Root, Converter={StaticResource DeveloperFromCompaniesConverter}}"
                                     FontSize="16"
                                     Foreground="White" />
                             </StackPanel>
-                        </StackPanel>
+                        </Grid>
                     </Border>
                     <ScrollViewer Grid.Row="0" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <Border Margin="0,10,0,0" Padding="20,85,20,0">
@@ -109,7 +122,7 @@
                                     FontSize="16"
                                     Foreground="White"
                                     Text="{Binding Detail.Genres.Values, ElementName=Root, Converter={StaticResource GenresToStringConverter}}"
-                                    Visibility="Collapsed" />
+                                    Visibility="Visible" />
                             </StackPanel>
                         </Border>
                     </ScrollViewer>
@@ -119,7 +132,8 @@
                         Margin="10"
                         Padding="0,10,0,10"
                         Background="#1D1D1D"
-                        CornerRadius="10">
+                        CornerRadius="10"
+                        Visibility="Collapsed">
                         <DockPanel>
                             <Button
                                 Margin="10,0,10,0"
@@ -127,7 +141,7 @@
                                 VerticalContentAlignment="Center"
                                 Command="{Binding AddToPlay, ElementName=Root}"
                                 CommandParameter="{Binding Detail, ElementName=Root}"
-                                Content="Add to Play"
+                                Content="Added to Play"
                                 FontSize="16"
                                 Foreground="White">
                                 <Button.Style>

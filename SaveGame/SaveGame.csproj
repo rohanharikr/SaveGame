@@ -13,11 +13,41 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Media\Images\linux.png" />
+    <None Remove="Media\Images\mac.png" />
+    <None Remove="Media\Images\nintendo.png" />
+    <None Remove="Media\Images\pc.png" />
+    <None Remove="Media\Images\ps.png" />
+    <None Remove="Media\Images\xbox.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="IGDB" Version="3.0.0" />
     <PackageReference Include="LottieSharp" Version="2.3.0" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Media\Images\linux.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Media\Images\mac.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Media\Images\nintendo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Media\Images\pc.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Media\Images\ps.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Media\Images\xbox.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -32,19 +62,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Animations\Empty.json">
+    <None Update="Media\Animations\Empty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Animations\Loading.json">
+    <None Update="Media\Animations\Loading.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Animations\Loading2.json">
+    <None Update="Media\Animations\Loading2.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Animations\Loading3.json">
+    <None Update="Media\Animations\Loading3.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Animations\Empty2.json">
+    <None Update="Media\Animations\Empty2.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Properties\Settings.settings">
