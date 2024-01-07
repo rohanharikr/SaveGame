@@ -22,9 +22,9 @@ namespace SaveGame.Services
             );
         }
 
-        string fields = $"fields name, involved_companies.developer, involved_companies.company.name," +
-                        $"screenshots.image_id, screenshots.url, platforms.slug, platforms.platform_family.*, aggregated_rating, cover.url, cover.image_id," +
-                        $"summary, genres.name, genres.slug, release_dates.y;";
+        string fields = $"fields name, first_release_date, involved_companies.developer, involved_companies.company.name," +
+            $"screenshots.image_id, screenshots.url, platforms.name, platforms.slug, platforms.platform_family.*, aggregated_rating, cover.url, cover.image_id," +
+            $"language_supports.language.name, summary, genres.name, genres.slug, release_dates.y;";
 
         public async Task<IEnumerable<Game>> GetUpcomingReleases()
         {

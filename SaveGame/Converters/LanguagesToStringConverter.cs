@@ -10,25 +10,25 @@ using System.Windows.Data;
 
 namespace SaveGame.Converters
 {
-    class GenresToStringConverter : IValueConverter
+    class LanguagesToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            StringBuilder genres = new StringBuilder();
-            if(value is Genre[] genreList)
+            StringBuilder languages = new StringBuilder();
+            if(value is LanguageSupport[] languageList)
             {
-                for (int i=0; i < genreList.Length; i++)
+                for (int i=0; i < languageList.Length; i++)
                 {
-                    genres.Append(genreList[i].Name);
+                    languages.Append(languageList[i].Language.Value.Name);
                     
-                    if(i != (genreList.Length - 1))
-                        genres.Append(" • ");
+                    if(i != (languageList.Length - 1))
+                        languages.Append(", ");
                 }
             }
-            if (genres.Length == 0)
+            if (languages.Length == 0)
                 return "N/A";
 
-            return genres.ToString();
+            return languages.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

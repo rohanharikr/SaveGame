@@ -1,5 +1,4 @@
 ﻿using IGDB;
-using IGDB.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,25 +9,16 @@ using System.Windows.Data;
 
 namespace SaveGame.Converters
 {
-    class GenresToStringConverter : IValueConverter
+    class EpochToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            StringBuilder genres = new StringBuilder();
-            if(value is Genre[] genreList)
-            {
-                for (int i=0; i < genreList.Length; i++)
-                {
-                    genres.Append(genreList[i].Name);
-                    
-                    if(i != (genreList.Length - 1))
-                        genres.Append(" • ");
-                }
-            }
-            if (genres.Length == 0)
+            if (value == null || !(value is DateTimeOffset))
                 return "N/A";
 
-            return genres.ToString();
+            DateTimeOffset dateTimeOffset = (DateTimeOffset)value;
+            string formattedDate = dateTimeOffset.ToString("MMMM d, yyyy");
+            return formattedDate;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
