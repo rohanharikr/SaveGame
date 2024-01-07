@@ -137,8 +137,12 @@
                 <controls:GameDetailModal
                     Grid.RowSpan="2"
                     Panel.ZIndex="100"
+                    AddToPlay="{Binding AddToPlayCommand}"
+                    AddToPlayed="{Binding AddToPlayedCommand}"
+                    AddToPlaying="{Binding AddToPlayingCommand}"
                     CloseModal="{Binding CloseGameDetailModalCommand}"
                     Detail="{Binding GameDetail}"
+                    Remove="{Binding RemoveCommand}"
                     Visibility="{Binding IsGameDetailModalOpen, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                 <Border

@@ -125,6 +125,8 @@
                                 Margin="10,0,10,0"
                                 VerticalAlignment="Stretch"
                                 VerticalContentAlignment="Center"
+                                Command="{Binding AddToPlay, ElementName=Root}"
+                                CommandParameter="{Binding Detail, ElementName=Root}"
                                 Content="Add to Play"
                                 FontSize="16"
                                 Foreground="White">
@@ -155,6 +157,8 @@
                                 Margin="10,0,10,0"
                                 VerticalAlignment="Stretch"
                                 VerticalContentAlignment="Center"
+                                Command="{Binding AddToPlaying, ElementName=Root}"
+                                CommandParameter="{Binding Detail, ElementName=Root}"
                                 Content="Add to Playing"
                                 FontSize="16"
                                 Foreground="White">
@@ -185,6 +189,8 @@
                                 Margin="10,0,10,0"
                                 VerticalAlignment="Stretch"
                                 VerticalContentAlignment="Center"
+                                Command="{Binding AddToPlayed, ElementName=Root}"
+                                CommandParameter="{Binding Detail, ElementName=Root}"
                                 Content="Add to Played"
                                 FontSize="16"
                                 Foreground="White">
@@ -215,6 +221,8 @@
                                 Margin="10,0,10,0"
                                 VerticalAlignment="Stretch"
                                 VerticalContentAlignment="Center"
+                                Command="{Binding Remove, ElementName=Root}"
+                                CommandParameter="{Binding Detail, ElementName=Root}"
                                 Content="Remove from Playing"
                                 FontSize="16"
                                 Foreground="White">
