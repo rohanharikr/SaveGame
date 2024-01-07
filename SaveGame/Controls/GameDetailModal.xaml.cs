@@ -101,7 +101,10 @@ namespace SaveGame.Controls
         private void VisibilityPropertyChanged(object sender, EventArgs e)
         {
             if (Visibility == Visibility.Collapsed)
+            {
                 showModalSb.Remove();
+                scrollviewer.ScrollToTop();
+            }
 
             if (Visibility == Visibility.Visible)
                 showModalSb.Begin();

@@ -37,7 +37,7 @@
         <Border Padding="15,10,15,0">
             <Label
                 Content="{Binding Greeting}"
-                ContentStringFormat="{}{0}, Rohan"
+                ContentStringFormat="{}{0}, RedRackham"
                 FontSize="30"
                 FontWeight="Bold"
                 Foreground="White" />
