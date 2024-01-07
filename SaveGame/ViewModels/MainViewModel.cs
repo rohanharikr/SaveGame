@@ -104,6 +104,7 @@ namespace SaveGame.ViewModels
         {
             CurrentView = HomeView;
             IsSearchBarVisible = false;
+            SearchQuery = "";
         }
 
         [RelayCommand]
