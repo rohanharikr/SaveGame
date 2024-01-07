@@ -55,7 +55,7 @@
             </Border>
             <Border Padding="15,0,15,0">
                 <StackPanel>
-                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsFetchingHighRatedGames, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding HighRatedGames.Count, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
                         <controls:GameCardSkeleton />
                         <controls:GameCardSkeleton />
                         <controls:GameCardSkeleton />
@@ -97,7 +97,7 @@
             </Border>
             <Border Padding="15,0,15,0">
                 <StackPanel>
-                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsFetchingRecentReleases, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding RecentReleases.Count, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
                         <controls:GameCardSkeleton />
                         <controls:GameCardSkeleton />
                         <controls:GameCardSkeleton />
@@ -139,7 +139,7 @@
             </Border>
             <Border Padding="15,0,15,0">
                 <StackPanel>
-                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsFetchingUpcomingReleases, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding UpcomingReleases.Count, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
                         <controls:GameCardSkeleton />
                         <controls:GameCardSkeleton />
                         <controls:GameCardSkeleton />

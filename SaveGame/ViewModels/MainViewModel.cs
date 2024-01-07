@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using IGDB;
 using IGDB.Models;
+using SaveGame.Services;
 using SaveGame.Stores;
 using SaveGame.Views;
 
@@ -32,8 +33,6 @@ namespace SaveGame.ViewModels
         [ObservableProperty]
         bool isSearchBarVisible = false;
 
-        IGDBClient igdb;
-
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly GameStore _gameStore;
 
@@ -45,14 +44,11 @@ namespace SaveGame.ViewModels
         PlayingView PlayingView;
         PlayedView PlayedView;
 
-        public MainViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore)
-        {
-            igdb = new IGDBClient(
-                Environment.GetEnvironmentVariable("IGDB_CLIENT_ID"),
-                Environment.GetEnvironmentVariable("IGDB_CLIENT_SECRET")
-            );
+        IGDBService _igdbService;
 
-            HomeView = new HomeView(modalNavigationStore, gameStore);
+        public MainViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore, IGDBService igdbService)
+        {
+            HomeView = new HomeView(modalNavigationStore, gameStore, igdbService);
             PlayView = new PlayView(modalNavigationStore, gameStore);
             PlayingView = new PlayingView(modalNavigationStore, gameStore);
             PlayedView = new PlayedView(modalNavigationStore, gameStore);
@@ -62,6 +58,7 @@ namespace SaveGame.ViewModels
 
             GotoHomeView();
             _gameStore = gameStore;
+            _igdbService = igdbService;
         }
 
         private void ModalNavigationStore_GameDetailChanged()
@@ -96,20 +93,7 @@ namespace SaveGame.ViewModels
             timer?.Change(Timeout.Infinite, Timeout.Infinite);
             timer = new Timer(async state =>
             {
-                var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
-                    $"fields name, involved_companies.developer, involved_companies.company.name," +
-                        $"screenshots.image_id, screenshots.url, aggregated_rating, cover.url, cover.image_id," +
-                        $"summary, genres.name, genres.slug, release_dates.y;" +
-                    
-                    $"search \"{value}\";" +
-
-                    $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & parent_game = null &" +
-                        $"(follows != null | hypes != null) & aggregated_rating_count > 0 & version_parent = null &" +
-                        $"involved_companies.developer = true & release_dates > 0;" +
-
-                    $"limit 5;");
-
-                SearchResults = games;
+                SearchResults = await _igdbService.SearchGame(value);
                 IsSearching = false;
             }, null, 500, Timeout.Infinite);
 

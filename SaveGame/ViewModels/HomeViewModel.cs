@@ -19,8 +19,6 @@ namespace SaveGame.ViewModels
 {
     partial class HomeViewModel : ObservableObject
     {
-        IGDBClient igdb;
-
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly GameStore _gameStore;
 
@@ -50,24 +48,11 @@ namespace SaveGame.ViewModels
         [ObservableProperty]
         string greeting = "Good ";
 
-        public HomeViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore)
+        public HomeViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore, IGDBService igdbService)
         {
-            igdb = new IGDBClient(
-                Environment.GetEnvironmentVariable("IGDB_CLIENT_ID"),
-                Environment.GetEnvironmentVariable("IGDB_CLIENT_SECRET")
-            );
+            GetGames(igdbService);
 
-            GetRecentReleases();
-            GetUpcomingReleases();
-            GetHighRatedGames();
-
-            int hour = DateTime.Now.Hour;
-            if (hour >= 18)
-                greeting += "Evening";
-            else if (hour >= 12)
-                greeting += "Afternoon";
-            else
-                greeting += "Morning";
+            greeting += TimeOfDay();
 
             _modalNavigationStore = modalNavigationStore;
             _gameStore = gameStore;
@@ -76,79 +61,28 @@ namespace SaveGame.ViewModels
             _gameStore.GamesChanged += GameStore_GamesChanged;
         }
 
-        async void GetUpcomingReleases()
+        async void GetGames(IGDBService igdbService)
         {
-            IsFetchingUpcomingReleases = true;
+            Task<IEnumerable<Game>> recentReleasesTask = igdbService.GetRecentReleases();
+            Task<IEnumerable<Game>> upcomingReleasesTask = igdbService.GetUpcomingReleases();
+            Task<IEnumerable<Game>> highRatedGamesTask = igdbService.GetHighRatedGames();
 
-            Int32 unixTime = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
-            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
-                    $"fields name, involved_companies.developer, involved_companies.company.name," +
-                        $"screenshots.image_id, screenshots.url, aggregated_rating, cover.url, cover.image_id," +
-                        $"summary, genres.name, genres.slug, release_dates.y;" +
+            await Task.WhenAll(recentReleasesTask, upcomingReleasesTask, highRatedGamesTask);
 
-                    $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & version_parent = null & parent_game = null &" +
-                        $"(follows > 25 | hypes > 25) & first_release_date > {unixTime} & involved_companies.developer = true;" +
-
-                    $"sort first_release_date asc;" +
-
-                    $"limit 5;");
-
-            UpcomingReleases = games;
-
-            IsFetchingUpcomingReleases = false;
+            RecentReleases = recentReleasesTask.Result;
+            UpcomingReleases = upcomingReleasesTask.Result;
+            HighRatedGames = highRatedGamesTask.Result;
         }
 
-        async void GetRecentReleases()
+        string TimeOfDay()
         {
-            IsFetchingRecentReleases = true;
-
-            int unixTime = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
-            int yearInUnixTime = 31536000;
-            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
-                    $"fields name, involved_companies.developer, involved_companies.company.name," +
-                        $"screenshots.image_id, screenshots.url, aggregated_rating, cover.url, cover.image_id," +
-                        $"summary, genres.name, genres.slug, release_dates.y;" +
-
-                    $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & version_parent = null & parent_game = null &" +
-                        $"(follows > 25 | hypes > 25) & first_release_date > {unixTime - yearInUnixTime} & first_release_date < {unixTime} & involved_companies.developer = true;" +
-
-                    $"sort first_release_date asc;" +
-
-                    $"limit 5;");
-
-            RecentReleases = games;
-
-            IsFetchingRecentReleases = false;
-        }
-
-        static int GetOffset()
-        {
-            Random random = new Random();
-            return random.Next(0, 21) * 5;
-        }
-
-        async void GetHighRatedGames()
-        {
-            IsFetchingHighRatedGames = true;
-            int offset = GetOffset();
-            var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
-                    $"fields name, involved_companies.developer, involved_companies.company.name," +
-                        $"screenshots.image_id, screenshots.url, aggregated_rating, cover.url, cover.image_id," +
-                        $"summary, genres.name, genres.slug, release_dates.y;" +
-
-                    $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & parent_game = null &" +
-                        $"(follows != null | hypes != null) & aggregated_rating_count > 0 & version_parent = null &" +
-                        $"involved_companies.developer = true & release_dates > 0;" +
-
-                    $"sort aggregated_rating desc;" +
-
-                    $"offset: {offset};" +
-
-                    $"limit 5;");
-
-            HighRatedGames = games;
-
-            IsFetchingHighRatedGames = false;
+            int hour = DateTime.Now.Hour;
+            if (hour >= 18)
+                return "Evening";
+            else if (hour >= 12)
+                return "Afternoon";
+            else
+                return "Morning";
         }
 
         private void ModalNavigationStore_GameDetailChanged()
