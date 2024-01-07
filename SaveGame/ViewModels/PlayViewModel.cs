@@ -17,8 +17,6 @@ namespace SaveGame.ViewModels
 {
     partial class PlayViewModel : ObservableObject
     {
-        IGDBClient igdb;
-
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly GameStore _gameStore;
 
@@ -32,33 +30,11 @@ namespace SaveGame.ViewModels
 
         public PlayViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore)
         {
-            igdb = new IGDBClient(
-                Environment.GetEnvironmentVariable("IGDB_CLIENT_ID"),
-                Environment.GetEnvironmentVariable("IGDB_CLIENT_SECRET")
-            );
-
-            GetUpcomingReleases();
-
             _modalNavigationStore = modalNavigationStore;
             _gameStore = gameStore;
 
             _modalNavigationStore.DetailChanged += ModalNavigationStore_GameDetailChanged;
             _gameStore.GamesChanged += GameStore_GamesChanged;
-        }
-
-        long GetDateTimeInMs()
-        {
-            DateTime currentDate = DateTime.Now;
-            long ticks = currentDate.Ticks;
-            long milliseconds = ticks / TimeSpan.TicksPerMillisecond;
-            return milliseconds;
-        }
-
-        async void GetUpcomingReleases()
-        {
-            var dateTimeInMs = GetDateTimeInMs();
-            IEnumerable<Game> games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: $"fields *, screenshots.*, genres.*, videos.*, release_dates.*, involved_companies.company.*, cover.*; where cover.url != null; limit 4;");
-            UpcomingReleases = games;
         }
 
         private void ModalNavigationStore_GameDetailChanged()
