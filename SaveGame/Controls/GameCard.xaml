@@ -33,10 +33,16 @@
                 <Grid.ContextMenu>
                     <ContextMenu PlacementTarget="{Binding ElementName=Root}">
                         <!--  binding was for these can be found in code-behind  -->
-                        <MenuItem x:Name="AddToPlayMenuItem" Header="Play" />
+                        <MenuItem
+                            x:Name="AddToPlayMenuItem"
+                            Header="Play"
+                            IsChecked="{Binding True}" />
                         <MenuItem x:Name="AddToPlayingMenuItem" Header="Playing" />
                         <MenuItem x:Name="AddToPlayedMenuItem" Header="Played" />
-                        <MenuItem x:Name="RemoveMenuItem" Header="Remove" />
+                        <MenuItem
+                            x:Name="RemoveMenuItem"
+                            Header="Remove"
+                            IsEnabled="False" />
                     </ContextMenu>
                 </Grid.ContextMenu>
                 <Grid.InputBindings>

@@ -25,8 +25,6 @@ namespace SaveGame.ViewModels
         public Game? GameDetail => _modalNavigationStore.Detail;
         public bool IsGameDetailModalOpen => _modalNavigationStore.IsOpen;
 
-        public ObservableCollection<Game> PlayGames => _gameStore.PlayGames;
-
         [ObservableProperty]
         bool isFetchingUpcomingReleases = true;
 
@@ -58,7 +56,6 @@ namespace SaveGame.ViewModels
             _gameStore = gameStore;
 
             _modalNavigationStore.DetailChanged += ModalNavigationStore_GameDetailChanged;
-            _gameStore.GamesChanged += GameStore_GamesChanged;
         }
 
         async void GetGames(IGDBService igdbService)
@@ -89,11 +86,6 @@ namespace SaveGame.ViewModels
         {
             OnPropertyChanged(nameof(GameDetail));
             OnPropertyChanged(nameof(IsGameDetailModalOpen));
-        }
-
-        private void GameStore_GamesChanged()
-        {
-            OnPropertyChanged(nameof(PlayGames));
         }
 
         [RelayCommand]
