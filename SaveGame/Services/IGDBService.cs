@@ -74,7 +74,7 @@ namespace SaveGame.Services
                     $"summary, genres.name, genres.slug, release_dates.y;" +
 
                 $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* &" +
-                    $"(follows != null | hypes != null) & aggregated_rating_count > 0 & version_parent = null &" +
+                    $"(follows != null | hypes != null) & version_parent = null &" +
                     $"involved_companies.developer = true & release_dates > 0;" +
 
                 $"sort aggregated_rating desc;" +
