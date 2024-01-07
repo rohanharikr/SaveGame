@@ -71,6 +71,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <controls:GameCard
+                                    AddToPlay="{Binding DataContext.AddToPlayCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     AddToPlayed="{Binding DataContext.AddToPlayedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     AddToPlaying="{Binding DataContext.AddToPlayingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
@@ -113,6 +114,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <controls:GameCard
+                                    AddToPlay="{Binding DataContext.AddToPlayCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     AddToPlayed="{Binding DataContext.AddToPlayedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     AddToPlaying="{Binding DataContext.AddToPlayingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
@@ -155,6 +157,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <controls:GameCard
+                                    AddToPlay="{Binding DataContext.AddToPlayCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     AddToPlayed="{Binding DataContext.AddToPlayedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     AddToPlaying="{Binding DataContext.AddToPlayingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"

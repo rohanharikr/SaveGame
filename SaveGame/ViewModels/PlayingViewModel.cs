@@ -57,14 +57,34 @@ namespace SaveGame.ViewModels
         }
 
         [RelayCommand]
+        void Remove(Game game)
+        {
+            if (_gameStore.PlayGames.Contains(game))
+                _gameStore.PlayGames.Remove(game);
+            else if (_gameStore.PlayingGames.Contains(game))
+                _gameStore.PlayingGames.Remove(game);
+            else if (_gameStore.PlayedGames.Contains(game))
+                _gameStore.PlayedGames.Remove(game);
+        }
+
+        [RelayCommand]
+        void AddToPlay(Game game)
+        {
+            Remove(game);
+            _gameStore.PlayGames.Add(game);
+        }
+
+        [RelayCommand]
         void AddToPlaying(Game game)
         {
+            Remove(game);
             _gameStore.PlayingGames.Add(game);
         }
 
         [RelayCommand]
         void AddToPlayed(Game game)
         {
+            Remove(game);
             _gameStore.PlayedGames.Add(game);
         }
     }

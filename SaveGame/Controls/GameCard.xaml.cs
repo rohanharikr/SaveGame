@@ -118,7 +118,7 @@ namespace SaveGame.Controls
             segmentWidth = Border.Width / _screenshots.Count;
 
             //trying to bind the command in XAML was a major PITA
-            AddToPlayMenuItem.Command = AddToPlayed;
+            AddToPlayMenuItem.Command = AddToPlay;
             AddToPlayMenuItem.CommandParameter = CommandParameter;
             AddToPlayingMenuItem.Command = AddToPlaying;
             AddToPlayingMenuItem.CommandParameter = CommandParameter;

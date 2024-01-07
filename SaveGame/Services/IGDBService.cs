@@ -30,7 +30,7 @@ namespace SaveGame.Services
                         $"screenshots.image_id, screenshots.url, aggregated_rating, cover.url, cover.image_id," +
                         $"summary, genres.name, genres.slug, release_dates.y;" +
 
-                    $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & version_parent = null & parent_game = null &" +
+                    $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & version_parent = null &" +
                         $"(follows > 25 | hypes > 25) & first_release_date > {unixTime} & involved_companies.developer = true;" +
 
                     $"sort first_release_date asc;" +
@@ -49,7 +49,7 @@ namespace SaveGame.Services
                         $"screenshots.image_id, screenshots.url, aggregated_rating, cover.url, cover.image_id," +
                         $"summary, genres.name, genres.slug, release_dates.y;" +
 
-                    $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & version_parent = null & parent_game = null &" +
+                    $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & version_parent = null &" +
                         $"(follows > 25 | hypes > 25) & first_release_date > {unixTime - yearInUnixTime} & first_release_date < {unixTime} & involved_companies.developer = true;" +
 
                     $"sort first_release_date asc;" +
@@ -73,7 +73,7 @@ namespace SaveGame.Services
                     $"screenshots.image_id, screenshots.url, aggregated_rating, cover.url, cover.image_id," +
                     $"summary, genres.name, genres.slug, release_dates.y;" +
 
-                $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & parent_game = null &" +
+                $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* &" +
                     $"(follows != null | hypes != null) & aggregated_rating_count > 0 & version_parent = null &" +
                     $"involved_companies.developer = true & release_dates > 0;" +
 
@@ -95,8 +95,8 @@ namespace SaveGame.Services
 
                 $"search \"{query}\";" +
 
-                $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & parent_game = null &" +
-                    $"(follows != null | hypes != null) & aggregated_rating_count > 0 & version_parent = null &" +
+                $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* &" +
+                    $"(follows != null | hypes != null) & version_parent = null &" +
                     $"involved_companies.developer = true & release_dates > 0;" +
 
                 $"limit 5;");
