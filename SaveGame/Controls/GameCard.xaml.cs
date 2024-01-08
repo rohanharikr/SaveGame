@@ -138,6 +138,8 @@ namespace SaveGame.Controls
 
             if(playState == PlayStates.None)
                 RemoveMenuItem.Visibility = Visibility.Collapsed;
+            else
+                RemoveMenuItem.Visibility = Visibility.Visible;
         }
 
         private void EnterPreview(object sender, MouseEventArgs e)

@@ -33,7 +33,7 @@ namespace SaveGame.ViewModels
 
         [ObservableProperty]
         bool isFetchingRecentReleases = true;
-        
+
         [ObservableProperty]
         IEnumerable<Game>? recentReleases;
 
