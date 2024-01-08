@@ -29,11 +29,24 @@
                         Margin="0,1,0,1"
                         Padding="10,5,10,5"
                         CornerRadius="5">
-                        <Label
-                            Content="{TemplateBinding Header}"
-                            FontSize="14"
-                            FontWeight="Medium"
-                            Foreground="White" />
+                        <DockPanel>
+                            <Label
+                                Content="{TemplateBinding Header}"
+                                DockPanel.Dock="Left"
+                                FontSize="14"
+                                FontWeight="Medium"
+                                Foreground="White" />
+                            <Path
+                                x:Name="checkicon"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Data="M1 5.44444L5.4 9L12 1"
+                                DockPanel.Dock="Right"
+                                Stroke="White"
+                                StrokeLineJoin="Round"
+                                StrokeThickness="2"
+                                Visibility="Collapsed" />
+                        </DockPanel>
                     </Border>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
@@ -48,6 +61,7 @@
                             </Setter>
                         </MultiTrigger>
                         <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="checkicon" Property="Visibility" Value="Visible" />
                             <Setter TargetName="Border" Property="Background" Value="MediumPurple" />
                         </Trigger>
                     </ControlTemplate.Triggers>
