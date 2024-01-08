@@ -37,8 +37,6 @@ namespace SaveGame.ViewModels
 
         readonly IGDBService _igdbService;
 
-        [RelayCommand]
-        void Remove(Game game) => _gameStore.Remove(game);
 
         [RelayCommand]
         void AddToPlay(Game game) => _gameStore.AddToPlay(game);
@@ -48,6 +46,9 @@ namespace SaveGame.ViewModels
 
         [RelayCommand]
         void AddToPlayed(Game game) => _gameStore.AddToPlayed(game);
+        
+        [RelayCommand]
+        void Remove(Game game) => _gameStore.Remove(game);
 
         [RelayCommand]
         void ShowGameDetailModal(Game game) => _modalNavigationStore.Show(game);
@@ -64,10 +65,10 @@ namespace SaveGame.ViewModels
 
             _modalNavigationStore = modalNavigationStore;
             _modalNavigationStore.DetailChanged += ModalNavigationStore_GameDetailChanged;
-
-            GotoHomeView();
             _gameStore = gameStore;
             _igdbService = igdbService;
+
+            GotoHomeView();
         }
 
         private void ModalNavigationStore_GameDetailChanged()

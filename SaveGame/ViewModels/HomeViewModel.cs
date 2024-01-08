@@ -11,9 +11,6 @@ namespace SaveGame.ViewModels
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly GameStore _gameStore;
 
-        public Game? GameDetail => _modalNavigationStore.Detail;
-        public bool IsGameDetailModalOpen => _modalNavigationStore.IsOpen;
-
         [ObservableProperty]
         bool isFetchingUpcomingReleases = true;
 
@@ -35,8 +32,6 @@ namespace SaveGame.ViewModels
         [ObservableProperty]
         string greeting;
 
-        [RelayCommand]
-        void Remove(Game game) => _gameStore.Remove(game);
 
         [RelayCommand]
         void AddToPlay(Game game) => _gameStore.AddToPlay(game);
@@ -46,12 +41,12 @@ namespace SaveGame.ViewModels
 
         [RelayCommand]
         void AddToPlayed(Game game) => _gameStore.AddToPlayed(game);
+        
+        [RelayCommand]
+        void Remove(Game game) => _gameStore.Remove(game);
 
         [RelayCommand]
         void ShowGameDetailModal(Game game) => _modalNavigationStore.Show(game);
-
-        [RelayCommand]
-        void CloseGameDetailModal() => _modalNavigationStore.Close();
 
         public HomeViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore, IGDBService igdbService)
         {
@@ -61,8 +56,6 @@ namespace SaveGame.ViewModels
 
             _modalNavigationStore = modalNavigationStore;
             _gameStore = gameStore;
-
-            _modalNavigationStore.DetailChanged += ModalNavigationStore_GameDetailChanged;
         }
 
         async void GetGames(IGDBService igdbService)
@@ -87,12 +80,6 @@ namespace SaveGame.ViewModels
                 return "Afternoon";
             else
                 return "Morning";
-        }
-
-        private void ModalNavigationStore_GameDetailChanged()
-        {
-            OnPropertyChanged(nameof(GameDetail));
-            OnPropertyChanged(nameof(IsGameDetailModalOpen));
         }
     }
 }
