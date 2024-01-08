@@ -42,9 +42,9 @@ namespace SaveGame.Stores
 
         public void Remove(Game game)
         {
-            PlayGames.Remove(game);
-            PlayingGames.Remove(game);
-            PlayedGames.Remove(game);
+            PlayGames.Remove(PlayGames.SingleOrDefault(i => i.Id == game.Id));
+            PlayingGames.Remove(PlayingGames.SingleOrDefault(i => i.Id == game.Id));
+            PlayedGames.Remove(PlayedGames.SingleOrDefault(i => i.Id == game.Id));
         }
 
         public void AddToPlay(Game game)

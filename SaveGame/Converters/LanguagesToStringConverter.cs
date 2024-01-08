@@ -9,7 +9,7 @@ namespace SaveGame.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            StringBuilder languages = new StringBuilder();
+            StringBuilder languages = new();
             if(value is LanguageSupport[] languageList)
             {
                 for (int i=0; i < languageList.Length; i++)

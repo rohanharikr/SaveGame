@@ -9,7 +9,7 @@ namespace SaveGame.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            StringBuilder genres = new StringBuilder();
+            StringBuilder genres = new();
             if(value is Genre[] genreList)
             {
                 for (int i=0; i < genreList.Length; i++)

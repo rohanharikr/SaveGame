@@ -9,7 +9,7 @@ namespace SaveGame.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            StringBuilder platforms = new StringBuilder();
+            StringBuilder platforms = new();
             if(value is Platform[] platformList)
             {
                 for (int i=0; i < platformList.Length; i++)
