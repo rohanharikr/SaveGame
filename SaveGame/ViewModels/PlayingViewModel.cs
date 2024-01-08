@@ -39,6 +39,8 @@ namespace SaveGame.ViewModels
         [RelayCommand]
         void CloseGameDetailModal() => _modalNavigationStore.Close();
 
+        private void GameStore_GamesChanged() => OnPropertyChanged(nameof(GameStore));
+
         public PlayingViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore)
         {
             _modalNavigationStore = modalNavigationStore;
@@ -52,11 +54,6 @@ namespace SaveGame.ViewModels
         {
             OnPropertyChanged(nameof(GameDetail));
             OnPropertyChanged(nameof(IsGameDetailModalOpen));
-        }
-
-        private void GameStore_GamesChanged()
-        {
-            OnPropertyChanged(nameof(PlayingGames));
         }
     }
 }
