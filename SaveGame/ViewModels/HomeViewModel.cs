@@ -85,10 +85,8 @@ namespace SaveGame.ViewModels
                .SelectMany(group => group)
                //remove duplicate suggestions
                .DistinctBy(g => g.Id)
-               //games with highest ratings takes precedence
-               .OrderByDescending(game => game.AggregatedRating)
-               .ToList()
-               .Slice(0,5);
+               .Take(5)
+               .ToList();
 
             //TODO: Suggested games should not include currently play/playing/played
 

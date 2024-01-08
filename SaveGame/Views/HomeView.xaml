@@ -41,7 +41,7 @@
                 Foreground="White" />
         </Border>
 
-        <StackPanel Visibility="{Binding SuggestedGames.Count, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <StackPanel>
             <Border Padding="15,10,15,0">
                 <Label
                     FontSize="20"
@@ -53,6 +53,13 @@
             </Border>
             <Border Padding="15,0,15,0">
                 <StackPanel>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding SuggestedGames.Count, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
+                        <controls:GameCardSkeleton />
+                        <controls:GameCardSkeleton />
+                        <controls:GameCardSkeleton />
+                        <controls:GameCardSkeleton />
+                        <controls:GameCardSkeleton />
+                    </StackPanel>
                     <ItemsControl ItemsSource="{Binding SuggestedGames}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
