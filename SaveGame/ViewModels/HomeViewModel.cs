@@ -44,7 +44,7 @@ namespace SaveGame.ViewModels
         IEnumerable<Game>? highRatedGames;
 
         [ObservableProperty]
-        string greeting = "Good ";
+        string greeting;
 
         [RelayCommand]
         void Remove(Game game) => _gameStore.Remove(game);
@@ -68,7 +68,7 @@ namespace SaveGame.ViewModels
         {
             GetGames(igdbService);
 
-            greeting += TimeOfDay();
+            greeting = "Good " + TimeOfDay();
 
             _modalNavigationStore = modalNavigationStore;
             _gameStore = gameStore;
