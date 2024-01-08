@@ -12,6 +12,7 @@ using System.DirectoryServices;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SaveGame.Stores.GameStore;
 
 namespace SaveGame.ViewModels
 {
@@ -43,22 +44,13 @@ namespace SaveGame.ViewModels
             OnPropertyChanged(nameof(IsGameDetailModalOpen));
         }
 
-        private void GameStore_GamesChanged()
-        {
-            OnPropertyChanged(nameof(PlayGames));
-        }
+        private void GameStore_GamesChanged() => OnPropertyChanged(nameof(GameStore));
 
         [RelayCommand]
-        void ShowGameDetailModal(Game game)
-        {
-            _modalNavigationStore.Detail = game;
-        }
+        void ShowGameDetailModal(Game game) => _modalNavigationStore.Detail = game;
 
         [RelayCommand]
-        void CloseGameDetailModal()
-        {
-            _modalNavigationStore.Detail = null;
-        }
+        void CloseGameDetailModal() => _modalNavigationStore.Detail = null; 
 
         [RelayCommand]
         void Remove(Game game)
