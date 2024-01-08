@@ -80,9 +80,13 @@ namespace SaveGame.ViewModels
 
             List<Game> suggestedGamesProritsed = allSuggestedGames
                .GroupBy(game => game.Id)
+               //games w/ highest inetersections gets highest priority in list
                .OrderByDescending(group => group.Count())
                .SelectMany(group => group)
+               //remove duplicate suggestions
                .DistinctBy(g => g.Id)
+               //games with highest ratings takes precedence
+               .OrderByDescending(game => game.AggregatedRating)
                .ToList()
                .Slice(0,5);
 
