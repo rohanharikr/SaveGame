@@ -2,11 +2,18 @@
     x:Class="SaveGame.Controls.GameCard"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:SaveGame.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SaveGame.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="Root"
     mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <converters:PlayToBoolConverter x:Key="PlayToBoolConverter" />
+        <converters:PlayingToBoolConverter x:Key="PlayingToBoolConverter" />
+        <converters:PlayedToBoolConverter x:Key="PlayedToBoolConverter" />
+    </UserControl.Resources>
 
     <Border
         x:Name="Border"
@@ -33,16 +40,16 @@
                 <Grid.ContextMenu>
                     <ContextMenu PlacementTarget="{Binding ElementName=Root}">
                         <!--  binding was for these can be found in code-behind  -->
+                        <MenuItem x:Name="AddToPlayMenuItem" Header="Play" />
                         <MenuItem
-                            x:Name="AddToPlayMenuItem"
-                            Header="Play"
-                            IsChecked="{Binding True}" />
-                        <MenuItem x:Name="AddToPlayingMenuItem" Header="Playing" />
-                        <MenuItem x:Name="AddToPlayedMenuItem" Header="Played" />
+                            x:Name="AddToPlayingMenuItem"
+                            Header="Playing"
+                            IsChecked="{Binding CommandParameter.PlayState, ElementName=Root, Converter={StaticResource PlayingToBoolConverter}}" />
                         <MenuItem
-                            x:Name="RemoveMenuItem"
-                            Header="Remove"
-                            IsEnabled="False" />
+                            x:Name="AddToPlayedMenuItem"
+                            Header="Played"
+                            IsChecked="{Binding CommandParameter.PlayState, ElementName=Root, Converter={StaticResource PlayedToBoolConverter}}" />
+                        <MenuItem x:Name="RemoveMenuItem" Header="Remove" />
                     </ContextMenu>
                 </Grid.ContextMenu>
                 <Grid.InputBindings>

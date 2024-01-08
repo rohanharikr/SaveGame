@@ -56,18 +56,21 @@ namespace SaveGame.Stores
         public void AddToPlay(Game game)
         {
             Remove(game);
+            game.PlayState = PlayStates.Play;
             PlayGames.Add(game);
         }
 
         public void AddToPlaying(Game game)
         {
             Remove(game);
+            game.PlayState = PlayStates.Playing;
             PlayingGames.Add(game);
         }
 
         public void AddToPlayed(Game game)
         {
             Remove(game);
+            game.PlayState = PlayStates.Played;
             PlayedGames.Add(game);
         }
     }

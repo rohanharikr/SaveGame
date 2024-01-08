@@ -119,14 +119,25 @@ namespace SaveGame.Controls
             segmentWidth = Border.Width / _screenshots.Count;
 
             //trying to bind the command in XAML was a major PITA
+            PlayStates playState = ((SaveGame.Models.Game)CommandParameter).PlayState;
+
             AddToPlayMenuItem.Command = AddToPlay;
             AddToPlayMenuItem.CommandParameter = CommandParameter;
+            AddToPlayMenuItem.IsChecked = playState == PlayStates.Play;
+
             AddToPlayingMenuItem.Command = AddToPlaying;
             AddToPlayingMenuItem.CommandParameter = CommandParameter;
+            AddToPlayingMenuItem.IsChecked = playState == PlayStates.Playing;
+
             AddToPlayedMenuItem.Command = AddToPlayed;
             AddToPlayedMenuItem.CommandParameter = CommandParameter;
+            AddToPlayedMenuItem.IsChecked = playState == PlayStates.Played;
+
             RemoveMenuItem.Command = Remove;
             RemoveMenuItem.CommandParameter = CommandParameter;
+
+            if(playState == PlayStates.None)
+                RemoveMenuItem.Visibility = Visibility.Collapsed;
         }
 
         private void EnterPreview(object sender, MouseEventArgs e)
