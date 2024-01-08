@@ -38,18 +38,27 @@
                 CornerRadius="5" />
             <Grid x:Name="Grid">
                 <Grid.ContextMenu>
-                    <ContextMenu PlacementTarget="{Binding ElementName=Root}">
+                    <ContextMenu PlacementTarget="{Binding ElementName=Root}" Style="{StaticResource CoolContextMenu}">
                         <!--  binding was for these can be found in code-behind  -->
-                        <MenuItem x:Name="AddToPlayMenuItem" Header="Play" />
+                        <MenuItem
+                            x:Name="AddToPlayMenuItem"
+                            Header="Play"
+                            IsChecked="{Binding CommandParameter.PlayState, ElementName=Root, Converter={StaticResource PlayingToBoolConverter}}"
+                            Style="{StaticResource CoolContextMenuItem}" />
                         <MenuItem
                             x:Name="AddToPlayingMenuItem"
                             Header="Playing"
-                            IsChecked="{Binding CommandParameter.PlayState, ElementName=Root, Converter={StaticResource PlayingToBoolConverter}}" />
+                            IsChecked="{Binding CommandParameter.PlayState, ElementName=Root, Converter={StaticResource PlayingToBoolConverter}}"
+                            Style="{StaticResource CoolContextMenuItem}" />
                         <MenuItem
                             x:Name="AddToPlayedMenuItem"
                             Header="Played"
-                            IsChecked="{Binding CommandParameter.PlayState, ElementName=Root, Converter={StaticResource PlayedToBoolConverter}}" />
-                        <MenuItem x:Name="RemoveMenuItem" Header="Remove" />
+                            IsChecked="{Binding CommandParameter.PlayState, ElementName=Root, Converter={StaticResource PlayedToBoolConverter}}"
+                            Style="{StaticResource CoolContextMenuItem}" />
+                        <MenuItem
+                            x:Name="RemoveMenuItem"
+                            Header="Remove"
+                            Style="{StaticResource CoolContextMenuItemDestructive}" />
                     </ContextMenu>
                 </Grid.ContextMenu>
                 <Grid.InputBindings>

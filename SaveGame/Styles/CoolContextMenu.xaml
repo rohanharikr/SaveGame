@@ -5,7 +5,12 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ContextMenu">
-                    <Border Background="#303030" BorderThickness="0">
+                    <Border
+                        Width="135"
+                        Padding="5"
+                        Background="#303030"
+                        BorderThickness="0"
+                        CornerRadius="5">
                         <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
                     </Border>
                 </ControlTemplate>
@@ -13,23 +18,74 @@
         </Setter>
     </Style>
 
-    <Style x:Key="CoolContextMenuItem" TargetType="MenuItem">
+    <Style x:Key="CoolContextMenuItemBase" TargetType="MenuItem">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Grid.IsSharedSizeScope" Value="true" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="MenuItem">
-                    <Label
-                        x:Name="label"
-                        Width="160"
-                        Height="40"
-                        Padding="20,0,20,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        Content="{TemplateBinding Header}"
-                        Foreground="White" />
+                    <Border
+                        x:Name="Border"
+                        Margin="0,1,0,1"
+                        Padding="10,5,10,5"
+                        CornerRadius="5">
+                        <Label
+                            Content="{TemplateBinding Header}"
+                            FontSize="14"
+                            FontWeight="Medium"
+                            Foreground="White" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsChecked" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Border" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0.25" Color="MediumPurple" />
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="MediumPurple" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        x:Key="CoolContextMenuItem"
+        BasedOn="{StaticResource CoolContextMenuItemBase}"
+        TargetType="MenuItem" />
+
+    <Style
+        x:Key="CoolContextMenuItemDestructive"
+        BasedOn="{StaticResource CoolContextMenuItemBase}"
+        TargetType="MenuItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <Border
+                        x:Name="Border"
+                        Margin="0,1,0,1"
+                        Padding="10,5,10,5"
+                        CornerRadius="5">
+                        <Label
+                            Content="{TemplateBinding Header}"
+                            FontSize="14"
+                            FontWeight="Medium"
+                            Foreground="White" />
+                    </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="label" Property="Background" Value="#101010" />
+                            <Setter TargetName="Border" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0.25" Color="Red" />
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
