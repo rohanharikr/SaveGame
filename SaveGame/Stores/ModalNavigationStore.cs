@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using IGDB.Models;
 using System;
 using System.Collections.Generic;
@@ -25,9 +26,9 @@ namespace SaveGame.Stores
 
         public event Action? DetailChanged;
 
-        public void Close()
-        {
-            _detail = null;
-        }
+        public void Show(Game game) => Detail = game;
+
+        public void Close() => Detail = null;
+
     }
 }

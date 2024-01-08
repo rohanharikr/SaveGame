@@ -58,6 +58,12 @@ namespace SaveGame.ViewModels
         [RelayCommand]
         void AddToPlayed(Game game) => _gameStore.AddToPlayed(game);
 
+        [RelayCommand]
+        void ShowGameDetailModal(Game game) => _modalNavigationStore.Show(game);
+
+        [RelayCommand]
+        void CloseGameDetailModal() => _modalNavigationStore.Close();
+
         public MainViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore, IGDBService igdbService)
         {
             HomeView = new HomeView(modalNavigationStore, gameStore, igdbService);
@@ -77,18 +83,6 @@ namespace SaveGame.ViewModels
         {
             OnPropertyChanged(nameof(GameDetail));
             OnPropertyChanged(nameof(IsGameDetailModalOpen));
-        }
-
-        [RelayCommand]
-        void ShowGameDetailModal(Game game)
-        {
-            _modalNavigationStore.Detail = game;
-        }
-
-        [RelayCommand]
-        void CloseGameDetailModal()
-        {
-            _modalNavigationStore.Detail = null;
         }
 
         private static Timer timer;

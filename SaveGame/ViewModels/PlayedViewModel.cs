@@ -34,7 +34,10 @@ namespace SaveGame.ViewModels
         void AddToPlaying(Game game) => _gameStore.AddToPlaying(game);
 
         [RelayCommand]
-        void AddToPlayed(Game game) => _gameStore.AddToPlayed(game);
+        void ShowGameDetailModal(Game game) => _modalNavigationStore.Show(game);
+
+        [RelayCommand]
+        void CloseGameDetailModal() => _modalNavigationStore.Close();
 
         public PlayedViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore)
         {
@@ -54,18 +57,6 @@ namespace SaveGame.ViewModels
         private void GameStore_GamesChanged()
         {
             OnPropertyChanged(nameof(PlayedGames));
-        }
-
-        [RelayCommand]
-        void ShowGameDetailModal(Game game)
-        {
-            _modalNavigationStore.Detail = game;
-        }
-
-        [RelayCommand]
-        void CloseGameDetailModal()
-        {
-            _modalNavigationStore.Detail = null;
         }
     }
 }
