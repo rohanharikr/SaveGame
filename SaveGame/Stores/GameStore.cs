@@ -40,6 +40,13 @@ namespace SaveGame.Stores
 
         public event Action? GamesChanged;
 
+        public GameStore()
+        {
+            PlayGames.CollectionChanged += (s,e) => GamesChanged?.Invoke();
+            PlayingGames.CollectionChanged += (s,e) => GamesChanged?.Invoke();
+            PlayedGames.CollectionChanged += (s,e) => GamesChanged?.Invoke();
+        }
+
         public void Remove(Game game)
         {
             PlayGames.Remove(PlayGames.SingleOrDefault(i => i.Id == game.Id));

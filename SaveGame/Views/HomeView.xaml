@@ -41,6 +41,42 @@
                 Foreground="White" />
         </Border>
 
+        <StackPanel Visibility="{Binding SuggestedGames.Count, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Border Padding="15,10,15,0">
+                <Label
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Opacity="0.65">
+                    Based on your interests
+                </Label>
+            </Border>
+            <Border Padding="15,0,15,0">
+                <StackPanel>
+                    <ItemsControl ItemsSource="{Binding SuggestedGames}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <controls:GameCard
+                                    AddToPlay="{Binding DataContext.AddToPlayCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    AddToPlayed="{Binding DataContext.AddToPlayedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    AddToPlaying="{Binding DataContext.AddToPlayingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    CommandParameter="{Binding .}"
+                                    CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
+                                    Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    Screenshots="{Binding Screenshots.Values}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
         <StackPanel>
             <Border Padding="15,10,15,0">
                 <Label

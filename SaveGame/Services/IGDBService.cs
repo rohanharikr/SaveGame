@@ -1,5 +1,6 @@
 ﻿using IGDB;
 using SaveGame.Models;
+using System.Text;
 
 namespace SaveGame.Services
 {
@@ -7,30 +8,49 @@ namespace SaveGame.Services
     {
         readonly IGDBClient igdb;
 
+        string queryField;
+
         public IGDBService()
         {
             igdb = new IGDBClient(
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_ID"),
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_SECRET")
             );
+
+            queryField = MakeQueryField();
         }
 
-        readonly string fields = $"fields name, first_release_date, involved_companies.developer, involved_companies.company.name," +
-            $"screenshots.image_id, screenshots.url, platforms.name, platforms.slug, platforms.platform_family.*, aggregated_rating, cover.url, cover.image_id," +
-            $"language_supports.language.name, summary, genres.name, genres.slug, release_dates.y;";
+        string MakeQueryField()
+        {
+            StringBuilder q = new StringBuilder();
+            List<string> baseFields = new List<string>()
+            {
+                "name", "first_release_date", "involved_companies.developer", "involved_companies.company.name",
+                "screenshots.image_id", "screenshots.url", "platforms.name", "platforms.slug", "platforms.platform_family.*",
+                "aggregated_rating", "cover.url", "cover.image_id", "language_supports.language.name", "summary", "genres.name",
+                "genres.slug", "release_dates.y"
+            };
+
+            q.Append(string.Join(",", baseFields));
+
+            foreach (string field in baseFields)
+                q.Append(",similar_games." + field);
+
+            return "fields " + q.ToString() + ";";
+        }
 
         public async Task<IEnumerable<Game>> GetUpcomingReleases()
         {
             Int32 unixTime = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
             var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
-                    fields +
+                queryField +
 
-                    $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & version_parent = null &" +
-                        $"(follows > 25 | hypes > 25) & first_release_date > {unixTime} & involved_companies.developer = true;" +
+                $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & version_parent = null &" +
+                    $"(follows > 25 | hypes > 25) & first_release_date > {unixTime} & involved_companies.developer = true;" +
 
-                    $"sort first_release_date asc;" +
+                $"sort first_release_date asc;" +
 
-                    $"limit 5;");
+                $"limit 5;");
             
             return games;
         }
@@ -40,14 +60,14 @@ namespace SaveGame.Services
             int unixTime = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
             int yearInUnixTime = 31536000;
             var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
-                    fields +
+                queryField +
 
-                    $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & version_parent = null &" +
-                        $"(follows > 25 | hypes > 25) & first_release_date > {unixTime - yearInUnixTime} & first_release_date < {unixTime} & involved_companies.developer = true;" +
+                $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* & version_parent = null &" +
+                    $"(follows > 25 | hypes > 25) & first_release_date > {unixTime - yearInUnixTime} & first_release_date < {unixTime} & involved_companies.developer = true;" +
 
-                    $"sort first_release_date asc;" +
+                $"sort first_release_date asc;" +
 
-                    $"limit 5;");
+                $"limit 5;");
             
             return games;
         }
@@ -62,7 +82,7 @@ namespace SaveGame.Services
         {
             int offset = GetOffset();
             var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
-                fields +
+                queryField +
 
                 $"where screenshots >= 3 & genres > 0 & summary != null & name ~ *\"\"* &" +
                     $"(follows != null | hypes != null) & version_parent = null &" +
@@ -80,7 +100,7 @@ namespace SaveGame.Services
         public async Task<IEnumerable<Game>> SearchGame(string query)
         {
             var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
-                fields +
+                queryField +
 
                 $"search \"{query}\";" +
 

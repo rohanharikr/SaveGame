@@ -12,6 +12,9 @@ namespace SaveGame.ViewModels
         private readonly GameStore _gameStore;
 
         [ObservableProperty]
+        IEnumerable<Game>? suggestedGames;
+
+        [ObservableProperty]
         bool isFetchingUpcomingReleases = true;
 
         [ObservableProperty]
@@ -31,7 +34,6 @@ namespace SaveGame.ViewModels
 
         [ObservableProperty]
         string greeting;
-
 
         [RelayCommand]
         void AddToPlay(Game game) => _gameStore.AddToPlay(game);
@@ -56,10 +58,43 @@ namespace SaveGame.ViewModels
 
             _modalNavigationStore = modalNavigationStore;
             _gameStore = gameStore;
+
+            _gameStore.GamesChanged += SuggestGames;
+        }
+
+        void SuggestGames()
+        {
+            if (_gameStore == null)
+                return;
+
+            List<Game> playSimilarGames = _gameStore.PlayGames.SelectMany(game => game.SimilarGames.Values).ToList();
+            List<Game> playingSimilarGames = _gameStore.PlayingGames.SelectMany(game => game.SimilarGames.Values).ToList();
+            List<Game> playedSimilarGames = _gameStore.PlayedGames.SelectMany(game => game.SimilarGames.Values).ToList();
+
+            List<Game> allSuggestedGames =
+            [
+                ..playSimilarGames,
+                ..playingSimilarGames,
+                ..playedSimilarGames,
+            ];
+
+            List<Game> suggestedGamesProritsed = allSuggestedGames
+               .GroupBy(game => game.Id)
+               .OrderByDescending(group => group.Count())
+               .SelectMany(group => group)
+               .DistinctBy(g => g.Id)
+               .ToList()
+               .Slice(0,5);
+
+            //TODO: Suggested games should not include currently play/playing/played
+
+            SuggestedGames = suggestedGamesProritsed;
         }
 
         async void GetGames(IGDBService igdbService)
         {
+            SuggestGames();
+
             Task<IEnumerable<Game>> recentReleasesTask = igdbService.GetRecentReleases();
             Task<IEnumerable<Game>> upcomingReleasesTask = igdbService.GetUpcomingReleases();
             Task<IEnumerable<Game>> highRatedGamesTask = igdbService.GetHighRatedGames();
