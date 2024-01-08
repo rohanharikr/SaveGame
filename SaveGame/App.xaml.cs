@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Infrastructure;
-using SaveGame.Services;
+﻿using SaveGame.Services;
 using SaveGame.Stores;
 using SaveGame.ViewModels;
-using System.Configuration;
-using System.Data;
 using System.Windows;
 
 namespace SaveGame

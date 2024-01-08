@@ -192,7 +192,7 @@
                                             Height="50"
                                             HorizontalAlignment="Left"
                                             AutoPlay="True"
-                                            FileName="Media/Animations/Empty2.json"
+                                            FileName="Media/Animations/Meow.json"
                                             Opacity="1"
                                             RepeatCount="-1" />
                                     </Border>

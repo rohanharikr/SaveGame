@@ -62,19 +62,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Media\Animations\Empty.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Media\Animations\Loading.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Media\Animations\Loading2.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Media\Animations\Loading3.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Media\Animations\Empty2.json">
+    <None Update="Media\Animations\Meow.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Properties\Settings.settings">
