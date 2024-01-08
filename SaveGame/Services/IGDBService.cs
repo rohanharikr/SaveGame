@@ -12,7 +12,7 @@ namespace SaveGame.Services
 {
     public class IGDBService
     {
-        IGDBClient igdb;
+        readonly IGDBClient igdb;
 
         public IGDBService()
         {
@@ -22,7 +22,7 @@ namespace SaveGame.Services
             );
         }
 
-        string fields = $"fields name, first_release_date, involved_companies.developer, involved_companies.company.name," +
+        readonly string fields = $"fields name, first_release_date, involved_companies.developer, involved_companies.company.name," +
             $"screenshots.image_id, screenshots.url, platforms.name, platforms.slug, platforms.platform_family.*, aggregated_rating, cover.url, cover.image_id," +
             $"language_supports.language.name, summary, genres.name, genres.slug, release_dates.y;";
 
@@ -59,9 +59,9 @@ namespace SaveGame.Services
             return games;
         }
 
-        private int GetOffset()
+        private static int GetOffset()
         {
-            Random random = new Random();
+            Random random = new();
             return random.Next(0, 21) * 5;
         }
 

@@ -29,7 +29,7 @@ namespace SaveGame.Controls
         }
 
         private static readonly DependencyProperty PlatformsProperty = DependencyProperty.Register(
-           "Platforms", typeof(Platform[]), typeof(PlatformLogos), new PropertyMetadata(new Platform[0], new PropertyChangedCallback(PlatformChanged)));
+           "Platforms", typeof(Platform[]), typeof(PlatformLogos), new PropertyMetadata(Array.Empty<Platform>(), new PropertyChangedCallback(PlatformChanged)));
 
         public PlatformLogos()
         {
@@ -47,9 +47,11 @@ namespace SaveGame.Controls
             IEnumerable<string> platformSlugs = platforms.Select(platform => platform.PlatformFamily?.Value?.Slug ?? platform.Slug).Distinct();
             foreach(string platformSlug in platformSlugs)
             {
-                Image platformLogo = new Image();
-                platformLogo.Height = 18;
-                platformLogo.Margin= new Thickness(10, 0, 0, 0);
+                Image platformLogo = new()
+                {
+                    Height = 18,
+                    Margin = new Thickness(10, 0, 0, 0)
+                };
 
                 switch (platformSlug)
                 {

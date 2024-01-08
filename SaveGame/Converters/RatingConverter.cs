@@ -14,7 +14,7 @@ namespace SaveGame.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || (value is double && (double)value == 0.0))
+            if (value == null || (value is double v && v == 0.0))
                 return "N/A";
             else
                 return (int)(double)value;

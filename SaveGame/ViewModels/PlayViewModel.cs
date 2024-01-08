@@ -26,9 +26,6 @@ namespace SaveGame.ViewModels
 
         public ObservableCollection<Game> PlayGames => _gameStore.PlayGames;
 
-        [ObservableProperty]
-        IEnumerable<Game> upcomingReleases;
-
         [RelayCommand]
         void Remove(Game game) => _gameStore.Remove(game);
 

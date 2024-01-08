@@ -11,7 +11,7 @@ namespace SaveGame.Stores
 {
     public class GameStore
     {
-        private ObservableCollection<Game> _playGames = new();
+        private ObservableCollection<Game> _playGames = [];
         public ObservableCollection<Game> PlayGames
         {
             get { return _playGames; }
@@ -22,7 +22,7 @@ namespace SaveGame.Stores
             }
         }
 
-        private ObservableCollection<Game> _playingGames = new();
+        private ObservableCollection<Game> _playingGames = [];
         public ObservableCollection<Game> PlayingGames
         {
             get { return _playingGames; }
@@ -33,7 +33,7 @@ namespace SaveGame.Stores
             }
         }
 
-        private ObservableCollection<Game> _playedGames = new();
+        private ObservableCollection<Game> _playedGames = [];
         public ObservableCollection<Game> PlayedGames
         {
             get { return _playedGames; }
@@ -48,12 +48,9 @@ namespace SaveGame.Stores
 
         public void Remove(Game game)
         {
-            if (PlayGames.Contains(game))
-                PlayGames.Remove(game);
-            else if (PlayingGames.Contains(game))
-                PlayingGames.Remove(game);
-            else if (PlayedGames.Contains(game))
-                PlayedGames.Remove(game);
+            PlayGames.Remove(game);
+            PlayingGames.Remove(game);
+            PlayedGames.Remove(game);
         }
 
         public void AddToPlay(Game game)

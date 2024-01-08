@@ -22,7 +22,7 @@ namespace SaveGame.Controls
 {
     public partial class GameCard : UserControl
     {
-        List<BitmapImage> _screenshots = new();
+        readonly List<BitmapImage> _screenshots = [];
         double segmentWidth = 0;
 
         public IList<Screenshot> Screenshots
@@ -111,8 +111,8 @@ namespace SaveGame.Controls
                 if (_screenshots.Count >= 3)
                     break;
 
-                Uri imageUri = new Uri("https:" + IGDB.ImageHelper.GetImageUrl(imageId: screenshot.ImageId, size: ImageSize.ScreenshotMed, retina: true));
-                BitmapImage bitmapImage = new BitmapImage(imageUri);
+                Uri imageUri = new("https:" + IGDB.ImageHelper.GetImageUrl(imageId: screenshot.ImageId, size: ImageSize.ScreenshotMed, retina: true));
+                BitmapImage bitmapImage = new(imageUri);
                 _screenshots.Add(bitmapImage);
 
             }

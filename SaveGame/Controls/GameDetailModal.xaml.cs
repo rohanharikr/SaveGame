@@ -86,14 +86,14 @@ namespace SaveGame.Controls
         public static readonly DependencyProperty CloseModalProperty =
             DependencyProperty.Register("CloseModal", typeof(ICommand), typeof(GameDetailModal));
 
-        Storyboard showModalSb;
+        readonly Storyboard showModalSb;
 
         public GameDetailModal()
         {
             InitializeComponent();
             
-            showModalSb = (FindResource("ShowModalAnimation") as Storyboard);
-
+            showModalSb = FindResource("ShowModalAnimation") as Storyboard;
+            
             DependencyPropertyDescriptor.FromProperty(UserControl.VisibilityProperty, typeof(UserControl))
                 .AddValueChanged(this, VisibilityPropertyChanged);
         }

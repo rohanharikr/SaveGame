@@ -22,11 +22,8 @@ namespace SaveGame.ViewModels
         bool isSearching = false;
 
         [ObservableProperty]
-        IEnumerable<Game> searchResults;
+        IEnumerable<Game>? searchResults;
 
-        [ObservableProperty]
-        IEnumerable<Game> randomGames;
-        
         [ObservableProperty]
         object? currentView = null;
 
@@ -39,12 +36,12 @@ namespace SaveGame.ViewModels
         public Game? GameDetail => _modalNavigationStore.Detail;
         public bool IsGameDetailModalOpen => _modalNavigationStore.IsOpen;
 
-        HomeView HomeView;
-        PlayView PlayView;
-        PlayingView PlayingView;
-        PlayedView PlayedView;
+        readonly HomeView HomeView;
+        readonly PlayView PlayView;
+        readonly PlayingView PlayingView;
+        readonly PlayedView PlayedView;
 
-        IGDBService _igdbService;
+        readonly IGDBService _igdbService;
 
         [RelayCommand]
         void Remove(Game game) => _gameStore.Remove(game);
@@ -85,7 +82,7 @@ namespace SaveGame.ViewModels
             OnPropertyChanged(nameof(IsGameDetailModalOpen));
         }
 
-        private static Timer timer;
+        private static Timer? timer;
         partial void OnSearchQueryChanged(string value)
         {
             if (value == "")

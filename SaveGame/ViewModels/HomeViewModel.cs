@@ -29,19 +29,19 @@ namespace SaveGame.ViewModels
         bool isFetchingUpcomingReleases = true;
 
         [ObservableProperty]
-        IEnumerable<Game> upcomingReleases;
+        IEnumerable<Game>? upcomingReleases;
 
         [ObservableProperty]
         bool isFetchingRecentReleases = true;
         
         [ObservableProperty]
-        IEnumerable<Game> recentReleases;
+        IEnumerable<Game>? recentReleases;
 
         [ObservableProperty]
         bool isFetchingHighRatedGames = true;
 
         [ObservableProperty]
-        IEnumerable<Game> highRatedGames;
+        IEnumerable<Game>? highRatedGames;
 
         [ObservableProperty]
         string greeting = "Good ";
@@ -89,7 +89,7 @@ namespace SaveGame.ViewModels
             HighRatedGames = highRatedGamesTask.Result;
         }
 
-        string TimeOfDay()
+        private static string TimeOfDay()
         {
             int hour = DateTime.Now.Hour;
             if (hour >= 18)
