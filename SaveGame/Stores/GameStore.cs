@@ -65,5 +65,34 @@ namespace SaveGame.Stores
         }
 
         public event Action? GamesChanged;
+
+
+        public void Remove(Game game)
+        {
+            if (PlayGames.Contains(game))
+                PlayGames.Remove(game);
+            else if (PlayingGames.Contains(game))
+                PlayingGames.Remove(game);
+            else if (PlayedGames.Contains(game))
+                PlayedGames.Remove(game);
+        }
+
+        public void AddToPlay(Game game)
+        {
+            Remove(game);
+            PlayGames.Add(game);
+        }
+
+        public void AddToPlaying(Game game)
+        {
+            Remove(game);
+            PlayingGames.Add(game);
+        }
+
+        public void AddToPlayed(Game game)
+        {
+            Remove(game);
+            PlayedGames.Add(game);
+        }
     }
 }

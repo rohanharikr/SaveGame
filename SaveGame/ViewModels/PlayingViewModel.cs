@@ -24,6 +24,18 @@ namespace SaveGame.ViewModels
 
         public ObservableCollection<Game> PlayingGames => _gameStore.PlayingGames;
 
+        [RelayCommand]
+        void Remove(Game game) => _gameStore.Remove(game);
+
+        [RelayCommand]
+        void AddToPlay(Game game) => _gameStore.AddToPlay(game);
+
+        [RelayCommand]
+        void AddToPlaying(Game game) => _gameStore.AddToPlaying(game);
+
+        [RelayCommand]
+        void AddToPlayed(Game game) => _gameStore.AddToPlayed(game);
+
         public PlayingViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore)
         {
             _modalNavigationStore = modalNavigationStore;
@@ -54,38 +66,6 @@ namespace SaveGame.ViewModels
         void CloseGameDetailModal()
         {
             _modalNavigationStore.Detail = null;
-        }
-
-        [RelayCommand]
-        void Remove(Game game)
-        {
-            if (_gameStore.PlayGames.Contains(game))
-                _gameStore.PlayGames.Remove(game);
-            else if (_gameStore.PlayingGames.Contains(game))
-                _gameStore.PlayingGames.Remove(game);
-            else if (_gameStore.PlayedGames.Contains(game))
-                _gameStore.PlayedGames.Remove(game);
-        }
-
-        [RelayCommand]
-        void AddToPlay(Game game)
-        {
-            Remove(game);
-            _gameStore.PlayGames.Add(game);
-        }
-
-        [RelayCommand]
-        void AddToPlaying(Game game)
-        {
-            Remove(game);
-            _gameStore.PlayingGames.Add(game);
-        }
-
-        [RelayCommand]
-        void AddToPlayed(Game game)
-        {
-            Remove(game);
-            _gameStore.PlayedGames.Add(game);
         }
     }
 }
