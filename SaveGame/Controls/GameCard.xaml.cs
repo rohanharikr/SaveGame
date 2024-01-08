@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using CommunityToolkit.Mvvm.Input;
 using IGDB;
 using IGDB.Models;
+using SaveGame.Models;
 
 namespace SaveGame.Controls
 {
@@ -95,7 +96,7 @@ namespace SaveGame.Controls
         }
         
         public static readonly DependencyProperty CommandParameterProperty =
-            DependencyProperty.Register("CommandParameter", typeof(Game), typeof(GameCard), new PropertyMetadata(null));
+            DependencyProperty.Register("CommandParameter", typeof(SaveGame.Models.Game), typeof(GameCard), new PropertyMetadata(null));
 
         public GameCard()
         {

@@ -5,20 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
-using IGDB.Models;
+using SaveGame.Models;
 
 namespace SaveGame.Stores
 {
     public class GameStore
     {
-        public enum PlayStates
-        {
-            None,
-            Play,
-            Playing,
-            Played
-        }
-
         private ObservableCollection<Game> _playGames = new();
         public ObservableCollection<Game> PlayGames
         {
@@ -52,20 +44,7 @@ namespace SaveGame.Stores
             }
         }
 
-        public PlayStates GetPlayState(Game game)
-        {
-            if (PlayGames.Contains(game))
-                return PlayStates.Play;
-            else if (PlayingGames.Contains(game))
-                return PlayStates.Playing;
-            else if (PlayedGames.Contains(game))
-                return PlayStates.Played;
-            else
-                return PlayStates.None;
-        }
-
         public event Action? GamesChanged;
-
 
         public void Remove(Game game)
         {

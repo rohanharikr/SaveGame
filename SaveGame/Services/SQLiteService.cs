@@ -1,5 +1,5 @@
 ﻿using IGDB;
-using IGDB.Models;
+using SaveGame.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

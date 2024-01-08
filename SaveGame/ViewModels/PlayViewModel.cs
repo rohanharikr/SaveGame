@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using IGDB;
-using IGDB.Models;
+using SaveGame.Models;
 using SaveGame.Services;
 using SaveGame.Stores;
 using System;
