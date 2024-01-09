@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaveGame", "SaveGame\SaveGame.csproj", "{D75F9168-7492-4D64-8C95-CEC1AD6EA6BE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IGDB", "IGDB.Client\IGDB\IGDB.csproj", "{4F39C054-A7C7-4DE2-8124-3299F1232164}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IGDB.Client", "IGDB.Client\IGDB\IGDB.Client.csproj", "{4F39C054-A7C7-4DE2-8124-3299F1232164}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

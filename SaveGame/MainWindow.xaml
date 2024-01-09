@@ -272,7 +272,7 @@
                                                         CommandParameter="{Binding .}"
                                                         CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
                                                         Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                                        Screenshots="{Binding Screenshots.Values}" />
+                                                        Screenshots="{Binding Screenshots}" />
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
                                         </ItemsControl>
@@ -284,28 +284,7 @@
                 </Border>
 
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-                    <StackPanel VerticalAlignment="Center">
-                        <StackPanel
-                            Margin="0,-80,0,0"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Opacity="0.5"
-                            Visibility="{Binding IsRetrievingGames, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <lottie:LottieAnimationView
-                                Width="200"
-                                Height="250"
-                                AutoPlay="True"
-                                FileName="Media/Animations/Loading.json"
-                                RepeatCount="-1" />
-                            <Label
-                                Margin="0,-20,0,0"
-                                HorizontalAlignment="Center"
-                                Content="Retrieving games..."
-                                FontSize="16"
-                                Foreground="White" />
-                        </StackPanel>
-                        <Frame Content="{Binding CurrentView}" NavigationUIVisibility="Hidden" />
-                    </StackPanel>
+                    <Frame Content="{Binding CurrentView}" NavigationUIVisibility="Hidden" />
                 </ScrollViewer>
             </Grid>
         </Border>
