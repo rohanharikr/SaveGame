@@ -5,6 +5,7 @@
     xmlns:controls="clr-namespace:SaveGame.Controls"
     xmlns:converters="clr-namespace:SaveGame.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lottie="clr-namespace:LottieSharp.WPF;assembly=LottieSharp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="HomeView"
     mc:Ignorable="d">
@@ -53,13 +54,39 @@
             </Border>
             <Border Padding="15,0,15,0">
                 <StackPanel>
-                    <StackPanel Orientation="Horizontal" Visibility="{Binding SuggestedGames.Count, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
-                        <controls:GameCardSkeleton />
-                        <controls:GameCardSkeleton />
-                        <controls:GameCardSkeleton />
-                        <controls:GameCardSkeleton />
-                        <controls:GameCardSkeleton />
-                    </StackPanel>
+                    <Grid Visibility="{Binding SuggestedGames.Count, Converter={StaticResource InvertBooleanToVisibilityConverter}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Panel.ZIndex="10"
+                            Opacity="0.5">
+                            <StackPanel>
+                                <lottie:LottieAnimationView
+                                    Width="100"
+                                    Height="100"
+                                    HorizontalAlignment="Center"
+                                    AutoPlay="True"
+                                    FileName="Media/Animations/MeowBored.json"
+                                    Opacity="1"
+                                    RepeatCount="-1" />
+                                <Label
+                                    Margin="0,-25,0,0"
+                                    Content="Nothing to see here...yet"
+                                    FontSize="14"
+                                    Foreground="White" />
+                            </StackPanel>
+                        </Border>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Opacity="0.5">
+                            <controls:GameCardSkeleton />
+                            <controls:GameCardSkeleton />
+                            <controls:GameCardSkeleton />
+                            <controls:GameCardSkeleton />
+                            <controls:GameCardSkeleton />
+                        </StackPanel>
+                    </Grid>
                     <ItemsControl ItemsSource="{Binding SuggestedGames}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
