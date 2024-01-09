@@ -32,7 +32,7 @@ namespace SaveGame.Controls
             Platform[] platforms = (Platform[])e.NewValue;
             string imageBasePath = "pack://application:,,,/Media/Images/";
 
-            Enumerable<string> platformSlugs = platforms.Select(platform => platform.PlatformFamily?.Value?.Slug ?? platform.Slug).Distinct();
+            IEnumerable<string> platformSlugs = platforms.Select(platform => platform.PlatformFamily?.Value?.Slug ?? platform.Slug).Distinct();
             foreach(string platformSlug in platformSlugs)
             {
                 Image platformLogo = new()
