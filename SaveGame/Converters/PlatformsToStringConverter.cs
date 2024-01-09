@@ -10,13 +10,13 @@ namespace SaveGame.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             StringBuilder platforms = new();
-            if(value is Platform[] platformList)
+            if(value is List<Platform> platformList)
             {
-                for (int i=0; i < platformList.Length; i++)
+                for (int i=0; i < platformList.Count; i++)
                 {
                     platforms.Append(platformList[i].Name);
                     
-                    if(i != (platformList.Length - 1))
+                    if(i != (platformList.Count - 1))
                         platforms.Append(", ");
                 }
             }
