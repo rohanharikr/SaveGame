@@ -79,7 +79,10 @@
                                     Foreground="White" />
                             </StackPanel>
                         </Border>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal" Opacity="0.5">
+                        <StackPanel
+                            Grid.Row="0"
+                            Opacity="0.5"
+                            Orientation="Horizontal">
                             <controls:GameCardSkeleton />
                             <controls:GameCardSkeleton />
                             <controls:GameCardSkeleton />
@@ -101,7 +104,7 @@
                                     AddToPlaying="{Binding DataContext.AddToPlayingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     CommandParameter="{Binding .}"
-                                    CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
+                                    CoverArt="{Binding Cover.ImageId, Converter={StaticResource CoverArtConverter}}"
                                     Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     Screenshots="{Binding Screenshots}" />
                             </DataTemplate>
@@ -144,7 +147,7 @@
                                     AddToPlaying="{Binding DataContext.AddToPlayingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     CommandParameter="{Binding .}"
-                                    CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
+                                    CoverArt="{Binding Cover.ImageId, Converter={StaticResource CoverArtConverter}}"
                                     Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     Screenshots="{Binding Screenshots}" />
                             </DataTemplate>
@@ -187,7 +190,7 @@
                                     AddToPlaying="{Binding DataContext.AddToPlayingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     CommandParameter="{Binding .}"
-                                    CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
+                                    CoverArt="{Binding Cover.ImageId, Converter={StaticResource CoverArtConverter}}"
                                     Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     Screenshots="{Binding Screenshots}" />
                             </DataTemplate>
@@ -230,7 +233,7 @@
                                     AddToPlaying="{Binding DataContext.AddToPlayingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     CommandParameter="{Binding .}"
-                                    CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
+                                    CoverArt="{Binding Cover.ImageId, Converter={StaticResource CoverArtConverter}}"
                                     Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                     Screenshots="{Binding Screenshots}" />
                             </DataTemplate>

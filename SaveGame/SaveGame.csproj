@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IGDB.Client\IGDB\IGDB.Client.csproj" />
+    <ProjectReference Include="..\IGDB.Client\IGDB\IGDB.Client.csproj" />
   </ItemGroup>
 
   <ItemGroup>

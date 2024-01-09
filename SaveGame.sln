@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaveGame", "SaveGame\SaveGame.csproj", "{D75F9168-7492-4D64-8C95-CEC1AD6EA6BE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IGDB.Client", "IGDB.Client\IGDB\IGDB.Client.csproj", "{4F39C054-A7C7-4DE2-8124-3299F1232164}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IGDB.Client", "IGDB.Client\IGDB\IGDB.Client.csproj", "{8806B0E0-23EE-439C-BFD6-AEF98A34CC6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{D75F9168-7492-4D64-8C95-CEC1AD6EA6BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D75F9168-7492-4D64-8C95-CEC1AD6EA6BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D75F9168-7492-4D64-8C95-CEC1AD6EA6BE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4F39C054-A7C7-4DE2-8124-3299F1232164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F39C054-A7C7-4DE2-8124-3299F1232164}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4F39C054-A7C7-4DE2-8124-3299F1232164}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F39C054-A7C7-4DE2-8124-3299F1232164}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8806B0E0-23EE-439C-BFD6-AEF98A34CC6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8806B0E0-23EE-439C-BFD6-AEF98A34CC6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8806B0E0-23EE-439C-BFD6-AEF98A34CC6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8806B0E0-23EE-439C-BFD6-AEF98A34CC6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -75,7 +75,7 @@ namespace SaveGame.Controls
         public static readonly DependencyProperty CloseModalProperty =
             DependencyProperty.Register("CloseModal", typeof(ICommand), typeof(GameDetailModal));
 
-        readonly Storyboard showModalSb;
+        readonly Storyboard? showModalSb;
 
         public GameDetailModal()
         {
@@ -87,16 +87,16 @@ namespace SaveGame.Controls
                 .AddValueChanged(this, VisibilityPropertyChanged);
         }
 
-        private void VisibilityPropertyChanged(object sender, EventArgs e)
+        private void VisibilityPropertyChanged(object? sender, EventArgs e)
         {
             if (Visibility == Visibility.Collapsed)
             {
-                showModalSb.Remove();
+                showModalSb?.Remove();
                 scrollviewer.ScrollToTop();
             }
 
             if (Visibility == Visibility.Visible)
-                showModalSb.Begin();
+                showModalSb?.Begin();
         }
     }
 }
