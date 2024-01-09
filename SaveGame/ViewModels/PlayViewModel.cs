@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SaveGame.Models;
+using IGDB.Models;
 using SaveGame.Stores;
 using System.Collections.ObjectModel;
 

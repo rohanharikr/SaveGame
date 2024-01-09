@@ -14,7 +14,7 @@ namespace SaveGame.Converters
             {
                 for (int i=0; i < languageList.Length; i++)
                 {
-                    languages.Append(languageList[i].Language.Value.Name);
+                    //languages.Append(languageList[i].Language.Value.Name);
                     
                     if(i != (languageList.Length - 1))
                         languages.Append(", ");

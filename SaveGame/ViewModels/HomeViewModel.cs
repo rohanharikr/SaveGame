@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SaveGame.Models;
+using IGDB.Models;
 using SaveGame.Services;
 using SaveGame.Stores;
 
@@ -67,9 +67,9 @@ namespace SaveGame.ViewModels
             if (_gameStore == null)
                 return;
 
-            List<Game> playSimilarGames = _gameStore.PlayGames.SelectMany(game => game.SimilarGames.Values).ToList();
-            List<Game> playingSimilarGames = _gameStore.PlayingGames.SelectMany(game => game.SimilarGames.Values).ToList();
-            List<Game> playedSimilarGames = _gameStore.PlayedGames.SelectMany(game => game.SimilarGames.Values).ToList();
+            List<Game> playSimilarGames = _gameStore.PlayGames.SelectMany(game => game.SimilarGames).ToList();
+            List<Game> playingSimilarGames = _gameStore.PlayingGames.SelectMany(game => game.SimilarGames).ToList();
+            List<Game> playedSimilarGames = _gameStore.PlayedGames.SelectMany(game => game.SimilarGames).ToList();
 
             List<Game> allSuggestedGames =
             [

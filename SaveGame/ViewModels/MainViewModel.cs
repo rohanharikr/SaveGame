@@ -1,10 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SaveGame.Models;
+using IGDB.Models;
 using SaveGame.Services;
 using SaveGame.Stores;
 using SaveGame.Views;
-using System.Windows.Automation;
 
 namespace SaveGame.ViewModels
 {
@@ -73,9 +72,6 @@ namespace SaveGame.ViewModels
             _igdbService = igdbService;
 
             GotoHomeView();
-
-            _gameStore.RetreiveGamesFromDb();
-            isRetrievingGames = false;
         }
 
         private void ModalNavigationStore_GameDetailChanged()

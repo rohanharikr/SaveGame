@@ -5,7 +5,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using IGDB;
 using IGDB.Models;
-using SaveGame.Models;
 
 namespace SaveGame.Controls
 {
@@ -85,7 +84,7 @@ namespace SaveGame.Controls
         }
         
         public static readonly DependencyProperty CommandParameterProperty =
-            DependencyProperty.Register("CommandParameter", typeof(SaveGame.Models.Game), typeof(GameCard), new PropertyMetadata(null));
+            DependencyProperty.Register("CommandParameter", typeof(Game), typeof(GameCard), new PropertyMetadata(null));
 
         public GameCard()
         {
@@ -108,7 +107,7 @@ namespace SaveGame.Controls
             segmentWidth = Border.Width / _screenshots.Count;
 
             //trying to bind the command in XAML was a major PITA
-            PlayStates playState = ((SaveGame.Models.Game)CommandParameter).PlayState;
+            PlayStates playState = ((Game)CommandParameter).PlayState;
 
             AddToPlayMenuItem.Command = AddToPlay;
             AddToPlayMenuItem.CommandParameter = CommandParameter;

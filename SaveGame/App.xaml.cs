@@ -19,7 +19,7 @@ namespace SaveGame
         {
             _modalNavigationStore = new ModalNavigationStore();
             _igdbService = new IGDBService();
-            _gameStore = new GameStore(_igdbService);
+            _gameStore = new GameStore();
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -30,8 +30,8 @@ namespace SaveGame
             };
             MainWindow.Show();
 
-            DatabaseFacade facade = new(new SQLiteService());
-            facade.EnsureCreated();
+            //DatabaseFacade facade = new(new SQLiteService());
+            //facade.EnsureCreated();
 
             base.OnStartup(e);
         }

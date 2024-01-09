@@ -1,5 +1,5 @@
 ﻿using IGDB;
-using SaveGame.Models;
+using IGDB.Models;
 using System.Text;
 
 namespace SaveGame.Services
@@ -111,17 +111,6 @@ namespace SaveGame.Services
                 $"limit 5;");
             
             return games;
-        }
-
-        public async Task<Game> SearchGameById(long? id)
-        {
-            var game = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
-                queryField +
-
-                $"where id={id};" +
-
-                $"limit 1;");
-            return game.FirstOrDefault();
         }
     }
 }
