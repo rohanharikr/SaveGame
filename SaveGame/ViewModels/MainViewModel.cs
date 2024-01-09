@@ -4,6 +4,7 @@ using SaveGame.Models;
 using SaveGame.Services;
 using SaveGame.Stores;
 using SaveGame.Views;
+using System.Windows.Automation;
 
 namespace SaveGame.ViewModels
 {
@@ -50,6 +51,9 @@ namespace SaveGame.ViewModels
         [RelayCommand]
         void Remove(Game game) => _gameStore.Remove(game);
 
+        [ObservableProperty]
+        bool isRetrievingGames = true;
+
         [RelayCommand]
         void ShowGameDetailModal(Game game) => _modalNavigationStore.Show(game);
 
@@ -69,6 +73,9 @@ namespace SaveGame.ViewModels
             _igdbService = igdbService;
 
             GotoHomeView();
+
+            _gameStore.RetreiveGamesFromDb();
+            isRetrievingGames = false;
         }
 
         private void ModalNavigationStore_GameDetailChanged()

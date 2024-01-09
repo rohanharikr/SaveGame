@@ -1,4 +1,5 @@
-﻿using SaveGame.Services;
+﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+using SaveGame.Services;
 using SaveGame.Stores;
 using SaveGame.ViewModels;
 using System.Windows;
@@ -17,8 +18,8 @@ namespace SaveGame
         public App()
         {
             _modalNavigationStore = new ModalNavigationStore();
-            _gameStore = new GameStore();
             _igdbService = new IGDBService();
+            _gameStore = new GameStore(_igdbService);
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -28,9 +29,11 @@ namespace SaveGame
                 DataContext = new MainViewModel(_modalNavigationStore, _gameStore, _igdbService)
             };
             MainWindow.Show();
+
+            DatabaseFacade facade = new(new SQLiteService());
+            facade.EnsureCreated();
+
             base.OnStartup(e);
-            //DatabaseFacade facade = new(new SQLiteService());
-            //facade.EnsureCreated();
         }
     }
 

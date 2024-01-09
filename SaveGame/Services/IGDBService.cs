@@ -112,5 +112,16 @@ namespace SaveGame.Services
             
             return games;
         }
+
+        public async Task<Game> SearchGameById(long? id)
+        {
+            var game = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
+                queryField +
+
+                $"where id={id};" +
+
+                $"limit 1;");
+            return game.FirstOrDefault();
+        }
     }
 }
