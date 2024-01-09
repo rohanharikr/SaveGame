@@ -85,10 +85,10 @@ namespace SaveGame.ViewModels
                .SelectMany(group => group)
                //remove duplicate suggestions
                .DistinctBy(g => g.Id)
+               //do not suggest games that are already being tracked
+               .Where(game => game.PlayState == PlayStates.None)
                .Take(5)
                .ToList();
-
-            //TODO: Suggested games should not include currently play/playing/played
 
             SuggestedGames = suggestedGamesProritsed;
         }
