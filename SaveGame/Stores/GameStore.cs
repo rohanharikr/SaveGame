@@ -50,10 +50,17 @@ namespace SaveGame.Stores
 
         public void Remove(Game game)
         {
-            PlayGames.Remove(PlayGames.SingleOrDefault(i => i.Id == game.Id));
-            PlayingGames.Remove(PlayingGames.SingleOrDefault(i => i.Id == game.Id));
-            PlayedGames.Remove(PlayedGames.SingleOrDefault(i => i.Id == game.Id));
-            RemoveFromDb(game);
+            var gameToRemove = PlayGames.SingleOrDefault(i => i.Id == game.Id);
+            if (gameToRemove != null)
+                PlayGames.Remove(gameToRemove);
+
+            gameToRemove = PlayingGames.SingleOrDefault(i => i.Id == game.Id);
+            if (gameToRemove != null)
+                PlayingGames.Remove(gameToRemove);
+
+            gameToRemove = PlayedGames.SingleOrDefault(i => i.Id == game.Id);
+            if (gameToRemove != null)
+                PlayedGames.Remove(gameToRemove);
         }
 
 
@@ -62,7 +69,6 @@ namespace SaveGame.Stores
             Remove(game);
             game.PlayState = PlayStates.Play;
             PlayGames.Add(game);
-            AddToDb(game);
         }
 
         public void AddToPlaying(Game game)
@@ -70,7 +76,6 @@ namespace SaveGame.Stores
             Remove(game);
             game.PlayState = PlayStates.Playing;
             PlayingGames.Add(game);
-            AddToDb(game);
         }
 
         public void AddToPlayed(Game game)
@@ -78,19 +83,6 @@ namespace SaveGame.Stores
             Remove(game);
             game.PlayState = PlayStates.Played;
             PlayedGames.Add(game);
-            AddToDb(game);
-        }
-        
-        private async void AddToDb(Game game)
-        {
-        }
-
-        private async void RemoveFromDb(Game game)
-        {
-        }
-
-        public async Task RetreiveGamesFromDb()
-        {
         }
     }
 }
