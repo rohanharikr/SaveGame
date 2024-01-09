@@ -1,0 +1,3 @@
+[submodule "igdb-dotnet"]
+	path = IGDB.Client
+	url = https://github.com/rohanharikr/igdb-dotnet.git
