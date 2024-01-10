@@ -50,15 +50,13 @@ namespace SaveGame.Stores
 
         public void Retrieve()
         {
-            using (var db = new LiteDatabase("Data.db"))
-            {
-                foreach (var game in db.GetCollection<Game>("Play").FindAll())
-                    PlayGames.Add(game);
-                foreach (var game in db.GetCollection<Game>("Playing").FindAll())
-                    PlayingGames.Add(game);
-                foreach (var game in db.GetCollection<Game>("Played").FindAll())
-                    PlayedGames.Add(game);
-            }
+            using var db = new LiteDatabase("Data.db");
+            foreach (var game in db.GetCollection<Game>("Play").FindAll())
+                PlayGames.Add(game);
+            foreach (var game in db.GetCollection<Game>("Playing").FindAll())
+                PlayingGames.Add(game);
+            foreach (var game in db.GetCollection<Game>("Played").FindAll())
+                PlayedGames.Add(game);
         }
 
         public void Remove(Game game)
@@ -75,23 +73,21 @@ namespace SaveGame.Stores
             if (gameToRemove != null)
                 PlayedGames.Remove(gameToRemove);
 
-            using (var db = new LiteDatabase("Data.db"))
-            {
-                if(game.PlayState == PlayStates.Play)
-                {
-                    var col = db.GetCollection<Game>("Play");
-                    col.Delete(game.Id);
-                } else if(game.PlayState == PlayStates.Playing)
-                {
-                    var col = db.GetCollection<Game>("Playing");
-                    col.Delete(game.Id);
-                } else if (game.PlayState == PlayStates.Played)
-                {
-                    var col = db.GetCollection<Game>("Played");
-                    var gameToDel = col.Find(i => i.Id == game.Id);
-                    col.Delete(game.Id);
-                }
-        }
+            using var db = new LiteDatabase("Data.db");
+            var playDb = db.GetCollection<Game>("Play");
+            var playingDb = db.GetCollection<Game>("Play");
+            var playedDb = db.GetCollection<Game>("Play");
+
+            var isInPlay = playDb.Find(i => i.Id == game.Id);
+            var isInPlaying = playingDb.Find(i => i.Id == game.Id);
+            var isInPlayed  = playedDb.Find(i => i.Id == game.Id);
+
+            if (isInPlay != null)
+                playDb.Delete(game.Id);
+            else if (isInPlaying != null)
+                playingDb.Delete(game.Id);
+            else if (isInPlayed != null)
+                playedDb.Delete(game.Id);
         }
 
         public void AddToPlay(Game game)
@@ -99,11 +95,9 @@ namespace SaveGame.Stores
             Remove(game);
             game.PlayState = PlayStates.Play;
             PlayGames.Add(game);
-            using (var db = new LiteDatabase("Data.db"))
-            {
-                var col = db.GetCollection<Game>("Play");
-                col.Insert(game);
-            }
+            using var db = new LiteDatabase("Data.db");
+            var col = db.GetCollection<Game>("Play");
+            col.Insert(game);
         }
 
         public void AddToPlaying(Game game)
@@ -111,11 +105,9 @@ namespace SaveGame.Stores
             Remove(game);
             game.PlayState = PlayStates.Playing;
             PlayingGames.Add(game);
-            using (var db = new LiteDatabase("Data.db"))
-            {
-                var col = db.GetCollection<Game>("Playing");
-                col.Insert(game);
-            }
+            using var db = new LiteDatabase("Data.db");
+            var col = db.GetCollection<Game>("Playing");
+            col.Insert(game);
         }
 
         public void AddToPlayed(Game game)
@@ -123,11 +115,9 @@ namespace SaveGame.Stores
             Remove(game);
             game.PlayState = PlayStates.Played;
             PlayedGames.Add(game);
-            using (var db = new LiteDatabase("Data.db"))
-            {
-                var col = db.GetCollection<Game>("Played");
-                col.Insert(game);
-            }
+            using var db = new LiteDatabase("Data.db");
+            var col = db.GetCollection<Game>("Played");
+            col.Insert(game);
         }
     }
 }

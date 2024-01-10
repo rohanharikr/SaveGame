@@ -60,6 +60,38 @@ namespace SaveGame.ViewModels
             _gameStore = gameStore;
 
             _gameStore.GamesChanged += SuggestGames;
+            _gameStore.GamesChanged += UpdateGameStates;
+        }
+
+        void UpdateGameState(Game game)
+        {
+            if (_gameStore.PlayGames.FirstOrDefault(i => i.Id == game.Id) != null)
+                game.PlayState = PlayStates.Play;
+            else if (_gameStore.PlayingGames.FirstOrDefault(i => i.Id == game.Id) != null)
+                game.PlayState = PlayStates.Playing;
+            else if (_gameStore.PlayedGames.FirstOrDefault(i => i.Id == game.Id) != null)
+                game.PlayState = PlayStates.Played;
+            else
+                game.PlayState = PlayStates.None;
+        }
+
+        void UpdateGameStates()
+        {
+            if(SuggestedGames != null)
+                foreach (var game in SuggestedGames)
+                    UpdateGameState(game);
+
+            if(HighRatedGames != null)
+                foreach (var game in HighRatedGames)
+                    UpdateGameState(game);
+
+            if(RecentReleases != null)
+                foreach (var game in RecentReleases)
+                    UpdateGameState(game);
+
+            if (UpcomingReleases != null)
+                foreach (var game in UpcomingReleases)
+                    UpdateGameState(game);
         }
 
         void SuggestGames()
