@@ -94,7 +94,7 @@ namespace SaveGame.Controls
         }
 
         public static readonly DependencyProperty StateProperty =
-            DependencyProperty.Register("State", typeof(SaveGame.Models.PlayStates), typeof(GameCard), new PropertyMetadata(PlayStates.None, new PropertyChangedCallback(UpdateContext)));
+            DependencyProperty.Register("State", typeof(SaveGame.Models.PlayStates), typeof(GameCard), new PropertyMetadata(PlayStates.None, new PropertyChangedCallback(StatePropertyChanged)));
 
         public GameCard()
         {
@@ -102,10 +102,15 @@ namespace SaveGame.Controls
             Loaded += GameCard_Loaded;
         }
 
-        private static void UpdateContext(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void StatePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             GameCard gameCard = (GameCard)d;
-            PlayStates playState = (PlayStates) e.NewValue;
+            UpdateContext(gameCard);
+        }
+
+        static void UpdateContext(GameCard gameCard)
+        { 
+            PlayStates playState = (PlayStates)gameCard.State;
             gameCard.AddToPlayMenuItem.IsChecked = playState == PlayStates.Play;
             gameCard.AddToPlayingMenuItem.IsChecked = playState == PlayStates.Playing;
             gameCard.AddToPlayedMenuItem.IsChecked = playState == PlayStates.Played;
@@ -117,7 +122,9 @@ namespace SaveGame.Controls
 
         private void GameCard_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach(var screenshot in Screenshots)
+            UpdateContext(this);
+
+            foreach (var screenshot in Screenshots)
             {
                 if (_screenshots.Count >= 3)
                     break;

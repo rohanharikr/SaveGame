@@ -83,7 +83,9 @@ namespace SaveGame.ViewModels
 
             if(HighRatedGames != null)
                 foreach (var game in HighRatedGames)
-                    UpdateGameState(game);
+                {
+                    game.PlayState = PlayStates.Played;
+                }
 
             if(RecentReleases != null)
                 foreach (var game in RecentReleases)

@@ -42,17 +42,14 @@
                         <MenuItem
                             x:Name="AddToPlayMenuItem"
                             Header="Play"
-                            IsChecked="{Binding CommandParameter.PlayState, ElementName=Root, Converter={StaticResource PlayingToBoolConverter}}"
                             Style="{StaticResource CoolContextMenuItem}" />
                         <MenuItem
                             x:Name="AddToPlayingMenuItem"
                             Header="Playing"
-                            IsChecked="{Binding CommandParameter.PlayState, ElementName=Root, Converter={StaticResource PlayingToBoolConverter}}"
                             Style="{StaticResource CoolContextMenuItem}" />
                         <MenuItem
                             x:Name="AddToPlayedMenuItem"
                             Header="Played"
-                            IsChecked="{Binding CommandParameter.PlayState, ElementName=Root, Converter={StaticResource PlayedToBoolConverter}}"
                             Style="{StaticResource CoolContextMenuItem}" />
                         <MenuItem
                             x:Name="RemoveMenuItem"
