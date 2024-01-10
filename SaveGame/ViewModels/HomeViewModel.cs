@@ -68,31 +68,12 @@ namespace SaveGame.ViewModels
             UpcomingReleases = [];
         }
 
-        private ObservableCollection<Game> GamesWithUpdatedState(ObservableCollection<Game> games)
-        {
-            if (games == null)
-                return [];
-
-            foreach (var game in games)
-            {
-                if (_gameStore.PlayGames.FirstOrDefault(i => i.Id == game.Id) != null)
-                    game.PlayState = PlayStates.Play;
-                else if (_gameStore.PlayingGames.FirstOrDefault(i => i.Id == game.Id) != null)
-                    game.PlayState = PlayStates.Playing;
-                else if (_gameStore.PlayedGames.FirstOrDefault(i => i.Id == game.Id) != null)
-                    game.PlayState = PlayStates.Played;
-                else
-                    game.PlayState = PlayStates.None;
-            }
-            return new ObservableCollection<Game>(games);
-        }
-
         void UpdateGameStates()
         {
             //SuggestGames does not need to be updated as tracked games do not show up here
-            HighRatedGames = GamesWithUpdatedState(HighRatedGames);
-            RecentReleases = GamesWithUpdatedState(RecentReleases);
-            UpcomingReleases = GamesWithUpdatedState(UpcomingReleases);
+            HighRatedGames = _gameStore.UpdateGameState(HighRatedGames);
+            RecentReleases = _gameStore.UpdateGameState(RecentReleases);
+            UpcomingReleases = _gameStore.UpdateGameState(UpcomingReleases);
         }
 
         void SuggestGames()

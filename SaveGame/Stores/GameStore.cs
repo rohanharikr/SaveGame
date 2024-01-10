@@ -121,5 +121,24 @@ namespace SaveGame.Stores
             var col = db.GetCollection<Game>("Played");
             col.Insert(game);
         }
+
+        public ObservableCollection<Game> UpdateGameState(ObservableCollection<Game> games)
+        {
+            if (games == null)
+                return [];
+
+            foreach (var game in games)
+            {
+                if (PlayGames.FirstOrDefault(i => i.Id == game.Id) != null)
+                    game.PlayState = PlayStates.Play;
+                else if (PlayingGames.FirstOrDefault(i => i.Id == game.Id) != null)
+                    game.PlayState = PlayStates.Playing;
+                else if (PlayedGames.FirstOrDefault(i => i.Id == game.Id) != null)
+                    game.PlayState = PlayStates.Played;
+                else
+                    game.PlayState = PlayStates.None;
+            }
+            return new ObservableCollection<Game>(games);
+        }
     }
 }

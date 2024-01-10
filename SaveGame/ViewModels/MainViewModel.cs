@@ -83,23 +83,7 @@ namespace SaveGame.ViewModels
             if (SearchResults == null)
                 return;
 
-            SearchResults = GamesWithUpdatedState(SearchResults);
-        }
-
-        private ObservableCollection<Game> GamesWithUpdatedState(ObservableCollection<Game> games)
-        {
-            foreach (var game in games)
-            {
-                if (_gameStore.PlayGames.FirstOrDefault(i => i.Id == game.Id) != null)
-                    game.PlayState = PlayStates.Play;
-                else if (_gameStore.PlayingGames.FirstOrDefault(i => i.Id == game.Id) != null)
-                    game.PlayState = PlayStates.Playing;
-                else if (_gameStore.PlayedGames.FirstOrDefault(i => i.Id == game.Id) != null)
-                    game.PlayState = PlayStates.Played;
-                else
-                    game.PlayState = PlayStates.None;
-            }
-            return new ObservableCollection<Game>(games);
+            SearchResults = _gameStore.UpdateGameState(SearchResults);
         }
 
         private void ModalNavigationStore_GameDetailChanged()
