@@ -30,8 +30,8 @@ namespace SaveGame
             };
             MainWindow.Show();
 
-            //DatabaseFacade facade = new(new SQLiteService());
-            //facade.EnsureCreated();
+            DatabaseFacade facade = new(new SQLiteService());
+            facade.EnsureCreated();
 
             base.OnStartup(e);
         }
