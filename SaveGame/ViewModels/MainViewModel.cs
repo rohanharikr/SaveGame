@@ -92,7 +92,7 @@ namespace SaveGame.ViewModels
             OnPropertyChanged(nameof(IsGameDetailModalOpen));
         }
 
-        private static Timer? timer;
+        private Timer _timer;
         partial void OnSearchQueryChanged(string value)
         {
             if (value == "")
@@ -100,15 +100,23 @@ namespace SaveGame.ViewModels
                 SearchResults = new ObservableCollection<Game>();
                 return;
             }
-            
+
             IsSearching = true;
 
-            timer?.Change(Timeout.Infinite, Timeout.Infinite);
-            timer = new Timer(async state =>
+            Debounce(async () =>
             {
                 SearchResults = new ObservableCollection<Game>(await _igdbService.SearchGame(value));
                 IsSearching = false;
-            }, null, 500, Timeout.Infinite);
+            }, 500);
+        }
+
+        private void Debounce(Action action, int millisecondsDelay)
+        {
+            _timer?.Change(Timeout.Infinite, Timeout.Infinite);
+            _timer = new Timer(state =>
+            {
+                action.Invoke();
+            }, null, millisecondsDelay, Timeout.Infinite);
         }
 
         [RelayCommand]
