@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using SaveGame.Models;
 using SaveGame.Services;
 using SaveGame.Stores;
+using System.Collections.ObjectModel;
 
 namespace SaveGame.ViewModels
 {
@@ -12,25 +13,24 @@ namespace SaveGame.ViewModels
         private readonly GameStore _gameStore;
 
         [ObservableProperty]
-        IEnumerable<Game>? suggestedGames;
-
+        ObservableCollection<Game> suggestedGames;
         [ObservableProperty]
         bool isFetchingUpcomingReleases = true;
 
         [ObservableProperty]
-        IEnumerable<Game>? upcomingReleases;
+        ObservableCollection<Game> upcomingReleases;
 
         [ObservableProperty]
         bool isFetchingRecentReleases = true;
 
         [ObservableProperty]
-        IEnumerable<Game>? recentReleases;
+        ObservableCollection<Game> recentReleases;
 
         [ObservableProperty]
         bool isFetchingHighRatedGames = true;
 
         [ObservableProperty]
-        IEnumerable<Game>? highRatedGames;
+        ObservableCollection<Game> highRatedGames;
 
         [ObservableProperty]
         string greeting;
@@ -81,13 +81,11 @@ namespace SaveGame.ViewModels
                 foreach (var game in SuggestedGames)
                     UpdateGameState(game);
 
-            if(HighRatedGames != null)
+            if (HighRatedGames != null)
                 foreach (var game in HighRatedGames)
-                {
-                    game.PlayState = PlayStates.Played;
-                }
+                    UpdateGameState(game);
 
-            if(RecentReleases != null)
+            if (RecentReleases != null)
                 foreach (var game in RecentReleases)
                     UpdateGameState(game);
 
@@ -120,7 +118,7 @@ namespace SaveGame.ViewModels
                 ..playedSimilarGames,
             ];
 
-            List<Game> suggestedGamesProritsed = allSuggestedGames
+            IEnumerable<Game> suggestedGamesProritsed = allSuggestedGames
                .GroupBy(game => game.Id)
                //games w/ highest inetersections gets highest priority in list
                .OrderByDescending(group => group.Count())
@@ -132,7 +130,9 @@ namespace SaveGame.ViewModels
                .Take(5)
                .ToList();
 
-            SuggestedGames = suggestedGamesProritsed;
+            SuggestedGames = new ObservableCollection<Game>(suggestedGamesProritsed);
+            if(SuggestedGames.Count > 0 )
+                SuggestedGames[0].PlayState = PlayStates.Played;
         }
 
         async void GetGames(IGDBService igdbService)
@@ -144,10 +144,10 @@ namespace SaveGame.ViewModels
             Task<IEnumerable<Game>> highRatedGamesTask = igdbService.GetHighRatedGames();
 
             await Task.WhenAll(recentReleasesTask, upcomingReleasesTask, highRatedGamesTask);
-
-            RecentReleases = recentReleasesTask.Result;
-            UpcomingReleases = upcomingReleasesTask.Result;
-            HighRatedGames = highRatedGamesTask.Result;
+            
+            RecentReleases = new ObservableCollection<Game>(recentReleasesTask.Result);
+            UpcomingReleases = new ObservableCollection<Game>(upcomingReleasesTask.Result);
+            HighRatedGames = new ObservableCollection<Game>(highRatedGamesTask.Result);
         }
 
         private static string TimeOfDay()
