@@ -8,11 +8,14 @@ namespace SaveGame.Services
 {
     internal class SQLiteService : DbContext
     {
-        public DbSet<Game> Games { get; set; }
+        public DbSet<Game> Play { get; set; }
+        public DbSet<Game> Playing { get; set; }
+        public DbSet<Game> Played { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source = Data.db");
+            optionsBuilder.EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
