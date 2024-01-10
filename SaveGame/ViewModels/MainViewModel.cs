@@ -73,12 +73,12 @@ namespace SaveGame.ViewModels
 
             _gameStore.Retrieve();
 
-            _gameStore.GamesChanged += _gameStore_GamesChanged;
+            _gameStore.GamesChanged += GameStore_GamesChanged;
 
             GotoHomeView();
         }
 
-        private void _gameStore_GamesChanged()
+        private void GameStore_GamesChanged()
         {
             if (SearchResults == null)
                 return;

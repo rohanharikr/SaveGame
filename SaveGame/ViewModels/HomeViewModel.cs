@@ -61,12 +61,17 @@ namespace SaveGame.ViewModels
 
             _gameStore.GamesChanged += SuggestGames;
             _gameStore.GamesChanged += UpdateGameStates;
+
+            SuggestedGames = [];
+            HighRatedGames = [];
+            RecentReleases = [];
+            UpcomingReleases = [];
         }
 
         private ObservableCollection<Game> GamesWithUpdatedState(ObservableCollection<Game> games)
         {
             if (games == null)
-                return new ObservableCollection<Game>();
+                return [];
 
             foreach (var game in games)
             {

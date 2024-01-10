@@ -5,26 +5,18 @@ using System.Text;
 
 namespace SaveGame.Services
 {
-    public class IGDBService
+    public class IGDBService(GameStore gameStore)
     {
-        readonly IGDBClient igdb;
-
-        readonly string queryField;
-
-        readonly GameStore _gameStore;
-
-        public IGDBService(GameStore gameStore)
-        {
-            igdb = new IGDBClient(
+        readonly IGDBClient igdb = new(
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_ID"),
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_SECRET")
             );
 
-            queryField = MakeQueryField();
-            _gameStore = gameStore;
-        }
+        readonly string queryField = MakeQueryField();
 
-        private IEnumerable<Game> GamesWithUpdatedState(Game[] games)
+        readonly GameStore _gameStore = gameStore;
+
+        private Game[] GamesWithUpdatedState(Game[] games)
         {
             foreach(var game in games)
             {
