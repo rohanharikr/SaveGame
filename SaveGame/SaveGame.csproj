@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Media\Images\SaveGameIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +20,10 @@
     <None Remove="Media\Images\pc.png" />
     <None Remove="Media\Images\ps.png" />
     <None Remove="Media\Images\xbox.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Media\Images\SaveGameIcon.ico" />
   </ItemGroup>
 
   <ItemGroup>

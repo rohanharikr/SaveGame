@@ -56,7 +56,7 @@
                         FontWeight="Bold"
                         Foreground="White"
                         Opacity="0.5">
-                        [savegame]
+                        .savegame
                     </Label>
                 </StackPanel>
             </Border>
