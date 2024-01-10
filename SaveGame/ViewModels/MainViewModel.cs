@@ -92,7 +92,7 @@ namespace SaveGame.ViewModels
             OnPropertyChanged(nameof(IsGameDetailModalOpen));
         }
 
-        private Timer _timer;
+        private Timer? _timer;
         partial void OnSearchQueryChanged(string value)
         {
             if (value == "")
