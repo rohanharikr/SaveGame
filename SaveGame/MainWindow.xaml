@@ -199,7 +199,7 @@
                                         Height="38"
                                         Margin="0,0,5,0">
                                         <Ellipse.Fill>
-                                            <ImageBrush ImageSource="https://avatars.cloudflare.steamstatic.com/fd8ad67f2057a60419430d6a07bbcf721754d231_full.jpg" RenderOptions.BitmapScalingMode="HighQuality" />
+                                            <ImageBrush ImageSource="https://avatars.githubusercontent.com/u/12775813?v=4" RenderOptions.BitmapScalingMode="HighQuality" />
                                         </Ellipse.Fill>
                                     </Ellipse>
                                 </StackPanel>

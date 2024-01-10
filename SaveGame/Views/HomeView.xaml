@@ -36,10 +36,10 @@
         <Border Padding="15,10,15,0">
             <Label
                 Content="{Binding Greeting}"
-                ContentStringFormat="{}{0}, fazfactor"
-                FontSize="30"
+                ContentStringFormat="{}{0}, RedRackham"
                 FontWeight="Bold"
-                Foreground="White" />
+                Foreground="White"
+                RedRackhamFontSize="30" />
         </Border>
 
         <StackPanel>
