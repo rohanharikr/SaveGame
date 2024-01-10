@@ -1,4 +1,4 @@
-﻿using IGDB.Models;
+﻿using SaveGame.Models;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;

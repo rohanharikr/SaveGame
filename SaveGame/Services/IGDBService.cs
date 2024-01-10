@@ -1,5 +1,5 @@
 ﻿using IGDB;
-using IGDB.Models;
+using SaveGame.Models;
 using System.Text;
 
 namespace SaveGame.Services
@@ -8,7 +8,7 @@ namespace SaveGame.Services
     {
         readonly IGDBClient igdb;
 
-        string queryField;
+        readonly string queryField;
 
         public IGDBService()
         {
@@ -20,16 +20,16 @@ namespace SaveGame.Services
             queryField = MakeQueryField();
         }
 
-        string MakeQueryField()
+        static string MakeQueryField()
         {
-            StringBuilder q = new StringBuilder();
-            List<string> baseFields = new List<string>()
-            {
+            StringBuilder q = new();
+            List<string> baseFields =
+            [
                 "name", "first_release_date", "involved_companies.developer", "involved_companies.company.name",
                 "screenshots.image_id", "screenshots.url", "platforms.name", "platforms.slug", "platforms.platform_family.*",
                 "aggregated_rating", "cover.url", "cover.image_id", "language_supports.language.name", "summary", "genres.name",
                 "genres.slug", "release_dates.y"
-            };
+            ];
 
             q.Append(string.Join(",", baseFields));
 

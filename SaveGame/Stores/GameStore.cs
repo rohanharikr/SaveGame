@@ -1,7 +1,5 @@
-﻿using IGDB.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyModel;
-using SaveGame.Services;
+﻿using LiteDB;
+using SaveGame.Models;
 using System.Collections.ObjectModel;
 
 namespace SaveGame.Stores
@@ -50,6 +48,16 @@ namespace SaveGame.Stores
             PlayedGames.CollectionChanged += (s,e) => GamesChanged?.Invoke();
         }
 
+        public void Retrieve()
+        {
+            using (var db = new LiteDatabase("Data.db"))
+            {
+                PlayGames = [..db.GetCollection<Game>("Play").FindAll().ToList()];
+                PlayingGames = [..db.GetCollection<Game>("Playing").FindAll().ToList()];
+                PlayedGames = [..db.GetCollection<Game>("Played").FindAll().ToList()];
+            }
+        }
+
         public void Remove(Game game)
         {
             var gameToRemove = PlayGames.SingleOrDefault(i => i.Id == game.Id);
@@ -65,44 +73,16 @@ namespace SaveGame.Stores
                 PlayedGames.Remove(gameToRemove);
         }
 
-        private void RetrieveFromDb()
-        {
-            using SQLiteService context = new();
-            PlayGames = [.. context.Play];
-            PlayingGames = [.. context.Playing];
-            PlayedGames = [.. context.Played];
-        }
-
-        private static void RemoveFromDb(Game game)
-        {
-            using SQLiteService context = new();
-            Game existingGame = context.Play
-                .FirstOrDefault(g => g.Id == game.Id) ??
-                context.Playing
-                    .FirstOrDefault(g => g.Id == game.Id) ??
-                context.Played
-                    .FirstOrDefault(g => g.Id == game.Id)!;
-
-            if (existingGame != null)
-            {
-                context.Remove(existingGame);
-                context.SaveChanges();
-            }
-        }
-
-        private static void AddToDb(Game game)
-        {
-            using SQLiteService context = new();
-            context.Play.Add(game);
-            context.SaveChanges();
-        }
-
         public void AddToPlay(Game game)
         {
             Remove(game);
             game.PlayState = PlayStates.Play;
             PlayGames.Add(game);
-            AddToDb(game);
+            using (var db = new LiteDatabase("Data.db"))
+            {
+                var col = db.GetCollection<Game>("Play");
+                col.Insert(game);
+            }
         }
 
         public void AddToPlaying(Game game)
@@ -110,7 +90,11 @@ namespace SaveGame.Stores
             Remove(game);
             game.PlayState = PlayStates.Playing;
             PlayingGames.Add(game);
-            AddToDb(game);
+            using (var db = new LiteDatabase("Data.db"))
+            {
+                var col = db.GetCollection<Game>("Playing");
+                col.Insert(game);
+            }
         }
 
         public void AddToPlayed(Game game)
@@ -118,7 +102,11 @@ namespace SaveGame.Stores
             Remove(game);
             game.PlayState = PlayStates.Played;
             PlayedGames.Add(game);
-            AddToDb(game);
+            using (var db = new LiteDatabase("Data.db"))
+            {
+                var col = db.GetCollection<Game>("Played");
+                col.Insert(game);
+            }
         }
     }
 }

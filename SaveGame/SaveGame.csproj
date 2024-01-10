@@ -23,14 +23,11 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="IGDB" Version="3.0.0" />
+    <PackageReference Include="LiteDB" Version="5.0.17" />
     <PackageReference Include="LottieSharp" Version="2.3.0" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="8.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\IGDB.Client\IGDB\IGDB.Client.csproj" />
-    <ProjectReference Include="..\IGDB.Client\IGDB\IGDB.Client.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
-using IGDB.Models;
+using SaveGame.Models;
 
 namespace SaveGame.Converters
 {

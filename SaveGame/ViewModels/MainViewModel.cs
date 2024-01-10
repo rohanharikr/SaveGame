@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using IGDB.Models;
+using SaveGame.Models;
 using SaveGame.Services;
 using SaveGame.Stores;
 using SaveGame.Views;
@@ -37,7 +37,6 @@ namespace SaveGame.ViewModels
 
         readonly IGDBService _igdbService;
 
-
         [RelayCommand]
         void AddToPlay(Game game) => _gameStore.AddToPlay(game);
 
@@ -70,6 +69,8 @@ namespace SaveGame.ViewModels
             _modalNavigationStore.DetailChanged += ModalNavigationStore_GameDetailChanged;
             _gameStore = gameStore;
             _igdbService = igdbService;
+
+            _gameStore.Retrieve();
 
             GotoHomeView();
         }

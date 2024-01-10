@@ -100,12 +100,12 @@
                                         DockPanel.Dock="Right"
                                         Opacity="0.35"
                                         Orientation="Horizontal">
-                                        <controls:PlatformLogos Platforms="{Binding Detail.Platforms, ElementName=Root}" />
+                                        <controls:PlatformLogos Platforms="{Binding Detail.Platforms.Values, ElementName=Root}" />
                                     </StackPanel>
                                 </DockPanel>
                                 <Label
                                     Padding="0"
-                                    Content="{Binding Path=Detail.InvolvedCompanies, ElementName=Root, Converter={StaticResource DeveloperFromCompaniesConverter}}"
+                                    Content="{Binding Path=Detail.InvolvedCompanies.Values, ElementName=Root, Converter={StaticResource DeveloperFromCompaniesConverter}}"
                                     FontSize="16"
                                     Foreground="White" />
                             </StackPanel>
@@ -117,7 +117,7 @@
                         ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <Border Margin="0,10,0,20" Padding="20,85,20,0">
                             <StackPanel>
-                                <local:ScreenshotsGallery CoverArt="{Binding Detail.Cover.ImageId, ElementName=Root, Converter={StaticResource CoverArtConverter}}" Screenshots="{Binding Detail.Screenshots, ElementName=Root}" />
+                                <local:ScreenshotsGallery CoverArt="{Binding Detail.Cover.Value.ImageId, ElementName=Root, Converter={StaticResource CoverArtConverter}}" Screenshots="{Binding Detail.Screenshots.Values, ElementName=Root}" />
                                 <TextBlock
                                     Margin="0,10,0,10"
                                     FontSize="16"
@@ -179,7 +179,7 @@
                                                 Padding="0"
                                                 FontSize="16"
                                                 Foreground="White"
-                                                Text="{Binding Detail.Genres, ElementName=Root, FallbackValue=N/A, Converter={StaticResource GenresToStringConverter}}"
+                                                Text="{Binding Detail.Genres.Values, ElementName=Root, FallbackValue=N/A, Converter={StaticResource GenresToStringConverter}}"
                                                 TextWrapping="Wrap"
                                                 Visibility="Visible" />
                                         </StackPanel>
@@ -204,7 +204,7 @@
                                                 Padding="0"
                                                 FontSize="16"
                                                 Foreground="White"
-                                                Text="{Binding Detail.Platforms, ElementName=Root, FallbackValue=N/A, Converter={StaticResource PlatformsToStringConverter}}"
+                                                Text="{Binding Detail.Platforms.Values, ElementName=Root, FallbackValue=N/A, Converter={StaticResource PlatformsToStringConverter}}"
                                                 TextWrapping="Wrap"
                                                 Visibility="Visible" />
                                         </StackPanel>
@@ -229,7 +229,7 @@
                                                 Padding="0"
                                                 FontSize="16"
                                                 Foreground="White"
-                                                Text="{Binding Detail.LanguageSupports, ElementName=Root, FallbackValue=N/A, Converter={StaticResource LanguagesToStringConverter}}"
+                                                Text="{Binding Detail.LanguageSupports.Values, ElementName=Root, FallbackValue=N/A, Converter={StaticResource LanguagesToStringConverter}}"
                                                 TextWrapping="Wrap"
                                                 Visibility="Visible" />
                                         </StackPanel>

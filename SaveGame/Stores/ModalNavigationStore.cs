@@ -1,4 +1,4 @@
-﻿using IGDB.Models;
+﻿using SaveGame.Models;
 
 namespace SaveGame.Stores
 {

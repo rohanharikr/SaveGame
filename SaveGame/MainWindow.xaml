@@ -272,7 +272,7 @@
                                                         CommandParameter="{Binding .}"
                                                         CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
                                                         Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                                        Screenshots="{Binding Screenshots}" />
+                                                        Screenshots="{Binding Screenshots.Values}" />
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
                                         </ItemsControl>

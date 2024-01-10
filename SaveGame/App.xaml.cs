@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+﻿using LiteDB;
 using SaveGame.Services;
 using SaveGame.Stores;
+using SaveGame.Models;
 using SaveGame.ViewModels;
 using System.Windows;
 
@@ -29,9 +30,6 @@ namespace SaveGame
                 DataContext = new MainViewModel(_modalNavigationStore, _gameStore, _igdbService)
             };
             MainWindow.Show();
-
-            DatabaseFacade facade = new(new SQLiteService());
-            facade.EnsureCreated();
 
             base.OnStartup(e);
         }

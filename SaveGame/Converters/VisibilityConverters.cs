@@ -74,7 +74,7 @@ namespace SaveGame.Converters
             }
             else
             {
-                return (value is bool && (bool)value) ? Visibility.Hidden : Visibility.Visible;
+                return (value is bool v && v) ? Visibility.Hidden : Visibility.Visible;
             }
         }
 

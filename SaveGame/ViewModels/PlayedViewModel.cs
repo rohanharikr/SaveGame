@@ -1,15 +1,15 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using IGDB.Models;
+using SaveGame.Models;
 using SaveGame.Stores;
 using System.Collections.ObjectModel;
 
 namespace SaveGame.ViewModels
 {
-    partial class PlayedViewModel : ObservableObject
+    partial class PlayedViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore) : ObservableObject
     {
-        private readonly ModalNavigationStore _modalNavigationStore;
-        private readonly GameStore _gameStore;
+        private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
+        private readonly GameStore _gameStore = gameStore;
 
         public ObservableCollection<Game> PlayedGames => _gameStore.PlayedGames;
 
@@ -24,11 +24,5 @@ namespace SaveGame.ViewModels
 
         [RelayCommand]
         void ShowGameDetailModal(Game game) => _modalNavigationStore.Show(game);
-
-        public PlayedViewModel(ModalNavigationStore modalNavigationStore, GameStore gameStore)
-        {
-            _modalNavigationStore = modalNavigationStore;
-            _gameStore = gameStore;
-        }
     }
 }

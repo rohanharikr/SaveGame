@@ -10,13 +10,13 @@ namespace SaveGame.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             StringBuilder languages = new();
-            if(value is List<LanguageSupport> languageList)
+            if(value is LanguageSupport[] languageList)
             {
-                for (int i=0; i < languageList.Count; i++)
+                for (int i=0; i < languageList.Length; i++)
                 {
-                    languages.Append(languageList[i].Language.Name);
+                    languages.Append(languageList[i].Language.Value.Name);
                     
-                    if(i != (languageList.Count - 1))
+                    if(i != (languageList.Length - 1))
                         languages.Append(", ");
                 }
             }

@@ -10,13 +10,13 @@ namespace SaveGame.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             StringBuilder genres = new();
-            if(value is List<Genre> genreList)
+            if(value is Genre[] genreList)
             {
-                for (int i=0; i < genreList.Count; i++)
+                for (int i=0; i < genreList.Length; i++)
                 {
                     genres.Append(genreList[i].Name);
                     
-                    if(i != (genreList.Count - 1))
+                    if(i != (genreList.Length - 1))
                         genres.Append(" • ");
                 }
             }
