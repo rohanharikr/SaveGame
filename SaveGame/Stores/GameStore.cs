@@ -52,9 +52,12 @@ namespace SaveGame.Stores
         {
             using (var db = new LiteDatabase("Data.db"))
             {
-                PlayGames = [..db.GetCollection<Game>("Play").FindAll().ToList()];
-                PlayingGames = [..db.GetCollection<Game>("Playing").FindAll().ToList()];
-                PlayedGames = [..db.GetCollection<Game>("Played").FindAll().ToList()];
+                foreach (var game in db.GetCollection<Game>("Play").FindAll())
+                    PlayGames.Add(game);
+                foreach (var game in db.GetCollection<Game>("Playing").FindAll())
+                    PlayingGames.Add(game);
+                foreach (var game in db.GetCollection<Game>("Played").FindAll())
+                    PlayedGames.Add(game);
             }
         }
 
@@ -71,6 +74,24 @@ namespace SaveGame.Stores
             gameToRemove = PlayedGames.SingleOrDefault(i => i.Id == game.Id);
             if (gameToRemove != null)
                 PlayedGames.Remove(gameToRemove);
+
+            using (var db = new LiteDatabase("Data.db"))
+            {
+                if(game.PlayState == PlayStates.Play)
+                {
+                    var col = db.GetCollection<Game>("Play");
+                    col.Delete(game.Id);
+                } else if(game.PlayState == PlayStates.Playing)
+                {
+                    var col = db.GetCollection<Game>("Playing");
+                    col.Delete(game.Id);
+                } else if (game.PlayState == PlayStates.Played)
+                {
+                    var col = db.GetCollection<Game>("Played");
+                    var gameToDel = col.Find(i => i.Id == game.Id);
+                    col.Delete(game.Id);
+                }
+        }
         }
 
         public void AddToPlay(Game game)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IGDB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,9 @@ namespace SaveGame.Models
 {
     public class Game : IGDB.Models.Game
     {
-        public PlayStates PlayState = PlayStates.None;
+        public PlayStates PlayState { get; set; }
+        //override SimilarGames to use this.Game
+        public new IdentitiesOrValues<Game>? SimilarGames { get; set; }
     }
 
     public enum PlayStates

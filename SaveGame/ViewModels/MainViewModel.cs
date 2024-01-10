@@ -98,7 +98,6 @@ namespace SaveGame.ViewModels
                 SearchResults = await _igdbService.SearchGame(value);
                 IsSearching = false;
             }, null, 500, Timeout.Infinite);
-
         }
 
         [RelayCommand]
