@@ -4,6 +4,7 @@ using SaveGame.Models;
 using SaveGame.Services;
 using SaveGame.Stores;
 using SaveGame.Views;
+using System.Collections.ObjectModel;
 
 namespace SaveGame.ViewModels
 {
@@ -16,7 +17,7 @@ namespace SaveGame.ViewModels
         bool isSearching = false;
 
         [ObservableProperty]
-        IEnumerable<Game>? searchResults;
+        ObservableCollection<Game>? searchResults;
 
         [ObservableProperty]
         object? currentView = null;
@@ -72,7 +73,33 @@ namespace SaveGame.ViewModels
 
             _gameStore.Retrieve();
 
+            _gameStore.GamesChanged += _gameStore_GamesChanged;
+
             GotoHomeView();
+        }
+
+        private void _gameStore_GamesChanged()
+        {
+            if (SearchResults == null)
+                return;
+
+            SearchResults = GamesWithUpdatedState(SearchResults);
+        }
+
+        private ObservableCollection<Game> GamesWithUpdatedState(ObservableCollection<Game> games)
+        {
+            foreach (var game in games)
+            {
+                if (_gameStore.PlayGames.FirstOrDefault(i => i.Id == game.Id) != null)
+                    game.PlayState = PlayStates.Play;
+                else if (_gameStore.PlayingGames.FirstOrDefault(i => i.Id == game.Id) != null)
+                    game.PlayState = PlayStates.Playing;
+                else if (_gameStore.PlayedGames.FirstOrDefault(i => i.Id == game.Id) != null)
+                    game.PlayState = PlayStates.Played;
+                else
+                    game.PlayState = PlayStates.None;
+            }
+            return new ObservableCollection<Game>(games);
         }
 
         private void ModalNavigationStore_GameDetailChanged()
@@ -86,7 +113,7 @@ namespace SaveGame.ViewModels
         {
             if (value == "")
             {
-                SearchResults = Enumerable.Empty<Game>();
+                SearchResults = new ObservableCollection<Game>();
                 return;
             }
             
@@ -95,7 +122,7 @@ namespace SaveGame.ViewModels
             timer?.Change(Timeout.Infinite, Timeout.Infinite);
             timer = new Timer(async state =>
             {
-                SearchResults = await _igdbService.SearchGame(value);
+                SearchResults = new ObservableCollection<Game>(await _igdbService.SearchGame(value));
                 IsSearching = false;
             }, null, 500, Timeout.Infinite);
         }

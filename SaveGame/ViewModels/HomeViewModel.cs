@@ -63,35 +63,31 @@ namespace SaveGame.ViewModels
             _gameStore.GamesChanged += UpdateGameStates;
         }
 
-        void UpdateGameState(Game game)
+        private ObservableCollection<Game> GamesWithUpdatedState(ObservableCollection<Game> games)
         {
-            if (_gameStore.PlayGames.FirstOrDefault(i => i.Id == game.Id) != null)
-                game.PlayState = PlayStates.Play;
-            else if (_gameStore.PlayingGames.FirstOrDefault(i => i.Id == game.Id) != null)
-                game.PlayState = PlayStates.Playing;
-            else if (_gameStore.PlayedGames.FirstOrDefault(i => i.Id == game.Id) != null)
-                game.PlayState = PlayStates.Played;
-            else
-                game.PlayState = PlayStates.None;
+            if (games == null)
+                return new ObservableCollection<Game>();
+
+            foreach (var game in games)
+            {
+                if (_gameStore.PlayGames.FirstOrDefault(i => i.Id == game.Id) != null)
+                    game.PlayState = PlayStates.Play;
+                else if (_gameStore.PlayingGames.FirstOrDefault(i => i.Id == game.Id) != null)
+                    game.PlayState = PlayStates.Playing;
+                else if (_gameStore.PlayedGames.FirstOrDefault(i => i.Id == game.Id) != null)
+                    game.PlayState = PlayStates.Played;
+                else
+                    game.PlayState = PlayStates.None;
+            }
+            return new ObservableCollection<Game>(games);
         }
 
         void UpdateGameStates()
         {
-            if(SuggestedGames != null)
-                foreach (var game in SuggestedGames)
-                    UpdateGameState(game);
-
-            if (HighRatedGames != null)
-                foreach (var game in HighRatedGames)
-                    UpdateGameState(game);
-
-            if (RecentReleases != null)
-                foreach (var game in RecentReleases)
-                    UpdateGameState(game);
-
-            if (UpcomingReleases != null)
-                foreach (var game in UpcomingReleases)
-                    UpdateGameState(game);
+            //SuggestGames does not need to be updated as tracked games do not show up here
+            HighRatedGames = GamesWithUpdatedState(HighRatedGames);
+            RecentReleases = GamesWithUpdatedState(RecentReleases);
+            UpcomingReleases = GamesWithUpdatedState(UpcomingReleases);
         }
 
         void SuggestGames()
