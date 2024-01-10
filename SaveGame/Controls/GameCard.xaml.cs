@@ -173,8 +173,8 @@ namespace SaveGame.Controls
         private void Preview(object sender, MouseEventArgs e)
         {
             /*
-              TBD Mos of screenshots are currently hard coded to 3
-              Handle cases where games might not have 3 screenshot - display hover bars accordingly.
+              TBD Nos of screenshots are currently hard coded to 3
+              Handle cases where games might not have 3 screenshot - display hover bars accordingly
             */
 
             if (_screenshots.Count <= 1)
