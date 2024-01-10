@@ -49,7 +49,8 @@
             <Border
                 Grid.Column="0"
                 Padding="15,0,0,0"
-                VerticalAlignment="Stretch">
+                VerticalAlignment="Stretch"
+                Background="#303030">
                 <StackPanel VerticalAlignment="Center" DockPanel.Dock="Left">
                     <Label
                         FontWeight="Bold"
