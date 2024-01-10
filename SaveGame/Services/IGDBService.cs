@@ -1,5 +1,6 @@
 ﻿using IGDB;
 using SaveGame.Models;
+using SaveGame.Stores;
 using System.Text;
 
 namespace SaveGame.Services
@@ -10,7 +11,9 @@ namespace SaveGame.Services
 
         readonly string queryField;
 
-        public IGDBService()
+        readonly GameStore _gameStore;
+
+        public IGDBService(GameStore gameStore)
         {
             igdb = new IGDBClient(
                 Environment.GetEnvironmentVariable("IGDB_CLIENT_ID"),
@@ -18,6 +21,23 @@ namespace SaveGame.Services
             );
 
             queryField = MakeQueryField();
+            _gameStore = gameStore;
+        }
+
+        private IEnumerable<Game> GamesWithUpdatedState(Game[] games)
+        {
+            foreach(var game in games)
+            {
+                if (_gameStore.PlayGames.FirstOrDefault(i => i.Id == game.Id) != null)
+                    game.PlayState = PlayStates.Play;
+                else if (_gameStore.PlayingGames.FirstOrDefault(i => i.Id == game.Id) != null)
+                    game.PlayState = PlayStates.Playing;
+                else if (_gameStore.PlayedGames.FirstOrDefault(i => i.Id == game.Id) != null)
+                    game.PlayState = PlayStates.Played;
+                else
+                    game.PlayState = PlayStates.None;
+            }
+            return games;
         }
 
         static string MakeQueryField()
@@ -51,8 +71,8 @@ namespace SaveGame.Services
                 $"sort first_release_date asc;" +
 
                 $"limit 5;");
-            
-            return games;
+
+            return GamesWithUpdatedState(games);
         }
 
         public async Task<IEnumerable<Game>> GetRecentReleases()
@@ -68,8 +88,8 @@ namespace SaveGame.Services
                 $"sort first_release_date asc;" +
 
                 $"limit 5;");
-            
-            return games;
+
+            return GamesWithUpdatedState(games);
         }
 
         private static int GetOffset()
@@ -93,8 +113,8 @@ namespace SaveGame.Services
                 $"offset: {offset};" +
 
                 $"limit 5;");
-            
-            return games;
+
+            return GamesWithUpdatedState(games);
         }
 
         public async Task<IEnumerable<Game>> SearchGame(string query)
@@ -109,8 +129,8 @@ namespace SaveGame.Services
                     $"involved_companies.developer = true & release_dates > 0;" +
 
                 $"limit 5;");
-            
-            return games;
+
+            return GamesWithUpdatedState(games);
         }
     }
 }

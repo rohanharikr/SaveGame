@@ -19,8 +19,8 @@ namespace SaveGame
         public App()
         {
             _modalNavigationStore = new ModalNavigationStore();
-            _igdbService = new IGDBService();
             _gameStore = new GameStore();
+            _igdbService = new IGDBService(_gameStore);
         }
 
         protected override void OnStartup(StartupEventArgs e)
