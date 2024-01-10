@@ -106,7 +106,8 @@
                                     CommandParameter="{Binding .}"
                                     CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
                                     Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                    Screenshots="{Binding Screenshots.Values}" />
+                                    Screenshots="{Binding Screenshots.Values}"
+                                    State="{Binding PlayState}" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -149,7 +150,8 @@
                                     CommandParameter="{Binding .}"
                                     CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
                                     Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                    Screenshots="{Binding Screenshots.Values}" />
+                                    Screenshots="{Binding Screenshots.Values}"
+                                    State="{Binding PlayState}" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -192,7 +194,8 @@
                                     CommandParameter="{Binding .}"
                                     CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
                                     Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                    Screenshots="{Binding Screenshots.Values}" />
+                                    Screenshots="{Binding Screenshots.Values}"
+                                    State="{Binding PlayState}" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -235,7 +238,8 @@
                                     CommandParameter="{Binding .}"
                                     CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
                                     Remove="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                    Screenshots="{Binding Screenshots.Values}" />
+                                    Screenshots="{Binding Screenshots.Values}"
+                                    State="{Binding PlayState}" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

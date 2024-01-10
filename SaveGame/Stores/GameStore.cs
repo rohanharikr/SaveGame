@@ -75,18 +75,20 @@ namespace SaveGame.Stores
 
             using var db = new LiteDatabase("Data.db");
             var playDb = db.GetCollection<Game>("Play");
-            var playingDb = db.GetCollection<Game>("Play");
-            var playedDb = db.GetCollection<Game>("Play");
+            var playingDb = db.GetCollection<Game>("Playing");
+            var playedDb = db.GetCollection<Game>("Played");
 
-            var isInPlay = playDb.Find(i => i.Id == game.Id);
-            var isInPlaying = playingDb.Find(i => i.Id == game.Id);
-            var isInPlayed  = playedDb.Find(i => i.Id == game.Id);
+            var query = Query.EQ("_id", game.Id);
+            var isInPlay = playDb.Exists(query);
+            var isInPlaying = playingDb.Exists(query);
+            var isInPlayed = playedDb.Exists(query);
+            var isInPlayed2 = playedDb.Exists(query);
 
-            if (isInPlay != null)
+            if (isInPlay)
                 playDb.Delete(game.Id);
-            else if (isInPlaying != null)
+            else if (isInPlaying)
                 playingDb.Delete(game.Id);
-            else if (isInPlayed != null)
+            else if (isInPlayed)
                 playedDb.Delete(game.Id);
         }
 

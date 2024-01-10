@@ -87,10 +87,32 @@ namespace SaveGame.Controls
         public static readonly DependencyProperty CommandParameterProperty =
             DependencyProperty.Register("CommandParameter", typeof(SaveGame.Models.Game), typeof(GameCard), new PropertyMetadata(null));
 
+        public object State
+        {
+            get { return GetValue(StateProperty); }
+            set { SetValue(StateProperty, value); }
+        }
+
+        public static readonly DependencyProperty StateProperty =
+            DependencyProperty.Register("State", typeof(SaveGame.Models.PlayStates), typeof(GameCard), new PropertyMetadata(PlayStates.None, new PropertyChangedCallback(UpdateContext)));
+
         public GameCard()
         {
             InitializeComponent();
             Loaded += GameCard_Loaded;
+        }
+
+        private static void UpdateContext(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            GameCard gameCard = (GameCard)d;
+            PlayStates playState = (PlayStates) e.NewValue;
+            gameCard.AddToPlayMenuItem.IsChecked = playState == PlayStates.Play;
+            gameCard.AddToPlayingMenuItem.IsChecked = playState == PlayStates.Playing;
+            gameCard.AddToPlayedMenuItem.IsChecked = playState == PlayStates.Played;
+            if (playState == PlayStates.None)
+                gameCard.RemoveMenuItem.Visibility = Visibility.Collapsed;
+            else
+                gameCard.RemoveMenuItem.Visibility = Visibility.Visible;
         }
 
         private void GameCard_Loaded(object sender, RoutedEventArgs e)
@@ -108,27 +130,14 @@ namespace SaveGame.Controls
             segmentWidth = Border.Width / _screenshots.Count;
 
             //trying to bind the command in XAML was a major PITA
-            PlayStates playState = ((SaveGame.Models.Game)CommandParameter).PlayState;
-
             AddToPlayMenuItem.Command = AddToPlay;
             AddToPlayMenuItem.CommandParameter = CommandParameter;
-            AddToPlayMenuItem.IsChecked = playState == PlayStates.Play;
-
             AddToPlayingMenuItem.Command = AddToPlaying;
             AddToPlayingMenuItem.CommandParameter = CommandParameter;
-            AddToPlayingMenuItem.IsChecked = playState == PlayStates.Playing;
-
             AddToPlayedMenuItem.Command = AddToPlayed;
             AddToPlayedMenuItem.CommandParameter = CommandParameter;
-            AddToPlayedMenuItem.IsChecked = playState == PlayStates.Played;
-
             RemoveMenuItem.Command = Remove;
             RemoveMenuItem.CommandParameter = CommandParameter;
-
-            if(playState == PlayStates.None)
-                RemoveMenuItem.Visibility = Visibility.Collapsed;
-            else
-                RemoveMenuItem.Visibility = Visibility.Visible;
         }
 
         private void EnterPreview(object sender, MouseEventArgs e)
