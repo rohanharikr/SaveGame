@@ -12,6 +12,7 @@
     Height="680"
     AllowsTransparency="True"
     Background="#1D1D1D"
+    Icon="Media/Images/SaveGameIcon.ico"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
