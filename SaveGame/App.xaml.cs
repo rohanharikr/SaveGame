@@ -1,9 +1,11 @@
-﻿using LiteDB;
-using SaveGame.Services;
+﻿using SaveGame.Services;
 using SaveGame.Stores;
-using SaveGame.Models;
 using SaveGame.ViewModels;
 using System.Windows;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using SaveGame.Controls;
+using SaveGame.Views;
 
 namespace SaveGame
 {
@@ -12,26 +14,50 @@ namespace SaveGame
     /// </summary>
     public partial class App : Application
     {
-        private readonly ModalNavigationStore _modalNavigationStore;
-        private readonly GameStore _gameStore;
-        private readonly IGDBService _igdbService;
+        private readonly IHost _host;
 
         public App()
         {
-            _modalNavigationStore = new ModalNavigationStore();
-            _gameStore = new GameStore();
-            _igdbService = new IGDBService(_gameStore);
+            _host = Host.CreateDefaultBuilder()
+                .ConfigureServices((context, services) =>
+                {
+                    services.AddSingleton<IGDBService>();
+                    services.AddSingleton<GameStore>();
+                    services.AddTransient<ModalNavigationStore>();
+
+                    services.AddSingleton<MainViewModel>();
+                    services.AddSingleton<HomeView>();
+                    services.AddSingleton<HomeViewModel>();
+                    services.AddSingleton<PlayView>();
+                    services.AddSingleton<PlayViewModel>();
+                    services.AddSingleton<PlayingView>();
+                    services.AddSingleton<PlayingViewModel>();
+                    services.AddSingleton<PlayedView>();
+                    services.AddSingleton<PlayedViewModel>();
+                    
+                    services.AddSingleton(services => new MainWindow()
+                    {
+                        DataContext = services.GetRequiredService<MainViewModel>()
+                    });
+                })
+                .Build();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            MainWindow = new MainWindow()
-            {
-                DataContext = new MainViewModel(_modalNavigationStore, _gameStore, _igdbService)
-            };
+            _host.Start();
+            
+            MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
 
             base.OnStartup(e);
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            _host.StopAsync();
+            _host.Dispose();
+            base.OnExit(e);
         }
     }
 
