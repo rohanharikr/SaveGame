@@ -37,9 +37,9 @@
             <Label
                 Content="{Binding Greeting}"
                 ContentStringFormat="{}{0}, RedRackham"
+                FontSize="30"
                 FontWeight="Bold"
-                Foreground="White"
-                RedRackhamFontSize="30" />
+                Foreground="White" />
         </Border>
 
         <StackPanel>
