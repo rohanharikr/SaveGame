@@ -50,6 +50,7 @@ namespace SaveGame.Stores
 
         public void Retrieve()
         {
+            //TBD Create LiteDBService
             using var db = new LiteDatabase("Data.db");
             foreach (var game in db.GetCollection<Game>("Play").FindAll())
                 PlayGames.Add(game);
@@ -73,6 +74,7 @@ namespace SaveGame.Stores
             if (gameToRemove != null)
                 PlayedGames.Remove(gameToRemove);
 
+            //TBD Create LiteDBService
             using var db = new LiteDatabase("Data.db");
             var playDb = db.GetCollection<Game>("Play");
             var playingDb = db.GetCollection<Game>("Playing");
@@ -97,6 +99,8 @@ namespace SaveGame.Stores
             Remove(game);
             game.PlayState = PlayStates.Play;
             PlayGames.Add(game);
+            
+            //TBD Create LiteDBService
             using var db = new LiteDatabase("Data.db");
             var col = db.GetCollection<Game>("Play");
             col.Insert(game);
@@ -107,6 +111,8 @@ namespace SaveGame.Stores
             Remove(game);
             game.PlayState = PlayStates.Playing;
             PlayingGames.Add(game);
+            
+            //TBD Create LiteDBService
             using var db = new LiteDatabase("Data.db");
             var col = db.GetCollection<Game>("Playing");
             col.Insert(game);
@@ -117,6 +123,8 @@ namespace SaveGame.Stores
             Remove(game);
             game.PlayState = PlayStates.Played;
             PlayedGames.Add(game);
+            
+            //TBD Create LiteDBService
             using var db = new LiteDatabase("Data.db");
             var col = db.GetCollection<Game>("Played");
             col.Insert(game);

@@ -8,8 +8,8 @@ namespace SaveGame.Services
     public class IGDBService(GameStore gameStore)
     {
         readonly IGDBClient igdb = new(
-                Environment.GetEnvironmentVariable("IGDB_CLIENT_ID"),
-                Environment.GetEnvironmentVariable("IGDB_CLIENT_SECRET")
+                "0hl10nl85ycx2zmag82ov97o5lv9yw",
+                "1uodu2dkuong8ikht5n22x7o4hwphj"
             );
 
         readonly string queryField = MakeQueryField();
