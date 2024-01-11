@@ -2,8 +2,6 @@
 
 Keep track of your games!
 
-## Screenshots
-
 ## Tech
 
 SaveGame is a windows desktop application powered by:
@@ -14,9 +12,10 @@ SaveGame is a windows desktop application powered by:
 - Lottie JSON animations via [LottieSharp](https://github.com/quicoli/LottieSharp)
 - Persistent (NoSQL) data via [LiteDB](https://www.litedb.org/)
 
-> [!Note]
-> Binaries are currently not offered.  
-> See [build section](#building-or-running-you-own-savegame-application) on instructions to compile the project.
+## Screenshots
+
+<img src="./README/HomeView.png" width="50%"/><img src="./README/Search.png" width="50%"/>
+<img src="./README/PlayView.png" width="50%"/><img src="./README/DetailModal.png" width="50%"/>
 
 ## Building or Running your own .savegame application
 
