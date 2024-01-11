@@ -23,8 +23,9 @@ SaveGame is a windows desktop application powered by:
 
 #### Pre-requisities
 1. Visual Studio or other IDE
-2. .NET 8.0
-3. Twitch Client ID and Secrets for IGDB API authentication (Obtain from [Twitch Developer Console](https://dev.twitch.tv/console/apps))
+1. .NET 8.0
+1. Twitch Client ID and Secrets for IGDB API authentication (Obtain from [Twitch Developer Console](https://dev.twitch.tv/console/apps))
+1. [Optional] WinAppDriver for UI test automation (Download [here](https://github.com/microsoft/WinAppDriver#install--run-winappdriver](https://github.com/microsoft/WinAppDriver)))
 
 #### Build or Run with environment variables:
 ```shell
