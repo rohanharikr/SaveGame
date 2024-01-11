@@ -33,6 +33,10 @@
         <converters:BooleanToVisibilityHiddenConverter x:Key="BooleanToVisibilityHiddenConverter" />
     </Window.Resources>
 
+    <Window.InputBindings>
+        <KeyBinding Key="Esc" Command="{Binding CloseGameDetailModalCommand}" />
+    </Window.InputBindings>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
