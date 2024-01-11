@@ -169,6 +169,7 @@ namespace SaveGame.Controls
 
             Bars.Visibility = Visibility.Collapsed;
             Grid.Background = _cover;
+            selectedBar = -1;
         }
 
         int selectedBar = -1;
