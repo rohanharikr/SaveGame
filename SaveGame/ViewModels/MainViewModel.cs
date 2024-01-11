@@ -38,18 +38,6 @@ namespace SaveGame.ViewModels
 
         readonly IGDBService _igdbService;
 
-        [RelayCommand]
-        void AddToPlay(Game game) => _gameStore.AddToPlay(game);
-
-        [RelayCommand]
-        void AddToPlaying(Game game) => _gameStore.AddToPlaying(game);
-
-        [RelayCommand]
-        void AddToPlayed(Game game) => _gameStore.AddToPlayed(game);
-        
-        [RelayCommand]
-        void Remove(Game game) => _gameStore.Remove(game);
-
         [ObservableProperty]
         bool isRetrievingGames = true;
 
@@ -76,6 +64,40 @@ namespace SaveGame.ViewModels
             _gameStore.GamesChanged += GameStore_GamesChanged;
 
             GotoHomeView();
+        }
+
+        [RelayCommand]
+        void AddToPlay(Game game)
+        {
+            _gameStore.AddToPlay(game);
+            ResetSearch();
+        }
+
+        [RelayCommand]
+        void AddToPlaying(Game game)
+        {
+            _gameStore.AddToPlaying(game);
+            ResetSearch();
+        }
+
+        [RelayCommand]
+        void AddToPlayed(Game game)
+        {
+            _gameStore.AddToPlayed(game);
+            ResetSearch();
+        }
+
+        [RelayCommand]
+        void Remove(Game game)
+        {
+            _gameStore.Remove(game);
+            ResetSearch();
+        }
+
+        private void ResetSearch()
+        {
+            SearchQuery = "";
+            SearchResults = new ObservableCollection<Game>();
         }
 
         private void GameStore_GamesChanged()
@@ -124,7 +146,7 @@ namespace SaveGame.ViewModels
         {
             CurrentView = HomeView;
             IsSearchBarVisible = false;
-            SearchQuery = "";
+            ResetSearch();
         }
 
         [RelayCommand]
