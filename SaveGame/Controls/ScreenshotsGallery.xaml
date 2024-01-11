@@ -118,7 +118,7 @@
                         Style="{StaticResource BorderAnimationStyle}">
                         <Border CornerRadius="5">
                             <Border.Background>
-                                <ImageBrush ImageSource="{Binding Screenshots[3].ImageId, ElementName=Root, Converter={StaticResource ScreenshotConverter}}" Stretch="UniformToFill" />
+                                <ImageBrush ImageSource="{Binding Screenshots[4].ImageId, ElementName=Root, Converter={StaticResource ScreenshotConverter}}" Stretch="UniformToFill" />
                             </Border.Background>
                         </Border>
                     </Border>

@@ -11,6 +11,7 @@ namespace SaveGame.Controls
 {
     public partial class GameCard : UserControl
     {
+        private ImageBrush _cover = new();
         readonly List<BitmapImage> _screenshots = [];
         double segmentWidth = 0;
 
@@ -124,6 +125,12 @@ namespace SaveGame.Controls
         {
             UpdateContext(this);
 
+            _cover = new ImageBrush
+            {
+                ImageSource = new BitmapImage(CoverArt),
+                Stretch = Stretch.UniformToFill
+            };
+
             foreach (var screenshot in Screenshots)
             {
                 if (_screenshots.Count >= 3)
@@ -161,11 +168,7 @@ namespace SaveGame.Controls
                 return;
 
             Bars.Visibility = Visibility.Collapsed;
-            Grid.Background = new ImageBrush
-            {
-                ImageSource = new BitmapImage(CoverArt),
-                Stretch = Stretch.UniformToFill
-            };
+            Grid.Background = _cover;
         }
 
         int selectedBar = -1;
