@@ -70,7 +70,7 @@ namespace SaveGame.ViewModels
 
         void UpdateGameStates()
         {
-            //SuggestGames does not need to be updated as tracked games do not show up here
+            //SuggestGames do not need to be updated as tracked games do not show up there
             HighRatedGames = _gameStore.UpdateGameState(HighRatedGames);
             RecentReleases = _gameStore.UpdateGameState(RecentReleases);
             UpcomingReleases = _gameStore.UpdateGameState(UpcomingReleases);
