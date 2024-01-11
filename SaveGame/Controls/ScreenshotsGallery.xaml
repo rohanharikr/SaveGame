@@ -12,7 +12,26 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <converters:ScreenshotConverter x:Key="ScreenshotConverter" />
+        <Style x:Key="BorderAnimationStyle" TargetType="Border">
+            <Setter Property="Background" Value="#323232" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Border.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever">
+                            <DoubleAnimation
+                                AutoReverse="True"
+                                Storyboard.TargetProperty="(Border.Background).Opacity"
+                                From="0.5"
+                                To="1.0"
+                                Duration="0:0:0.5" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -51,47 +70,57 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         Margin="0,0,5,5"
-                        CornerRadius="5">
-                        <Border.Background>
-                            <ImageBrush ImageSource="{Binding Screenshots[0].ImageId, ElementName=Root, Converter={StaticResource ScreenshotConverter}}" Stretch="UniformToFill" />
-                        </Border.Background>
+                        Style="{StaticResource BorderAnimationStyle}">
+                        <Border CornerRadius="5">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding Screenshots[0].ImageId, ElementName=Root, Converter={StaticResource ScreenshotConverter}}" Stretch="UniformToFill" />
+                            </Border.Background>
+                        </Border>
                     </Border>
                     <Border
                         Grid.Row="0"
                         Grid.Column="1"
                         Grid.ColumnSpan="2"
                         Margin="5,0,0,5"
-                        CornerRadius="5">
-                        <Border.Background>
-                            <ImageBrush ImageSource="{Binding Screenshots[1].ImageId, ElementName=Root, Converter={StaticResource ScreenshotConverter}}" Stretch="UniformToFill" />
-                        </Border.Background>
+                        Style="{StaticResource BorderAnimationStyle}">
+                        <Border CornerRadius="5">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding Screenshots[1].ImageId, ElementName=Root, Converter={StaticResource ScreenshotConverter}}" Stretch="UniformToFill" />
+                            </Border.Background>
+                        </Border>
                     </Border>
                     <Border
                         Grid.Row="1"
                         Grid.Column="0"
-                        Margin="0,5,5,0"
-                        CornerRadius="5">
-                        <Border.Background>
-                            <ImageBrush ImageSource="{Binding Screenshots[2].ImageId, ElementName=Root, Converter={StaticResource ScreenshotConverter}}" Stretch="UniformToFill" />
-                        </Border.Background>
+                        Margin="0,5,5,5"
+                        Style="{StaticResource BorderAnimationStyle}">
+                        <Border CornerRadius="5">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding Screenshots[2].ImageId, ElementName=Root, Converter={StaticResource ScreenshotConverter}}" Stretch="UniformToFill" />
+                            </Border.Background>
+                        </Border>
                     </Border>
                     <Border
                         Grid.Row="1"
                         Grid.Column="1"
-                        Margin="5,5,5,0"
-                        CornerRadius="5">
-                        <Border.Background>
-                            <ImageBrush ImageSource="{Binding Screenshots[3].ImageId, ElementName=Root, Converter={StaticResource ScreenshotConverter}}" Stretch="UniformToFill" />
-                        </Border.Background>
+                        Margin="5,5,5,5"
+                        Style="{StaticResource BorderAnimationStyle}">
+                        <Border CornerRadius="5">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding Screenshots[3].ImageId, ElementName=Root, Converter={StaticResource ScreenshotConverter}}" Stretch="UniformToFill" />
+                            </Border.Background>
+                        </Border>
                     </Border>
                     <Border
                         Grid.Row="1"
                         Grid.Column="2"
-                        Margin="5,5,0,0"
-                        CornerRadius="5">
-                        <Border.Background>
-                            <ImageBrush ImageSource="{Binding Screenshots[4].ImageId, ElementName=Root, Converter={StaticResource ScreenshotConverter}}" Stretch="UniformToFill" />
-                        </Border.Background>
+                        Margin="5"
+                        Style="{StaticResource BorderAnimationStyle}">
+                        <Border CornerRadius="5">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding Screenshots[3].ImageId, ElementName=Root, Converter={StaticResource ScreenshotConverter}}" Stretch="UniformToFill" />
+                            </Border.Background>
+                        </Border>
                     </Border>
                 </Grid>
             </Grid>
