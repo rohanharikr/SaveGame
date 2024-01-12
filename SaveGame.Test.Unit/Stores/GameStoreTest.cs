@@ -16,7 +16,7 @@ namespace SaveGame.Test.Unit.Stores
         [SetUp]
         public void Setup()
         {
-            //We want to start every test on a clean slate
+            //We want to start every test on a clean state
             _gameStore = new GameStore();
         }
 
@@ -52,7 +52,7 @@ namespace SaveGame.Test.Unit.Stores
             _gameStore.AddToPlay(_mario);
             _gameStore.Remove(_mario);
             var playGames = _gameStore.PlayGames;
-            Assert.That(playGames.Count, Is.Zero);
+            Assert.That(playGames, Is.Empty);
         }
 
         [Test]
@@ -62,8 +62,11 @@ namespace SaveGame.Test.Unit.Stores
             _gameStore.AddToPlayed(_mario);
             var playGames = _gameStore.PlayGames;
             var playedGames = _gameStore.PlayedGames;
-            Assert.That(playGames.Count, Is.Zero);
-            Assert.That(playedGames, Has.Count.EqualTo(1));
+            Assert.Multiple(() =>
+            {
+                Assert.That(playGames.Count, Is.Empty);
+                Assert.That(playedGames, Has.Count.EqualTo(1));
+            });
             Assert.That(playedGames.First(), Is.SameAs(_mario));
         }
 
