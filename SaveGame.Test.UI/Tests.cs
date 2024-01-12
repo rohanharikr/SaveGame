@@ -64,7 +64,7 @@ namespace SaveGame.Test.UI
             driver.Keyboard.PressKey(Keys.Escape); //Press escape key to close modal
 
             //Add game
-            Actions action = news(driver);
+            Actions action = new(driver);
             action.ContextClick(firstHighRatedGame)
                 .SendKeys(Keys.Down).SendKeys(Keys.Down).SendKeys(Keys.Down) //Played
                 .SendKeys(Keys.Enter).Build().Perform();
