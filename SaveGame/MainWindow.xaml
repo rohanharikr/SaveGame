@@ -159,22 +159,26 @@
                                     DockPanel.Dock="Left"
                                     Orientation="Horizontal">
                                     <RadioButton
+                                        AutomationProperties.AutomationId="HomeNavButton"
                                         Command="{Binding GotoHomeViewCommand}"
                                         Content="Home"
                                         GroupName="MainNav"
                                         IsChecked="True"
                                         Style="{StaticResource NavButton}" />
                                     <RadioButton
+                                        AutomationProperties.AutomationId="PlayNavButton"
                                         Command="{Binding GotoPlayViewCommand}"
                                         Content="Play"
                                         GroupName="MainNav"
                                         Style="{StaticResource NavButton}" />
                                     <RadioButton
+                                        AutomationProperties.AutomationId="PlayingNavButton"
                                         Command="{Binding GotoPlayingViewCommand}"
                                         Content="Playing"
                                         GroupName="MainNav"
                                         Style="{StaticResource NavButton}" />
                                     <RadioButton
+                                        AutomationProperties.AutomationId="PlayedingNavButton"
                                         Command="{Binding GotoPlayedViewCommand}"
                                         Content="Played"
                                         GroupName="MainNav"
