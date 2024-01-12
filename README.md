@@ -14,6 +14,8 @@ SaveGame is a windows desktop application powered by:
 - IGDB API via [igdb-dotnet](https://github.com/kamranayub/igdb-dotnet)
 - Lottie JSON animations via [LottieSharp](https://github.com/quicoli/LottieSharp)
 - Persistent (NoSQL) data via [LiteDB](https://www.litedb.org/)
+- UI tests via [Appium](https://github.com/appium/dotnet-client) and [NUnit](https://nunit.org/)
+- Unit tests via [NUnit](https://nunit.org/)
 
 ## Screenshots
 
