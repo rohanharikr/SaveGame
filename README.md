@@ -3,7 +3,7 @@ https://github.com/rohanharikr/SaveGame/assets/12775813/a1dd9f62-d008-423e-80a6-
 # .savegame
 
 Keep track of your games!  
-Powered by C#/.NET WPF, IGDB, LiteDB.
+Powered by C#/.NET WPF, IGDB, and LiteDB.
 
 ## Tech
 
