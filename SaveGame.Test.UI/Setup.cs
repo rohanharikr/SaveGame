@@ -10,8 +10,7 @@ namespace SaveGame.Test.UI
         string appWorkingDirPath;
         string appPath;
 
-        public const int ESCAPE_KEY_CODE = 27;
-        const int MAX_RETRIES = 20;
+        const int MAX_RETRIES = 15;
         TimeSpan RETRY_INTERVAL = TimeSpan.FromSeconds(1);
 
 

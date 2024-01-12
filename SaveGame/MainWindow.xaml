@@ -178,7 +178,7 @@
                                         GroupName="MainNav"
                                         Style="{StaticResource NavButton}" />
                                     <RadioButton
-                                        AutomationProperties.AutomationId="PlayedingNavButton"
+                                        AutomationProperties.AutomationId="PlayedNavButton"
                                         Command="{Binding GotoPlayedViewCommand}"
                                         Content="Played"
                                         GroupName="MainNav"
@@ -247,6 +247,7 @@
                                         x:Name="SearchTextBox"
                                         Grid.Row="0"
                                         Padding="10,5,10,10"
+                                        AutomationProperties.AutomationId="SearchTextBox"
                                         Background="Transparent"
                                         BorderThickness="0"
                                         CaretBrush="White"
@@ -278,6 +279,7 @@
                                                         AddToPlay="{Binding DataContext.AddToPlayCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                         AddToPlayed="{Binding DataContext.AddToPlayedCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                         AddToPlaying="{Binding DataContext.AddToPlayingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                        AutomationProperties.AutomationId="SearchedGame"
                                                         Command="{Binding DataContext.ShowGameDetailModalCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                         CommandParameter="{Binding .}"
                                                         CoverArt="{Binding Cover.Value.ImageId, Converter={StaticResource CoverArtConverter}}"
