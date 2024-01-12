@@ -4,7 +4,7 @@ using SaveGame.Stores;
 
 namespace SaveGame.Test.Unit.Services
 {
-    public class IGDBServiceTest
+    public class IGDBServiceTest : BaseTest
     {
         readonly private IGDBService _igdbService;
 

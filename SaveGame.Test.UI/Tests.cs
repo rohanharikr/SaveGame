@@ -4,7 +4,7 @@ using OpenQA.Selenium.Interactions;
 
 namespace SaveGame.Test.UI
 {
-    public class Tests : Setup
+    public class Tests : BaseTest
     {
         [Test]
         public void AddToPlay()

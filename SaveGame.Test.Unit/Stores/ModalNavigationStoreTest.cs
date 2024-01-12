@@ -3,7 +3,7 @@ using SaveGame.Stores;
 
 namespace SaveGame.Test.Unit.Stores
 {
-    public class ModalNavigationStoreTest
+    public class ModalNavigationStoreTest : BaseTest
     {
         private ModalNavigationStore _modalNavigationStore;
         private readonly Game _mario;

@@ -3,7 +3,7 @@ using SaveGame.Stores;
 
 namespace SaveGame.Test.Unit.Stores
 {
-    public class GameStoreTest
+    public class GameStoreTest : BaseTest
     {
         private GameStore _gameStore;
         private readonly Game _mario;
@@ -64,7 +64,7 @@ namespace SaveGame.Test.Unit.Stores
             var playedGames = _gameStore.PlayedGames;
             Assert.Multiple(() =>
             {
-                Assert.That(playGames, Has.Count.Empty);
+                Assert.That(playGames, Has.Count.Zero);
                 Assert.That(playedGames, Has.Count.EqualTo(1));
             });
             Assert.That(playedGames.First(), Is.SameAs(_mario));

@@ -4,7 +4,7 @@ using OpenQA.Selenium.Appium;
 
 namespace SaveGame.Test.UI
 {
-    public class Setup
+    public class BaseTest
     {
         public WindowsDriver<WindowsElement> driver;
         readonly string appWorkingDirPath;
@@ -16,7 +16,7 @@ namespace SaveGame.Test.UI
 
         readonly AppiumOptions options;
 
-        public Setup()
+        public BaseTest()
         {
             appWorkingDirPath = Path.GetFullPath(@"../../../../SaveGame/bin/Debug/net8.0-windows");
             appPath = Path.Combine(appWorkingDirPath, "SaveGame.exe");
@@ -26,9 +26,9 @@ namespace SaveGame.Test.UI
         }
 
         [SetUp]
-        public void StartUp()
+        public void Setup()
         {
-            //Remove DB
+            //Remove DB so we start every test on a clean state
             File.Delete(Path.Combine(appWorkingDirPath, "Data.db"));
 
             driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), options);
