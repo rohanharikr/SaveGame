@@ -6,7 +6,7 @@ namespace SaveGame.Test.UI
 {
     public class Setup
     {
-        readonly public WindowsDriver<WindowsElement> driver;
+        public WindowsDriver<WindowsElement> driver;
         readonly string appWorkingDirPath;
         readonly string appPath;
 
