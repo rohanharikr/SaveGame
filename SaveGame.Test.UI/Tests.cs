@@ -1,6 +1,4 @@
 using NUnit.Framework;
-using OpenQA.Selenium.Appium;
-using OpenQA.Selenium.Appium.Windows;
 
 namespace SaveGame.Test.UI
 {
@@ -9,7 +7,10 @@ namespace SaveGame.Test.UI
         [Test]
         public void CanAddToPlay()
         {
-            Assert.That(true, Is.True);
+            var highRatedGames = WaitForElements("HighRatedGame");
+            highRatedGames.First().Click();
+            string gamename = WaitForElement("GameName").Text;
+            Console.WriteLine(gamename);
         }
     }
 }

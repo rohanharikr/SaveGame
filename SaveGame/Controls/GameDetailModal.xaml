@@ -83,6 +83,7 @@
                                     <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                                         <Label
                                             Padding="0"
+                                            AutomationProperties.AutomationId="GameName"
                                             Content="{Binding Detail.Name, ElementName=Root}"
                                             FontSize="24"
                                             FontWeight="Bold"

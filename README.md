@@ -31,5 +31,4 @@ SaveGame is a windows desktop application powered by:
 #### Build or Run with environment variables:
 ```shell
 export IGDB_CLIENT_ID=[your OAuth app client ID]
-export IGDB_CLIENT_SECRET=[your OAuth app client secret]
-```
+export IGDB_CLIENT_SECRET=[your OAuth app clien
