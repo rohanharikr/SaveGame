@@ -31,7 +31,13 @@ namespace SaveGame.Test.UI
             //Remove DB so we start every test on a clean state
             File.Delete(Path.Combine(appWorkingDirPath, "Data.db"));
 
-            driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), options);
+            try
+            {
+                driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), options);
+            } catch (Exception)
+            {
+                Console.WriteLine("Is the WinAppDriver app running?");
+            }
         }
 
         [TearDown]
