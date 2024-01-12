@@ -89,7 +89,7 @@
                                             Foreground="White" />
                                         <Label
                                             Padding="0"
-                                            Content="{Binding Detail.ReleaseDates[0].Year, ElementName=Root}"
+                                            Content="{Binding Detail.ReleaseDates.Values[0].Year, ElementName=Root}"
                                             ContentStringFormat=" ({0})"
                                             FontSize="24"
                                             FontWeight="Bold"
