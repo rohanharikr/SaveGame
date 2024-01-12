@@ -34,3 +34,9 @@ SaveGame is a windows desktop application powered by:
 ```shell
 export IGDB_CLIENT_ID=[your OAuth app client ID]
 export IGDB_CLIENT_SECRET=[your OAuth app clien
+```
+
+#### Running the UI test suite
+1. Start WinAppDriver (Download [here](https://github.com/microsoft/WinAppDriver?tab=readme-ov-file#install--run-winappdriver))
+1. Make sure [Window Developer Mode](https://learn.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development) is enabled
+1. Run test suite from IDE
