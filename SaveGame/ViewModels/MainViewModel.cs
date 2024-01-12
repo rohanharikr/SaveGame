@@ -97,7 +97,7 @@ namespace SaveGame.ViewModels
         private void ResetSearch()
         {
             SearchQuery = "";
-            SearchResults = new ObservableCollection<Game>();
+            SearchResults = [];
         }
 
         private void GameStore_GamesChanged()
