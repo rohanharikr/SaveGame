@@ -7,30 +7,22 @@ using System.Collections.ObjectModel;
 
 namespace SaveGame.ViewModels
 {
-    partial class HomeViewModel : ObservableObject
+    public partial class HomeViewModel : ObservableObject
     {
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly GameStore _gameStore;
 
         [ObservableProperty]
-        ObservableCollection<Game> suggestedGames;
-        [ObservableProperty]
-        bool isFetchingUpcomingReleases = true;
+        public ObservableCollection<Game> suggestedGames;
 
         [ObservableProperty]
-        ObservableCollection<Game> upcomingReleases;
+        public ObservableCollection<Game> upcomingReleases;
 
         [ObservableProperty]
-        bool isFetchingRecentReleases = true;
+        public ObservableCollection<Game> recentReleases;
 
         [ObservableProperty]
-        ObservableCollection<Game> recentReleases;
-
-        [ObservableProperty]
-        bool isFetchingHighRatedGames = true;
-
-        [ObservableProperty]
-        ObservableCollection<Game> highRatedGames;
+        public ObservableCollection<Game> highRatedGames;
 
         [ObservableProperty]
         string greeting;
@@ -117,7 +109,7 @@ namespace SaveGame.ViewModels
                 SuggestedGames[0].PlayState = PlayStates.Played;
         }
 
-        async void GetGames(IGDBService igdbService)
+        public async void GetGames(IGDBService igdbService)
         {
             SuggestGames();
 

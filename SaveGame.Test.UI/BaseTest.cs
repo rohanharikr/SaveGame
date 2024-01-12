@@ -59,7 +59,7 @@ namespace SaveGame.Test.UI
             throw new Exception("Element not found");
         }
 
-        public IReadOnlyCollection<WindowsElement> WaitForElements(string Id)
+        protected IReadOnlyCollection<WindowsElement> WaitForElements(string Id)
         {
             IReadOnlyCollection<WindowsElement> elements;
             for (int i = 0; i < MAX_RETRIES; i++)

@@ -8,16 +8,16 @@ using System.Collections.ObjectModel;
 
 namespace SaveGame.ViewModels
 {
-    partial class MainViewModel : ObservableObject
+    public partial class MainViewModel : ObservableObject
     {
         [ObservableProperty]
-        string searchQuery = "";
+        public string searchQuery = "";
 
         [ObservableProperty]
-        bool isSearching = false;
+        public bool isSearching = false;
 
         [ObservableProperty]
-        ObservableCollection<Game>? searchResults;
+        public ObservableCollection<Game>? searchResults;
 
         [ObservableProperty]
         object? currentView = null;
@@ -37,9 +37,6 @@ namespace SaveGame.ViewModels
         readonly PlayedView PlayedView;
 
         readonly IGDBService _igdbService;
-
-        [ObservableProperty]
-        bool isRetrievingGames = true;
 
         [RelayCommand]
         void ShowGameDetailModal(Game game) => _modalNavigationStore.Show(game);
@@ -94,7 +91,7 @@ namespace SaveGame.ViewModels
             ResetSearch();
         }
 
-        private void ResetSearch()
+        public void ResetSearch()
         {
             SearchQuery = "";
             SearchResults = [];
