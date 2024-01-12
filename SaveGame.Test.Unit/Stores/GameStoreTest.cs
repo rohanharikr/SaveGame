@@ -64,7 +64,7 @@ namespace SaveGame.Test.Unit.Stores
             var playedGames = _gameStore.PlayedGames;
             Assert.Multiple(() =>
             {
-                Assert.That(playGames.Count, Is.Empty);
+                Assert.That(playGames, Has.Count.Empty);
                 Assert.That(playedGames, Has.Count.EqualTo(1));
             });
             Assert.That(playedGames.First(), Is.SameAs(_mario));
