@@ -25,8 +25,8 @@ namespace SaveGame.ViewModels
         [ObservableProperty]
         bool isSearchBarVisible = false;
 
-        Game? GameDetail => _modalNavigationStore.Detail;
-        bool IsGameDetailModalOpen => _modalNavigationStore.IsOpen;
+        public Game? GameDetail => _modalNavigationStore.Detail;
+        public bool IsGameDetailModalOpen => _modalNavigationStore.IsOpen;
 
         #region Views
         readonly HomeView HomeView;
