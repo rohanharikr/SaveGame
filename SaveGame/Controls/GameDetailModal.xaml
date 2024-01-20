@@ -21,7 +21,7 @@
 
         <Storyboard x:Key="ShowModalAnimation">
             <DoubleAnimation
-                Storyboard.TargetName="Background"
+                Storyboard.TargetName="BackgroundOverlay"
                 Storyboard.TargetProperty="Opacity"
                 From="0"
                 To="0.5"
@@ -380,7 +380,7 @@
                     </Border>
                 </Grid>
             </Border>
-            <StackPanel x:Name="Background" Background="Black">
+            <StackPanel x:Name="BackgroundOverlay" Background="Black">
                 <StackPanel.InputBindings>
                     <MouseBinding Command="{Binding CloseModal, ElementName=Root}" Gesture="LeftClick" />
                 </StackPanel.InputBindings>

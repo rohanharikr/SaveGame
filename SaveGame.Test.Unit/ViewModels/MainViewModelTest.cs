@@ -7,9 +7,10 @@ namespace SaveGame.Test.Unit.ViewModels
     public class MainViewModelTest : BaseTest
     {
         MainViewModel _mainViewModel;
-        IGDBService _igdbService;
-        ModalNavigationStore _modalNavigationStore;
-        GameStore _gameStore;
+
+        readonly IGDBService _igdbService;
+        readonly ModalNavigationStore _modalNavigationStore;
+        readonly GameStore _gameStore;
 
         public MainViewModelTest()
         {
