@@ -39,7 +39,7 @@
                                 FontWeight="Medium"
                                 Foreground="White" />
                             <Path
-                                x:Name="checkicon"
+                                x:Name="CheckIcon"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Data="M1 5.44444L5.4 9L12 1"

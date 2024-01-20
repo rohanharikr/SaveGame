@@ -45,7 +45,7 @@
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Path=ActivateBlink, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NeonText}}}" Value="True">
                             <DataTrigger.EnterActions>
-                                <BeginStoryboard x:Name="bsb" Storyboard="{StaticResource glowBoard}" />
+                                <BeginStoryboard x:Name="BeginStoryboard" Storyboard="{StaticResource glowBoard}" />
                             </DataTrigger.EnterActions>
                             <DataTrigger.ExitActions>
                                 <RemoveStoryboard />

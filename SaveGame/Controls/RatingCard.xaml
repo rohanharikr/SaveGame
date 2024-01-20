@@ -12,14 +12,14 @@
         <converters:RatingCoverter x:Key="RatingCoverter" />
     </UserControl.Resources>
     <Border
-        x:Name="border"
+        x:Name="Border"
         Width="46"
         Height="46"
         Margin="0,3,10,0"
         HorizontalAlignment="Left"
         CornerRadius="4">
         <Label
-            x:Name="label"
+            x:Name="Label"
             Padding="0"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"

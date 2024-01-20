@@ -8,5 +8,5 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <StackPanel x:Name="stackpanel" Orientation="Horizontal" />
+    <StackPanel x:Name="PlatformsPanel" Orientation="Horizontal" />
 </UserControl>
