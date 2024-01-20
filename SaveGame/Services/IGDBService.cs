@@ -51,7 +51,7 @@ namespace SaveGame.Services
 
         public async Task<IEnumerable<Game>> GetHighRatedGames()
         {
-            int offset = GetOffset();
+            int offset = Utility.GetOffset();
 
             //TBD Handle exception
             var games = await igdb.QueryAsync<Game>(IGDBClient.Endpoints.Games, query:
@@ -85,12 +85,6 @@ namespace SaveGame.Services
                 $"limit 5;");
 
             return GamesWithUpdatedState(games);
-        }
-
-        private static int GetOffset()
-        {
-            Random random = new();
-            return random.Next(0, 21) * 5;
         }
 
         private Game[] GamesWithUpdatedState(Game[] games)

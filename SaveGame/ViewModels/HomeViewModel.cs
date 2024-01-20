@@ -1,4 +1,4 @@
-﻿ using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SaveGame.Models;
 using SaveGame.Services;
@@ -13,16 +13,16 @@ namespace SaveGame.ViewModels
         private readonly GameStore _gameStore;
 
         [ObservableProperty]
-        public ObservableCollection<Game> suggestedGames;
+        ObservableCollection<Game> suggestedGames;
 
         [ObservableProperty]
-        public ObservableCollection<Game> upcomingReleases;
+        ObservableCollection<Game> upcomingReleases;
 
         [ObservableProperty]
-        public ObservableCollection<Game> recentReleases;
+        ObservableCollection<Game> recentReleases;
 
         [ObservableProperty]
-        public ObservableCollection<Game> highRatedGames;
+        ObservableCollection<Game> highRatedGames;
 
         [ObservableProperty]
         string greeting;
@@ -46,7 +46,7 @@ namespace SaveGame.ViewModels
         {
             GetGames(igdbService);
 
-            greeting = "Good " + TimeOfDay();
+            greeting += $"Good {Utility.TimeOfDay()}";
 
             _modalNavigationStore = modalNavigationStore;
             _gameStore = gameStore;
@@ -94,7 +94,7 @@ namespace SaveGame.ViewModels
 
             IEnumerable<Game> suggestedGamesProritsed = allSuggestedGames
                .GroupBy(game => game.Id)
-               //games w/ highest inetersections gets highest priority in list
+               //games w/ highest inetersection occurrences gets highest priority in list
                .OrderByDescending(group => group.Count())
                .SelectMany(group => group)
                //remove duplicate suggestions
@@ -105,8 +105,6 @@ namespace SaveGame.ViewModels
                .ToList();
 
             SuggestedGames = new ObservableCollection<Game>(suggestedGamesProritsed);
-            if(SuggestedGames.Count > 0 )
-                SuggestedGames[0].PlayState = PlayStates.Played;
         }
 
         public async void GetGames(IGDBService igdbService)
@@ -122,17 +120,6 @@ namespace SaveGame.ViewModels
             RecentReleases = new ObservableCollection<Game>(recentReleasesTask.Result);
             UpcomingReleases = new ObservableCollection<Game>(upcomingReleasesTask.Result);
             HighRatedGames = new ObservableCollection<Game>(highRatedGamesTask.Result);
-        }
-
-        private static string TimeOfDay()
-        {
-            int hour = DateTime.Now.Hour;
-            if (hour >= 18)
-                return "Evening";
-            else if (hour >= 12)
-                return "Afternoon";
-            else
-                return "Morning";
         }
     }
 }

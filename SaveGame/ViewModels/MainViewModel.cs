@@ -11,13 +11,13 @@ namespace SaveGame.ViewModels
     public partial class MainViewModel : ObservableObject
     {
         [ObservableProperty]
-        public string searchQuery = "";
+        string searchQuery = "";
 
         [ObservableProperty]
-        public bool isSearching = false;
+        bool isSearching = false;
 
         [ObservableProperty]
-        public ObservableCollection<Game>? searchResults;
+        ObservableCollection<Game>? searchResults;
 
         [ObservableProperty]
         object? currentView = null;
@@ -25,18 +25,16 @@ namespace SaveGame.ViewModels
         [ObservableProperty]
         bool isSearchBarVisible = false;
 
-        private readonly ModalNavigationStore _modalNavigationStore;
-        private readonly GameStore _gameStore;
-
-        public Game? GameDetail => _modalNavigationStore.Detail;
-        public bool IsGameDetailModalOpen => _modalNavigationStore.IsOpen;
+        Game? GameDetail => _modalNavigationStore.Detail;
+        bool IsGameDetailModalOpen => _modalNavigationStore.IsOpen;
 
         readonly HomeView HomeView;
         readonly PlayView PlayView;
         readonly PlayingView PlayingView;
         readonly PlayedView PlayedView;
-
         readonly IGDBService _igdbService;
+        readonly ModalNavigationStore _modalNavigationStore;
+        readonly GameStore _gameStore;
 
         [RelayCommand]
         void ShowGameDetailModal(Game game) => _modalNavigationStore.Show(game);
@@ -111,7 +109,6 @@ namespace SaveGame.ViewModels
             OnPropertyChanged(nameof(IsGameDetailModalOpen));
         }
 
-        private Timer? _timer;
         partial void OnSearchQueryChanged(string value)
         {
             if (value == "")
@@ -122,20 +119,12 @@ namespace SaveGame.ViewModels
 
             IsSearching = true;
 
-            Debounce(async () =>
+            //Stop spamming API for every keypress - wait for 500ms after every key press before calling API 
+            Utility.Debounce(async () =>
             {
                 SearchResults = new ObservableCollection<Game>(await _igdbService.SearchGame(value));
                 IsSearching = false;
             }, 500);
-        }
-
-        private void Debounce(Action action, int millisecondsDelay)
-        {
-            _timer?.Change(Timeout.Infinite, Timeout.Infinite);
-            _timer = new Timer(state =>
-            {
-                action.Invoke();
-            }, null, millisecondsDelay, Timeout.Infinite);
         }
 
         [RelayCommand]
