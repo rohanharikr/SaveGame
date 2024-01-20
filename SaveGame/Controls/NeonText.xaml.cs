@@ -4,23 +4,14 @@ using System.Windows.Media;
 
 namespace SaveGame.Controls
 {
-    /// <summary>
-    /// Interaction logic for NeonText.xaml
-    /// </summary>
     public partial class NeonText : UserControl
     {
-        static Color _defaultColor = (Color)ColorConverter.ConvertFromString("#47bdfc");
-        public NeonText()
-        {
-            InitializeComponent();
-        }
-
+        #region Dependency properties
         public string Text
         {
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
-
         public static readonly DependencyProperty TextProperty =
             DependencyProperty.Register("Text", typeof(string), typeof(NeonText), new PropertyMetadata("Mouse Events"));
 
@@ -29,7 +20,7 @@ namespace SaveGame.Controls
             get { return (Color)GetValue(GlowColorProperty); }
             set { SetValue(GlowColorProperty, value); }
         }
-
+        static Color _defaultColor = (Color)ColorConverter.ConvertFromString("#47bdfc");
         public static readonly DependencyProperty GlowColorProperty =
             DependencyProperty.Register("GlowColor", typeof(Color), typeof(NeonText), new PropertyMetadata(_defaultColor));
 
@@ -40,5 +31,12 @@ namespace SaveGame.Controls
         }
         public static readonly DependencyProperty ActivateBlinkProperty =
             DependencyProperty.Register("ActivateBlink", typeof(bool), typeof(NeonText), new PropertyMetadata(false));
+        #endregion
+
+
+        public NeonText()
+        {
+            InitializeComponent();
+        }
     }
 }

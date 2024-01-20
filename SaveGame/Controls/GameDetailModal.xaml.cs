@@ -7,17 +7,14 @@ using System.Windows.Media.Animation;
 
 namespace SaveGame.Controls
 {
-    /// <summary>
-    /// Interaction logic for GameDetailModal.xaml
-    /// </summary>
     public partial class GameDetailModal : UserControl
     {
+        #region Dependency properties
         public ICommand AddToPlay
         {
             get { return (ICommand)GetValue(AddToPlayProperty); }
             set { SetValue(AddToPlayProperty, value); }
         }
-
         public static readonly DependencyProperty AddToPlayProperty =
             DependencyProperty.Register("AddToPlay", typeof(ICommand), typeof(GameDetailModal));
 
@@ -26,7 +23,6 @@ namespace SaveGame.Controls
             get { return (ICommand)GetValue(AddToPlayingProperty); }
             set { SetValue(AddToPlayingProperty, value); }
         }
-
         public static readonly DependencyProperty AddToPlayingProperty =
             DependencyProperty.Register("AddToPlaying", typeof(ICommand), typeof(GameDetailModal));
 
@@ -35,7 +31,6 @@ namespace SaveGame.Controls
             get { return (ICommand)GetValue(AddToPlayedProperty); }
             set { SetValue(AddToPlayedProperty, value); }
         }
-
         public static readonly DependencyProperty AddToPlayedProperty =
             DependencyProperty.Register("AddToPlayed", typeof(ICommand), typeof(GameDetailModal));
 
@@ -44,7 +39,6 @@ namespace SaveGame.Controls
             get { return GetValue(CommandParameterProperty); }
             set { SetValue(CommandParameterProperty, value); }
         }
-
         public static readonly DependencyProperty CommandParameterProperty =
             DependencyProperty.Register("CommandParameter", typeof(Game), typeof(GameDetailModal), new PropertyMetadata(null));
 
@@ -53,7 +47,6 @@ namespace SaveGame.Controls
             get { return (ICommand)GetValue(RemoveProperty); }
             set { SetValue(RemoveProperty, value); }
         }
-
         public static readonly DependencyProperty RemoveProperty =
             DependencyProperty.Register("Remove", typeof(ICommand), typeof(GameDetailModal));
 
@@ -62,7 +55,6 @@ namespace SaveGame.Controls
             get { return (Game)GetValue(DetailProperty); }
             set { SetValue(DetailProperty, value); }
         }
-
         public static readonly DependencyProperty DetailProperty =
             DependencyProperty.Register("Detail", typeof(Game), typeof(GameDetailModal), new PropertyMetadata(null));
 
@@ -71,9 +63,9 @@ namespace SaveGame.Controls
             get { return (ICommand)GetValue(CloseModalProperty); }
             set { SetValue(CloseModalProperty, value); }
         }
-
         public static readonly DependencyProperty CloseModalProperty =
             DependencyProperty.Register("CloseModal", typeof(ICommand), typeof(GameDetailModal));
+        #endregion
 
         readonly Storyboard? showModalSb;
 

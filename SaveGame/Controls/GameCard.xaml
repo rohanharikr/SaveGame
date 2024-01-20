@@ -38,7 +38,7 @@
             <Grid x:Name="Grid">
                 <Grid.ContextMenu>
                     <ContextMenu PlacementTarget="{Binding ElementName=Root}" Style="{StaticResource CoolContextMenu}">
-                        <!--  binding was for these can be found in code-behind  -->
+                        <!--  Bindings in code-behind  -->
                         <MenuItem
                             x:Name="AddToPlayMenuItem"
                             Header="Play"

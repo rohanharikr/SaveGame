@@ -5,19 +5,17 @@ using System.Windows.Media.Imaging;
 
 namespace SaveGame.Controls
 {
-    /// <summary>
-    /// Interaction logic for Platforms.xaml
-    /// </summary>
     public partial class PlatformLogos : UserControl
     {
+        #region Dependency properties
         public Platform[] Platforms
         {
             get { return (Platform[])GetValue(PlatformsProperty); }
             set { SetValue(PlatformsProperty, value); }
         }
-
         private static readonly DependencyProperty PlatformsProperty = DependencyProperty.Register(
            "Platforms", typeof(Platform[]), typeof(PlatformLogos), new PropertyMetadata(Array.Empty<Platform>(), new PropertyChangedCallback(PlatformChanged)));
+        #endregion
 
         public PlatformLogos()
         {

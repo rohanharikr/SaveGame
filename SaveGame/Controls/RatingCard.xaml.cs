@@ -6,19 +6,20 @@ namespace SaveGame.Controls
 {
     public partial class RatingCard : UserControl
     {
-        private static readonly DependencyProperty RatingProperty = DependencyProperty.Register(
-           "Rating", typeof(double), typeof(RatingCard), new PropertyMetadata(0.0, new PropertyChangedCallback(RatingChanged)));
-
+        #region Dependency properties
         public double Rating
         {
             get { return (double)GetValue(RatingProperty); }
             set { SetValue(RatingProperty, value); }
         }
+        private static readonly DependencyProperty RatingProperty = DependencyProperty.Register(
+           "Rating", typeof(double), typeof(RatingCard), new PropertyMetadata(0.0, new PropertyChangedCallback(RatingChanged)));
+        #endregion
 
         public RatingCard()
         {
             InitializeComponent();
-            border.Background = Brushes.Gray; //this is hack - RatingChanged does not get fired 
+            border.Background = Brushes.Gray; //TBD This is hack - RatingChanged does not get fired the first time
         }
 
         private static void RatingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

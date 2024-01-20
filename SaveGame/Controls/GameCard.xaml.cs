@@ -11,16 +11,12 @@ namespace SaveGame.Controls
 {
     public partial class GameCard : UserControl
     {
-        private ImageBrush _cover = new();
-        readonly List<BitmapImage> _screenshots = [];
-        double segmentWidth = 0;
-
+        #region  Dependency properties
         public IList<Screenshot> Screenshots
         {
             get { return (IList<Screenshot>)GetValue(ScreenshotsProperty); }
             set { SetValue(ScreenshotsProperty, value); }
         }
-
         public static readonly DependencyProperty ScreenshotsProperty =
              DependencyProperty.Register("Screenshots", typeof(IList<Screenshot>), typeof(GameCard), new PropertyMetadata(new List<Screenshot>()));
 
@@ -29,7 +25,6 @@ namespace SaveGame.Controls
             get { return (Uri)GetValue(CoverArtProperty); }
             set { SetValue(CoverArtProperty, value); }
         }
-
         public static readonly DependencyProperty CoverArtProperty =
             DependencyProperty.Register("CoverArt", typeof(Uri), typeof(GameCard), new PropertyMetadata(null));
 
@@ -38,17 +33,14 @@ namespace SaveGame.Controls
             get { return (ICommand)GetValue(CommandProperty); }
             set { SetValue(CommandProperty, value); }
         }
-
         public static readonly DependencyProperty CommandProperty =
             DependencyProperty.Register("Command", typeof(ICommand), typeof(GameCard));
-
 
         public ICommand AddToPlay
         {
             get { return (ICommand)GetValue(AddToPlayProperty); }
             set { SetValue(AddToPlayProperty, value); }
         }
-
         public static readonly DependencyProperty AddToPlayProperty =
             DependencyProperty.Register("AddToPlay", typeof(ICommand), typeof(GameCard));
 
@@ -57,7 +49,6 @@ namespace SaveGame.Controls
             get { return (ICommand)GetValue(AddToPlayingProperty); }
             set { SetValue(AddToPlayingProperty, value); }
         }
-
         public static readonly DependencyProperty AddToPlayingProperty =
             DependencyProperty.Register("AddToPlaying", typeof(ICommand), typeof(GameCard));
 
@@ -66,7 +57,6 @@ namespace SaveGame.Controls
             get { return (ICommand)GetValue(AddToPlayedProperty); }
             set { SetValue(AddToPlayedProperty, value); }
         }
-
         public static readonly DependencyProperty AddToPlayedProperty =
             DependencyProperty.Register("AddToPlayed", typeof(ICommand), typeof(GameCard));
 
@@ -75,7 +65,6 @@ namespace SaveGame.Controls
             get { return (ICommand)GetValue(RemoveProperty); }
             set { SetValue(RemoveProperty, value); }
         }
-
         public static readonly DependencyProperty RemoveProperty =
             DependencyProperty.Register("Remove", typeof(ICommand), typeof(GameCard));
 
@@ -84,7 +73,6 @@ namespace SaveGame.Controls
             get { return GetValue(CommandParameterProperty); }
             set { SetValue(CommandParameterProperty, value); }
         }
-        
         public static readonly DependencyProperty CommandParameterProperty =
             DependencyProperty.Register("CommandParameter", typeof(SaveGame.Models.Game), typeof(GameCard), new PropertyMetadata(null));
 
@@ -93,14 +81,54 @@ namespace SaveGame.Controls
             get { return GetValue(StateProperty); }
             set { SetValue(StateProperty, value); }
         }
-
         public static readonly DependencyProperty StateProperty =
             DependencyProperty.Register("State", typeof(SaveGame.Models.PlayStates), typeof(GameCard), new PropertyMetadata(PlayStates.None, new PropertyChangedCallback(StatePropertyChanged)));
+        #endregion
+
+        private ImageBrush _cover = new();
+        readonly List<BitmapImage> _screenshots = [];
+        double segmentWidth = 0;
+        int selectedPreview = -1;
 
         public GameCard()
         {
             InitializeComponent();
             Loaded += GameCard_Loaded;
+        }
+
+        private void GameCard_Loaded(object sender, RoutedEventArgs e)
+        {
+            UpdateContext(this);
+
+            _cover = new ImageBrush
+            {
+                ImageSource = new BitmapImage(CoverArt),
+                Stretch = Stretch.UniformToFill
+            };
+
+            foreach (var screenshot in Screenshots)
+            {
+                if (_screenshots.Count >= 3)
+                    break;
+
+                Uri imageUri = new("https:" + IGDB.ImageHelper.GetImageUrl(
+                    imageId: screenshot.ImageId, size: ImageSize.ScreenshotMed, retina: true)
+                    );
+                BitmapImage bitmapImage = new(imageUri);
+                _screenshots.Add(bitmapImage);
+
+            }
+            segmentWidth = Border.Width / _screenshots.Count;
+
+            //TBD trying to bind the command in XAML was a major PITA
+            AddToPlayMenuItem.Command = AddToPlay;
+            AddToPlayMenuItem.CommandParameter = CommandParameter;
+            AddToPlayingMenuItem.Command = AddToPlaying;
+            AddToPlayingMenuItem.CommandParameter = CommandParameter;
+            AddToPlayedMenuItem.Command = AddToPlayed;
+            AddToPlayedMenuItem.CommandParameter = CommandParameter;
+            RemoveMenuItem.Command = Remove;
+            RemoveMenuItem.CommandParameter = CommandParameter;
         }
 
         private static void StatePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -121,39 +149,6 @@ namespace SaveGame.Controls
                 gameCard.RemoveMenuItem.Visibility = Visibility.Visible;
         }
 
-        private void GameCard_Loaded(object sender, RoutedEventArgs e)
-        {
-            UpdateContext(this);
-
-            _cover = new ImageBrush
-            {
-                ImageSource = new BitmapImage(CoverArt),
-                Stretch = Stretch.UniformToFill
-            };
-
-            foreach (var screenshot in Screenshots)
-            {
-                if (_screenshots.Count >= 3)
-                    break;
-
-                Uri imageUri = new("https:" + IGDB.ImageHelper.GetImageUrl(imageId: screenshot.ImageId, size: ImageSize.ScreenshotMed, retina: true));
-                BitmapImage bitmapImage = new(imageUri);
-                _screenshots.Add(bitmapImage);
-
-            }
-            segmentWidth = Border.Width / _screenshots.Count;
-
-            //trying to bind the command in XAML was a major PITA
-            AddToPlayMenuItem.Command = AddToPlay;
-            AddToPlayMenuItem.CommandParameter = CommandParameter;
-            AddToPlayingMenuItem.Command = AddToPlaying;
-            AddToPlayingMenuItem.CommandParameter = CommandParameter;
-            AddToPlayedMenuItem.Command = AddToPlayed;
-            AddToPlayedMenuItem.CommandParameter = CommandParameter;
-            RemoveMenuItem.Command = Remove;
-            RemoveMenuItem.CommandParameter = CommandParameter;
-        }
-
         private void EnterPreview(object sender, MouseEventArgs e)
         {
             if (_screenshots.Count <= 1)
@@ -169,10 +164,8 @@ namespace SaveGame.Controls
 
             Bars.Visibility = Visibility.Collapsed;
             Grid.Background = _cover;
-            selectedBar = -1;
+            selectedPreview = -1;
         }
-
-        int selectedBar = -1;
 
         private void Preview(object sender, MouseEventArgs e)
         {
@@ -189,7 +182,7 @@ namespace SaveGame.Controls
             int segmentIndex = (int)(mouseX / segmentWidth);
             segmentIndex = Math.Max(0, Math.Min(segmentIndex, _screenshots.Count - 1));
 
-            if(selectedBar != segmentIndex)
+            if(selectedPreview != segmentIndex)
             {
                 for (int i=0; i<Bars.Children.Count; i++)
                 {
@@ -203,7 +196,7 @@ namespace SaveGame.Controls
                     ImageSource = _screenshots[segmentIndex],
                     Stretch = Stretch.UniformToFill
                 };
-                selectedBar = segmentIndex;
+                selectedPreview = segmentIndex;
             }
         }
     }
