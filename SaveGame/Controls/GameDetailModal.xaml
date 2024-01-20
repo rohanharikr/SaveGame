@@ -21,13 +21,13 @@
 
         <Storyboard x:Key="ShowModalAnimation">
             <DoubleAnimation
-                Storyboard.TargetName="bg"
+                Storyboard.TargetName="Background"
                 Storyboard.TargetProperty="Opacity"
                 From="0"
                 To="0.5"
                 Duration="0:0:0.10" />
             <DoubleAnimation
-                Storyboard.TargetName="modalY"
+                Storyboard.TargetName="ModalY"
                 Storyboard.TargetProperty="Y"
                 From="10"
                 To="0"
@@ -56,7 +56,7 @@
                 RenderTransformOrigin="0.5,1">
                 <Border.RenderTransform>
                     <TransformGroup>
-                        <TranslateTransform x:Name="modalY" Y="0" />
+                        <TranslateTransform x:Name="ModalY" Y="0" />
                     </TransformGroup>
                 </Border.RenderTransform>
                 <Grid>
@@ -380,7 +380,7 @@
                     </Border>
                 </Grid>
             </Border>
-            <StackPanel x:Name="bg" Background="Black">
+            <StackPanel x:Name="Background" Background="Black">
                 <StackPanel.InputBindings>
                     <MouseBinding Command="{Binding CloseModal, ElementName=Root}" Gesture="LeftClick" />
                 </StackPanel.InputBindings>

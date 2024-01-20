@@ -28,13 +28,21 @@ namespace SaveGame.ViewModels
         Game? GameDetail => _modalNavigationStore.Detail;
         bool IsGameDetailModalOpen => _modalNavigationStore.IsOpen;
 
+        #region Views
         readonly HomeView HomeView;
         readonly PlayView PlayView;
         readonly PlayingView PlayingView;
         readonly PlayedView PlayedView;
+        #endregion
+
+        #region Services
         readonly IGDBService _igdbService;
+        #endregion
+
+        #region Stores
         readonly ModalNavigationStore _modalNavigationStore;
         readonly GameStore _gameStore;
+        #endregion
 
         [RelayCommand]
         void ShowGameDetailModal(Game game) => _modalNavigationStore.Show(game);

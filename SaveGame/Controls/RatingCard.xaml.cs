@@ -19,7 +19,7 @@ namespace SaveGame.Controls
         public RatingCard()
         {
             InitializeComponent();
-            border.Background = Brushes.Gray; //TBD This is hack - RatingChanged does not get fired the first time
+            Border.Background = Brushes.Gray; //TBD This is hack - RatingChanged does not get fired the first time
         }
 
         private static void RatingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -28,13 +28,13 @@ namespace SaveGame.Controls
             double newRating = (double)e.NewValue;
 
             if (newRating >= 66)
-                ratingCard.border.Background = Brushes.Green;
+                ratingCard.Border.Background = Brushes.Green;
             else if (newRating >= 33)
-                ratingCard.border.Background = Brushes.Yellow;
+                ratingCard.Border.Background = Brushes.Yellow;
             else if (newRating > 0)
-                ratingCard.border.Background = Brushes.Red;
+                ratingCard.Border.Background = Brushes.Red;
             else
-                ratingCard.border.Background = Brushes.Gray;
+                ratingCard.Border.Background = Brushes.Gray;
         }
     }
 }

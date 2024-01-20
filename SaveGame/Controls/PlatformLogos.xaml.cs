@@ -25,7 +25,7 @@ namespace SaveGame.Controls
         private static void PlatformChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             PlatformLogos platformsLogos = (PlatformLogos)d;
-            platformsLogos.stackpanel.Children.Clear();
+            platformsLogos.PlatformsPanel.Children.Clear();
 
             Platform[] platforms = (Platform[])e.NewValue;
             string imageBasePath = "pack://application:,,,/Media/Images/";
@@ -64,7 +64,7 @@ namespace SaveGame.Controls
                 if (platformLogo.Source == null)
                     continue;
 
-                platformsLogos.stackpanel.Children.Add(platformLogo);
+                platformsLogos.PlatformsPanel.Children.Add(platformLogo);
             }
         }
     }

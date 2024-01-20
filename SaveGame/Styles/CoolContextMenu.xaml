@@ -70,7 +70,7 @@
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="checkicon" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="CheckIcon" Property="Visibility" Value="Visible" />
                             <Setter TargetName="Border" Property="Background" Value="MediumPurple" />
                         </Trigger>
                     </ControlTemplate.Triggers>

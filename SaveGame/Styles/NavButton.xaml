@@ -5,13 +5,13 @@
                 <DoubleAnimation
                     AutoReverse="True"
                     RepeatBehavior="Forever"
-                    Storyboard.TargetName="label"
+                    Storyboard.TargetName="Label"
                     Storyboard.TargetProperty="(Effect).Opacity"
                     From="0.0"
                     To="1.0"
                     Duration="0:0:1.5" />
             </Storyboard>
-            <Style x:Key="labelBase" TargetType="{x:Type Label}">
+            <Style x:Key="LabelBase" TargetType="{x:Type Label}">
                 <Setter Property="FontSize" Value="30" />
                 <Setter Property="FontWeight" Value="Bold" />
                 <Setter Property="Foreground" Value="White" />
@@ -28,7 +28,7 @@
                             x:Name="Label"
                             Content="{TemplateBinding Content}"
                             Foreground="White"
-                            Style="{StaticResource labelBase}">
+                            Style="{StaticResource LabelBase}">
                             <Label.Effect>
                                 <DropShadowEffect
                                     BlurRadius="100"
@@ -39,7 +39,7 @@
                         <Label
                             x:Name="Label2"
                             Content="{TemplateBinding Content}"
-                            Style="{StaticResource labelBase}">
+                            Style="{StaticResource LabelBase}">
                             <Label.Effect>
                                 <DropShadowEffect
                                     BlurRadius="25"
@@ -50,7 +50,7 @@
                         <Label
                             x:Name="Label3"
                             Content="{TemplateBinding Content}"
-                            Style="{StaticResource labelBase}">
+                            Style="{StaticResource LabelBase}">
                             <Label.Effect>
                                 <DropShadowEffect
                                     BlurRadius="15"
@@ -65,7 +65,7 @@
                                 <BeginStoryboard x:Name="BeginStoryboard" Storyboard="{StaticResource GlowBoard}" />
                             </Trigger.EnterActions>
                             <Trigger.ExitActions>
-                                <RemoveStoryboard BeginStoryboardName="bsb" />
+                                <RemoveStoryboard BeginStoryboardName="BeginStoryboard" />
                             </Trigger.ExitActions>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="False">

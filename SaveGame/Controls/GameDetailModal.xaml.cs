@@ -84,7 +84,7 @@ namespace SaveGame.Controls
             if (Visibility == Visibility.Collapsed)
             {
                 showModalSb?.Remove();
-                scrollviewer.ScrollToTop();
+                ScrollViewer.ScrollToTop();
             }
 
             if (Visibility == Visibility.Visible)
