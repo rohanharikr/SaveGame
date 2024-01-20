@@ -4,6 +4,8 @@ namespace SaveGame.Stores
 {
     public class ModalNavigationStore
     {
+        public event Action? DetailChanged;
+
         private Game? _detail;
         public Game? Detail
         {
@@ -16,8 +18,6 @@ namespace SaveGame.Stores
         }
 
         public bool IsOpen => _detail != null;
-
-        public event Action? DetailChanged;
 
         public void Show(Game game) => Detail = game;
 

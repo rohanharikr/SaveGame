@@ -6,6 +6,8 @@ namespace SaveGame.Stores
 {
     public class GameStore
     {
+        public event Action? GamesChanged;
+
         private ObservableCollection<Game> _playGames = [];
         public ObservableCollection<Game> PlayGames
         {
@@ -39,8 +41,6 @@ namespace SaveGame.Stores
             }
         }
 
-        public event Action? GamesChanged;
-
         public GameStore()
         {
             PlayGames.CollectionChanged += (s,e) => GamesChanged?.Invoke();
@@ -48,7 +48,7 @@ namespace SaveGame.Stores
             PlayedGames.CollectionChanged += (s,e) => GamesChanged?.Invoke();
         }
 
-        public void Retrieve()
+        public void Retrieve() //Retrieve data from LiteDB and update store
         {
             //TBD Create LiteDBService
             using var db = new LiteDatabase("Data.db");
@@ -130,6 +130,7 @@ namespace SaveGame.Stores
             col.Insert(game);
         }
 
+        //Keep game status of games in game collection up to date
         public ObservableCollection<Game> UpdateGameState(ObservableCollection<Game> games)
         {
             if (games == null)

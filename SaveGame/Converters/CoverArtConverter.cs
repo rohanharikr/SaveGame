@@ -8,7 +8,7 @@ namespace SaveGame.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string url = IGDB.ImageHelper.GetImageUrl(imageId: (string)value, size: ImageSize.CoverBig, retina: true);
+            string url = ImageHelper.GetImageUrl(imageId: (string)value, size: ImageSize.CoverBig, retina: true);
             return "https:" + url;
         }
 
