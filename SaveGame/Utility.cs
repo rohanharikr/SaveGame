@@ -1,6 +1,6 @@
 ﻿namespace SaveGame
 {
-    public class Utility
+    public static class Utility
     {
         private static Timer? _timer;
         public static void Debounce(Action action, int millisecondsDelay)
